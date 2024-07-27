@@ -1,0 +1,10 @@
+{
+    "es": {
+        "title": "Hola Mundo",
+        "greeting": "Este es un ejemplo de cómo usar una fuente personalizada en tu página web."
+    },
+    "en": {
+        "title": "Hello World",
+        "greeting": "This is an example of how to use a custom font on your web page."
+    }
+}
