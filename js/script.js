@@ -16,3 +16,19 @@ function fixWidth(userWitdh, userHeight) {
 
     canvas.width(heightCanvas * userWitdh / userHeight);
 }
+
+$(".cinema__switch__button").on("click", function() {
+    $(this).toggleClass("active");
+
+    if ($(this).hasClass("active")) {
+        $(this).find("input").val("01").prop("readonly", false).css("opacity", "1");
+    } else {
+        $(this).find("input").val("00").prop("readonly", true).css("opacity", ".5");
+    }
+});
+
+$(".cinema__level").on("click", function(event) {
+    if (!$(this).prop("readonly")) {
+        event.stopPropagation();
+    }
+});
