@@ -33,7 +33,7 @@ var banfboos = [
     "rocketboo", "safety", "sharkboo", "sumoboo"
 ];
 
-var driveDisks = ["chaotic_metal", "fanged_metal", "freedom_blues", "hotmone_punk",
+var driveDisks = ["chaotic_metal", "fanged_metal", "freedom_blues", "hormone_punk",
     "inferno_metal", "polar_metal", "puffer_electro", "shockstar_disco", "soul_rock",
     "swin_jazz", "thunder_metal", "woodpecker_electro"
 ];

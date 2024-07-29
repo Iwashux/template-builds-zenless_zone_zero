@@ -51,7 +51,7 @@
                         <input class="cinema__level" type="text" value="01">
                     </div>
                 </div>
-                <textarea class="cinema__info" rows="2" name="" id=""></textarea>
+                <div class="cinema__info" contenteditable>EMPTY</div>
             </div>
             <div class="cinema__best">
                 <div class="cinema__switch">
@@ -60,23 +60,27 @@
                         <input class="cinema__level" type="text" value="00" readonly style="opacity: 0.5;">
                     </div>
                 </div>
-                <p></p>
+                <div class="cinema__info" contenteditable style="opacity: 0.5;">EMPTY</div>
             </div>
         </div>
         <div class="w-engine">
             <h2>W-ENGINE / DRIVE DISK</h2>
             <div class="w-engine__best">
                 <div class="w-engine__conteiner">
-                    <img class="w-engine__rarity" src="img/ranks/item_rarity_a.webp" alt="">
-                    <div>
-                        <img class="w-engine__img" src="img/w-engine/Kaboom_the_Cannon.webp" alt="">
+                    <img class="w-engine__rarity" src="img/ranks/item_rank_a.webp" alt="">
+                    <div class="w-engine__img">
+                        <div class="w-engine__img__border">
+                            <img src="img/w-engine/Kaboom_the_Cannon.webp" alt="">
+                        </div>
                     </div>
                     <p>KABBOM THE CANNON</p>
                 </div>
                 <div class="w-engine__conteiner">
-                    <img class="w-engine__rarity" src="img/ranks/item_rarity_b.webp" alt="">
-                    <div>
-                        <img class="w-engine__img" src="img/w-engine/[Reverb]_Mark_II.webp" alt="">
+                    <img class="w-engine__rarity" src="img/ranks/item_rank_b.webp" alt="">
+                    <div class="w-engine__img">
+                        <div class="w-engine__img__border">
+                            <img src="img/w-engine/[Reverb]_Mark_II.webp" alt="">
+                        </div>
                     </div>
                     <p>[REVERB] MARK II</p>
                 </div>
@@ -84,18 +88,76 @@
             <div class="w-engine__good">
                 <p>Other Good Engine</p>
                 <div class="w-engine__conteiner">
-                    <img class="w-engine__rarity" src="img/ranks/item_rarity_b.webp" alt="">
+                    <img class="w-engine__rarity" src="img/ranks/item_rank_b.webp" alt="">
                     <img class="w-engine__img" src="img/w-engine/[Reverb]_Mark_III.webp" alt="">
                     <p>Reverb - Mark III</p>
                 </div>
                 <div class="w-engine__conteiner">
-                    <img class="w-engine__rarity" src="img/ranks/item_rarity_a.webp" alt="">
+                    <img class="w-engine__rarity" src="img/ranks/item_rank_a.webp" alt="">
                     <img class="w-engine__img" src="img/w-engine/Unfettered_Game_Ball.webp" alt="">
                     <p>Unfettered G.</p>
                 </div>
             </div>
         </div>
-        <div class="drive-disk"></div>
+        <div class="drive-disk">
+            <h2 style="display: none;">DRIVE DISK</h2>
+            <div class="drive-disk__conteiner">
+                <div class="drive-disk__decoration">
+                    <div class="drive-disk__icon__zero">
+                        <i class="fa-solid fa-chevron-up"></i>
+                        <i class="fa-solid fa-chevron-down"></i>
+                        <span class="drive-disk__icon__text">zero</span>
+                    </div>
+                    <p>[ DRIVE DISC OPTIONS ]</p>
+                    <i class="fa-solid fa-hard-drive"></i>
+                </div>
+                <div class="drive-disk__sets">
+                    <div>
+                        <p>[set 1]</p>
+                        <div class="drive-disk__set__conteiner">
+                            <div class="drive-disk__img">
+                                <img src="img/drive-disks/swin_jazz.webp" alt="">
+                                <p>swin jazz</p>
+                            </div>
+                            <i class="fa-solid fa-plus"></i>
+                            <div class="drive-disk__img">
+                                <img src="img/drive-disks/hormone_punk.webp" alt="">
+                                <p>hormone punk</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p>[set 2]</p>
+                        <div class="drive-disk__set__conteiner">
+                            <div class="drive-disk__img">
+                                <img src="img/drive-disks/swin_jazz.webp" alt="">
+                                <p>swin jazz</p>
+                            </div>
+                            <i class="fa-solid fa-plus"></i>
+                            <div class="drive-disk__img">
+                                <img src="img/drive-disks/shockstar_disco.webp" alt="">
+                                <p>shockstar disco</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="drive-disk__stats">
+                <div>
+                    <span>IV</span>
+                    <span>a</span>
+                </div>
+                <div>
+                    <span>V</span>
+                    <span>a</span>
+                </div>
+                <div>
+                    <span>VI</span>
+                    <span>a</span>
+                </div>
+            </div>
+            <p class="drive-disk__sub-stats">SUB STATS: CRIT% > ATK%</p>
+        </div>
         <div class="team"></div>
     </main>
 </body>

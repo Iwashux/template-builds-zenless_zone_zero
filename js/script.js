@@ -18,12 +18,18 @@ function fixWidth(userWitdh, userHeight) {
 }
 
 $(".cinema__switch__button").on("click", function() {
-    $(this).toggleClass("active");
+    let element = $(this);
+    let thisInput = element.find("input");
+    let thisInfo = element.closest(".cinema__best").find(".cinema__info");
 
-    if ($(this).hasClass("active")) {
-        $(this).find("input").val("01").prop("readonly", false).css("opacity", "1");
+    element.toggleClass("active");
+
+    if (element.hasClass("active")) {
+        thisInput.val("01").prop("readonly", false).add(thisInfo).css("opacity", "1");
+        thisInfo.prop("contenteditable", true)
     } else {
-        $(this).find("input").val("00").prop("readonly", true).css("opacity", ".5");
+        thisInput.val("00").prop("readonly", true).add(thisInfo).css("opacity", ".5");
+        thisInfo.prop("contenteditable", false).text("EMPTY")
     }
 });
 
