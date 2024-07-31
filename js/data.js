@@ -39,10 +39,10 @@ var driveDisks = ["chaotic_metal", "fanged_metal", "freedom_blues", "hormone_pun
 ];
 
 var characters = [
-    "nekomata", "lycaon", "soldier 11", "koleda", "grace", "ellen joe", 
-    "rina", "zhu yuan", "anby", "billy", "nicole", "Anton", "corin", 
-    "ben", "soukaku", "lucy", "piper", "hoshimi miyabi", "qinqyi", 
-    "seth", "jane doe"
+    "nekomata", "lycaon", "soldier_11", "koleda", "grace", "ellen_joe", 
+    "rina", "zhu_yuan", "anby", "billy", "nicole", "Anton", "corin", 
+    "ben", "soukaku", "lucy", "piper", "hoshimi_miyabi", "qinqyi", 
+    "seth", "jane_doe"
 ];
 
 var charactersInfo = {  
@@ -56,7 +56,7 @@ var charactersInfo = {
         "attribute": "Ice",
         "specialty": "Stun",
         "faction": "Victoria"
-    },"soldier 11": {
+    },"soldier_11": {
         "rarity": "S",
         "attribute": "Fire",
         "specialty": "Attack",
@@ -71,7 +71,7 @@ var charactersInfo = {
         "attribute": "Electric",
         "specialty": "Anomaly",
         "faction": "Belobog"
-    },"ellen joe": {
+    },"ellen_joe": {
         "rarity": "S",
         "attribute": "Ice",
         "specialty": "Attack",
@@ -81,7 +81,7 @@ var charactersInfo = {
         "attribute": "Electric",
         "specialty": "Support",
         "faction": "Victoria"
-    },"zhu yuan": {
+    },"zhu_yuan": {
         "rarity": "S",
         "attribute": "Ether",
         "specialty": "Attack",
@@ -131,7 +131,7 @@ var charactersInfo = {
         "attribute": "Physical",
         "specialty": "Anomaly",
         "faction": "Calydon"
-    },"hoshimi miyabi": {
+    },"hoshimi_miyabi": {
         "rarity": "S",
         "attribute": "Ice",
         "specialty": "Attack",
@@ -146,7 +146,7 @@ var charactersInfo = {
         "attribute": "??",
         "specialty": "??",
         "faction": "??"
-    },"jane doe": {
+    },"jane_doe": {
         "rarity": "S",
         "attribute": "??",
         "specialty": "??",

@@ -38,3 +38,25 @@ $(".cinema__level").on("click", function(event) {
         event.stopPropagation();
     }
 });
+
+
+
+
+// PRUEBAS
+
+const elementsView = $(".stat__text");
+
+function checkElements() {
+    elementsView.each(function() {
+        var elementCount = $(this).children().length;
+        if (elementCount == 1) {
+            $(this).css('font-size', '.5rem');
+        } else if(elementCount == 2) {
+            $(this).css('font-size', '.4rem');
+        } else {
+            $(this).css('font-size', '.3rem');
+        }
+    });
+  }
+
+checkElements();
