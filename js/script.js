@@ -1,6 +1,6 @@
 let scale = 1;
 
-// cambio de proporciones del lienso
+// redimencion lienso
 function fixWidth() { 
     let canvas = $("main");
     let canvasHeight = canvas.height();
@@ -47,10 +47,9 @@ $(".cinema__level").on("click", function(event) {
 
 
 // PRUEBAS
-
-const elementsView = $(".stat__text");
-
 function checkElements() {
+    const elementsView = $(".stat__text");
+
     elementsView.each(function() {
         let elementCount = $(this).children().length;
         if (elementCount == 1) {
@@ -61,6 +60,30 @@ function checkElements() {
             $(this).css('font-size', '.3rem');
         }
     });
-  }
+}checkElements();
 
-checkElements();
+
+function putCharacter() {
+    console.log(characters);
+
+    const selectedCharacter = $(".selected__character__conteiner");
+
+    characters.forEach(function(character, index) {
+        let characterText = capitalizeEachWord(character.replaceAll("_"," "));
+
+        selectedCharacter.append("<div>");
+        selectedCharacter.find("div:last").attr("id_character-data", index).append("<img>")
+            .find("img").attr("src", "img/char_avatar/"+character+".png");
+            
+    });
+    
+}putCharacter();
+
+function capitalizeEachWord(string) {
+    return string.split(" ").map(word => capitalize(word)).join(" ");
+}
+
+function capitalize(string) {
+    if (!string) return ""; // Manejar el caso de una cadena vacía
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}

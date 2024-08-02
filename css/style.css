@@ -23,7 +23,7 @@
 body {
     height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background-color: #2d0000;
 }
@@ -113,7 +113,7 @@ main {
 }
 
 .logo i {
-    height: 20px;
+    font-size: 20px;
 }
 
 .logo img {
@@ -711,6 +711,19 @@ main {
     height: 100%;
 }
 
-button {
-    color: #090909;
+.selected {
+    height: 100%;
+    width: 275px;
+    background-color: #090909;
+}
+
+.selected__character__conteiner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.selected__character__conteiner img {
+    height: 65px;
 }

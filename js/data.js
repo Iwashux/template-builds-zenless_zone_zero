@@ -40,7 +40,7 @@ var driveDisks = ["chaotic_metal", "fanged_metal", "freedom_blues", "hormone_pun
 
 var characters = [
     "nekomata", "lycaon", "soldier_11", "koleda", "grace", "ellen_joe", 
-    "rina", "zhu_yuan", "anby", "billy", "nicole", "Anton", "corin", 
+    "rina", "zhu_yuan", "anby", "billy", "nicole", "anton", "corin", 
     "ben", "soukaku", "lucy", "piper", "hoshimi_miyabi", "qinqyi", 
     "seth", "jane_doe"
 ];
@@ -101,7 +101,7 @@ var charactersInfo = {
         "attribute": "Ether",
         "specialty": "Support",
         "faction": "Cunning Hares"
-    },"Anton": {
+    },"anton": {
         "rarity": "A",
         "attribute": "Electric",
         "specialty": "Attack",
