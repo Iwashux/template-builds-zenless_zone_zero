@@ -1,21 +1,25 @@
-userHeight = 1329;
-userWitdh = 1023;
+let scale = 1;
 
-canvas = $("main");
+// cambio de proporciones del lienso
+function fixWidth() { 
+    let canvas = $("main");
+    let canvasHeight = canvas.height();
+    let canvasWidth = canvas.width();
 
-// fixWidth(userWitdh, userHeight); 
+    while ($(window).height() - 50 <= canvasHeight * scale || 
+        $(window).width() - 50 <= canvasWidth * scale) {
+        scale -= 0.01;
+    }
 
-// // cambiar tamaño de pantalla
-// $(window).resize(function(){
-//     fixWidth(userWitdh, userHeight)
-// })
+    while ($(window).height() - 50 >= canvasHeight * scale &&
+        $(window).width() - 50 >= canvasWidth * scale) {
+        scale += 0.01;
+    }
 
-// // cambio de proporciones del lienso
-// function fixWidth(userWitdh, userHeight) { 
-//     heightCanvas = canvas.height();
-
-//     canvas.width(heightCanvas * userWitdh / userHeight);
-// }
+    canvas.css("transform", "scale(" + scale + ")");
+    console.log(scale);
+    
+}fixWidth();
 
 $(".cinema__switch__button").on("click", function() {
     let element = $(this);
