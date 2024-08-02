@@ -706,3 +706,7 @@ main {
 .team__characters img {
     height: 100%;
 }
+
+button {
+    color: #090909;
+}
