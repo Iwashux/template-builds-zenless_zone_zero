@@ -71,10 +71,17 @@ function putCharacter() {
     characters.forEach(function(character, index) {
         let characterText = capitalizeEachWord(character.replaceAll("_"," "));
 
-        selectedCharacter.append("<div>");
-        selectedCharacter.find("div:last").attr("id_character-data", index).append("<img>")
-            .find("img").attr("src", "img/char_avatar/"+character+".png");
-            
+        if (charactersInfo[character].active) {
+            selectedCharacter
+                .append(`<div class='character__avatar' id_character-data='${index}'>
+                    <div class="team__character__info">
+                        <img src="img/ranks/char_rank_${charactersInfo[character].rarity}_color.png" alt="">
+                        <img src="img/attributes/${charactersInfo[character].attribute}.png" alt="">
+                    </div>
+                    <img src="img/char_avatar/${character}.png" alt="">
+                    <p class="team__characters__name">${characterText}</p>
+                </div>`);
+        }
     });
     
 }putCharacter();
@@ -87,3 +94,15 @@ function capitalize(string) {
     if (!string) return ""; // Manejar el caso de una cadena vacía
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
+
+
+$(document).on("click", ".character__avatar", function() {
+    idCharacter = $(this).attr("id_character-data");
+    character = characters[idCharacter];
+    let characterText = capitalizeEachWord(character.replaceAll("_"," "));
+    
+    $("#character-faction").attr("src", `img/factions/${charactersInfo[character].faction}.png`);
+    $("#character-attribute").attr("src", `img/attributes/${charactersInfo[character].attribute}.png`);
+    $("#character-specialty").attr("src", `img/specialties/${charactersInfo[character].specialty}.png`);
+    $("#character-name").text(characterText);
+});

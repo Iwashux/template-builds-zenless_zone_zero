@@ -19,10 +19,10 @@ var wEngeines = [
 ];
 
 var wEngeinesRarity = [ 
-    "S", "S", "S", "S", "S", "S", "S", "S",
-    "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", 
-    "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A",
-    "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B"
+    "s", "s", "s", "s", "s", "s", "s", "s",
+    "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", 
+    "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
+    "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b"
 ];
 
 
@@ -40,116 +40,139 @@ var driveDisks = ["chaotic_metal", "fanged_metal", "freedom_blues", "hormone_pun
 
 var characters = [
     "nekomata", "lycaon", "soldier_11", "koleda", "grace", "ellen_joe", 
-    "rina", "zhu_yuan", "anby", "billy", "nicole", "anton", "corin", 
-    "ben", "soukaku", "lucy", "piper", "hoshimi_miyabi", "qinqyi", 
-    "seth", "jane_doe"
+    "rina", "zhu_yuan", "qinqyi", "jane_doe",
+    
+    "anby", "billy", "nicole", "anton", "corin", 
+    "ben", "soukaku", "lucy", "piper", "hoshimi_miyabi",
+    "seth"
 ];
 
 var charactersInfo = {  
     "nekomata": {
-        "rarity": "S",
-        "attribute": "Physical",
-        "specialty": "Attack",
-        "faction": "Cunning Hares"
+        "rarity": "s",
+        "attribute": "physical",
+        "specialty": "attack",
+        "faction": "cunning_hares",
+        "active": true
     },"lycaon": {
-        "rarity": "S",
-        "attribute": "Ice",
-        "specialty": "Stun",
-        "faction": "Victoria"
+        "rarity": "s",
+        "attribute": "ice",
+        "specialty": "stun",
+        "faction": "victoria",
+        "active": true
     },"soldier_11": {
-        "rarity": "S",
-        "attribute": "Fire",
-        "specialty": "Attack",
-        "faction": "OBOL Squad"
+        "rarity": "s",
+        "attribute": "fire",
+        "specialty": "attack",
+        "faction": "obol_squad",
+        "active": true
     },"koleda": {
-        "rarity": "S",
-        "attribute": "Fire",
-        "specialty": "Stun",
-        "faction": "Belobog"
+        "rarity": "s",
+        "attribute": "fire",
+        "specialty": "stun",
+        "faction": "belobog",
+        "active": true
     },"grace": {
-        "rarity": "S",
-        "attribute": "Electric",
+        "rarity": "s",
+        "attribute": "electric",
         "specialty": "Anomaly",
-        "faction": "Belobog"
+        "faction": "belobog",
+        "active": true
     },"ellen_joe": {
-        "rarity": "S",
-        "attribute": "Ice",
-        "specialty": "Attack",
-        "faction": "Victoria"
+        "rarity": "s",
+        "attribute": "ice",
+        "specialty": "attack",
+        "faction": "victoria",
+        "active": true
     },"rina": {
-        "rarity": "S",
-        "attribute": "Electric",
-        "specialty": "Support",
-        "faction": "Victoria"
+        "rarity": "s",
+        "attribute": "electric",
+        "specialty": "support",
+        "faction": "victoria",
+        "active": true
     },"zhu_yuan": {
-        "rarity": "S",
-        "attribute": "Ether",
-        "specialty": "Attack",
-        "faction": "Investigation SRT"
+        "rarity": "s",
+        "attribute": "ether",
+        "specialty": "attack",
+        "faction": "investigation_srt",
+        "active": true
     },"anby": {
-        "rarity": "A",
-        "attribute": "Electric",
-        "specialty": "Stun",
-        "faction": "Cunning Hares"
+        "rarity": "a",
+        "attribute": "electric",
+        "specialty": "stun",
+        "faction": "cunning_hares",
+        "active": true
     },"billy": {
-        "rarity": "A",
-        "attribute": "Physical",
-        "specialty": "Attack",
-        "faction": "Cunning Hares"
+        "rarity": "a",
+        "attribute": "physical",
+        "specialty": "attack",
+        "faction": "cunning_hares",
+        "active": true
     },"nicole": {
-        "rarity": "A",
-        "attribute": "Ether",
-        "specialty": "Support",
-        "faction": "Cunning Hares"
+        "rarity": "a",
+        "attribute": "ether",
+        "specialty": "support",
+        "faction": "cunning_hares",
+        "active": true
     },"anton": {
-        "rarity": "A",
-        "attribute": "Electric",
-        "specialty": "Attack",
-        "faction": "Belobog"
+        "rarity": "a",
+        "attribute": "electric",
+        "specialty": "attack",
+        "faction": "belobog",
+        "active": true
     },"corin": {
-        "rarity": "A",
-        "attribute": "Physical",
-        "specialty": "Attack",
-        "faction": "Victoria"
+        "rarity": "a",
+        "attribute": "physical",
+        "specialty": "attack",
+        "faction": "victoria",
+        "active": true
     },"ben": {
-        "rarity": "A",
-        "attribute": "Fire",
-        "specialty": "Defense",
-        "faction": "Cunning Hares"
+        "rarity": "a",
+        "attribute": "fire",
+        "specialty": "defense",
+        "faction": "cunning_hares",
+        "active": true
     },"soukaku": {
-        "rarity": "A",
-        "attribute": "Ice",
-        "specialty": "Support",
-        "faction": "Section 6"
+        "rarity": "a",
+        "attribute": "ice",
+        "specialty": "support",
+        "faction": "section_6",
+        "active": true
     },"lucy": {
-        "rarity": "A",
-        "attribute": "Fire",
-        "specialty": "Support",
-        "faction": "Calydon"
+        "rarity": "a",
+        "attribute": "fire",
+        "specialty": "support",
+        "faction": "Calydon",
+        "active": true
     },"piper": {
-        "rarity": "A",
-        "attribute": "Physical",
+        "rarity": "a",
+        "attribute": "physical",
         "specialty": "Anomaly",
-        "faction": "Calydon"
+        "faction": "Calydon",
+        "active": true
     },"hoshimi_miyabi": {
-        "rarity": "S",
-        "attribute": "Ice",
-        "specialty": "Attack",
-        "faction": "Section 6"
+        "rarity": "s",
+        "attribute": "ice",
+        "specialty": "attack",
+        "faction": "section_6",
+        "active": false
     },"qinqyi": {
-        "rarity": "S",
-        "attribute": "Electric",
-        "specialty": "Stun",
-        "faction": "Investigation SRT"
+        "rarity": "s",
+        "attribute": "electric",
+        "specialty": "stun",
+        "faction": "investigation_srt",
+        "active": false
     },"seth": {
-        "rarity": "A",
+        "rarity": "a",
         "attribute": "??",
         "specialty": "??",
-        "faction": "??"
+        "faction": "??",
+        "active": false
     },"jane_doe": {
-        "rarity": "S",
+        "rarity": "s",
         "attribute": "??",
         "specialty": "??",
-        "faction": "??"
+        "faction": "??",
+        "active": false
     }
 };

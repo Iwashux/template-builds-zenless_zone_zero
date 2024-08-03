@@ -163,6 +163,7 @@ main {
     right: 7px;
     height: 30px;
     opacity: .75;
+    z-index: 1;
 }
 
 #character .conteiner__character h2 {
@@ -657,7 +658,7 @@ main {
     width: 100%;
 }
 
-.team__characters > div {
+.team__characters > div, .selected__character__conteiner > div {
     position: relative;
     height: 100%;
     border: 2px solid black;
@@ -690,7 +691,7 @@ main {
     background-color: black;
 }
 
-.team__character__info img:nth-child(2) {
+.team__character__info img:nth-child(n+2) {
     padding: 2px;
     border-radius: 10px;
     background-color: black;
@@ -711,6 +712,8 @@ main {
     height: 100%;
 }
 
+
+
 .selected {
     height: 100%;
     width: 275px;
@@ -721,9 +724,13 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
+}
+
+.selected__character__conteiner > div {
+    height: 75px;
 }
 
 .selected__character__conteiner img {
-    height: 65px;
+    height: 100%;
 }
