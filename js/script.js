@@ -62,6 +62,22 @@ function checkElements() {
     });
 }checkElements();
 
+function putWEngine() {
+    console.log(wEngeines);
+
+    const selectedComponent = $(".selected__component__conteiner");
+
+    wEngeines.forEach(function(wEngeine, index) {
+        selectedComponent.append(
+            `<div class="w-engine__conteiner">
+                <img class="w-engine__rarity" src="img/ranks/item_rank_${wEngeinesRarity[index]}.webp" alt="">
+                <img class="w-engine__img" src="img/w-engine/${wEngeine}.webp" alt="">
+            </div>`
+        );
+    });
+    
+}putWEngine();
+
 
 function putCharacter() {
     console.log(characters);
@@ -72,15 +88,16 @@ function putCharacter() {
         let characterText = capitalizeEachWord(character.replaceAll("_"," "));
 
         if (charactersInfo[character].active) {
-            selectedCharacter
-                .append(`<div class='character__avatar' id_character-data='${index}'>
+            selectedCharacter.append(
+                `<div class='character__avatar' id_character-data='${index}'>
                     <div class="team__character__info">
                         <img src="img/ranks/char_rank_${charactersInfo[character].rarity}_color.png" alt="">
                         <img src="img/attributes/${charactersInfo[character].attribute}.png" alt="">
                     </div>
                     <img src="img/char_avatar/${character}.png" alt="">
                     <p class="team__characters__name">${characterText}</p>
-                </div>`);
+                </div>`
+            );
         }
     });
     

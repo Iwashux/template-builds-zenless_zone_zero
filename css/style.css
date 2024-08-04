@@ -720,7 +720,7 @@ main {
     background-color: #090909;
 }
 
-.selected__character__conteiner {
+.selected__character__conteiner, .selected__component__conteiner {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -733,4 +733,12 @@ main {
 
 .selected__character__conteiner img {
     height: 100%;
+}
+
+.selected__component__conteiner > div {
+    width: 20px;
+}
+
+.selected__component__conteiner > div > img {
+    width: 100%;
 }
