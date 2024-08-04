@@ -118,8 +118,9 @@ $(document).on("click", ".character__avatar", function() {
     character = characters[idCharacter];
     let characterText = capitalizeEachWord(character.replaceAll("_"," "));
     
+    $("#character-name").text(characterText);
     $("#character-faction").attr("src", `img/factions/${charactersInfo[character].faction}.png`);
     $("#character-attribute").attr("src", `img/attributes/${charactersInfo[character].attribute}.png`);
     $("#character-specialty").attr("src", `img/specialties/${charactersInfo[character].specialty}.png`);
-    $("#character-name").text(characterText);
+    $("#character-rank").attr("src", `img/ranks/char_rank_${charactersInfo[character].rarity}.png`);
 });
