@@ -28,6 +28,10 @@ body {
     background-color: #2d0000;
 }
 
+body > * {
+    overflow: hidden;
+}
+
 input:focus, textarea:focus, .cinema__info:focus{
     outline: none;
     box-shadow: none;
@@ -54,6 +58,7 @@ main {
 }
 
 #character-info {
+    position: relative;
     grid-column: 1 / 3;
     display: flex;
     justify-content: space-between;
@@ -125,6 +130,7 @@ main {
 }
 
 #character {
+    position: relative;
     margin-top: 20px;
     grid-row: 2 / 4;
 
@@ -155,6 +161,7 @@ main {
     transform: translateX(-47%);
 
     z-index: 1;
+    pointer-events: none;
 }
 
 #character .character__rank {
@@ -186,33 +193,35 @@ main {
     border-right: 3px solid black;
 }
 
-.habilidades{
+.skills{
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 7px;
     background: rgb(255 165 0 / 50%);
     border-top: 3px solid black;
 }
 
-.habilidades i {
+.skills i {
     padding-right: 1px;
     width: 11px;
     display: flex;
     justify-content: center;
 }
 
-.habilidades .fa-equals {
+.skills .fa-equals {
     margin: 0 1px;
     overflow: hidden;
 }
 
-.habilidades img {
+.skills img {
     height: auto;
     width: calc((100% - 34px) / 7);;
 }
 
 #cinema {
+    position: relative;
     grid-row: 4 / 5;
     display: flex;
     flex-direction: column;
@@ -348,6 +357,7 @@ main {
 }
 
 #w-engine {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -460,6 +470,7 @@ main {
 }
 
 #drive-disk {
+    position: relative;
     grid-row: 3 / 5;
     display: flex;
     flex-direction: column;
@@ -629,9 +640,9 @@ main {
 }
 
 #team {
+    position: relative;
     grid-column: 1 / 3;
     display: flex;
-    overflow: hidden;
     width: 100%;
     height: 100%;
 }
@@ -713,6 +724,9 @@ main {
 }
 
 
+.default {
+    display: none;
+}
 
 .selected {
     height: 100%;
@@ -741,4 +755,20 @@ main {
 
 .selected__component__conteiner > div > img {
     width: 100%;
+}
+
+.conteiner__active::after {
+    position: absolute;
+    content: "";
+    top: -2px;
+    left: -2px;
+    bottom: -2px;
+    right: -2px;
+    border: 2px solid;
+    animation: blink 0.5s linear infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0; } /* Comienza y termina opaco */
+    50% { opacity: 1; }     /* Mitad del tiempo transparente */
 }
