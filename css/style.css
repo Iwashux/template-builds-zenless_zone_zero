@@ -24,7 +24,6 @@ body {
     height: 100vh;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     background-color: #2d0000;
 }
 
@@ -32,7 +31,7 @@ body > * {
     overflow: hidden;
 }
 
-input:focus, textarea:focus, .cinema__info:focus{
+:focus{
     outline: none;
     box-shadow: none;
 }
@@ -42,6 +41,7 @@ main {
     height: 600px;
     min-width: 468px;
     width: 468px;
+    margin: 20px 0;
     padding: 10px;
     border: 2px solid black;
     border-radius: 10px;
@@ -140,8 +140,9 @@ main {
 
     border-top-left-radius: 100px;
     background-image: url('../img/background/character.png');
-    background-size: 240px;
+    background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
     
     border: 3px solid black;
 }
@@ -176,7 +177,7 @@ main {
 #character .conteiner__character h2 {
     position: absolute;
     bottom: -1px;
-    left: 0;
+    left: -2px;
     z-index: 2;
     
     font-size: var(--font-size-subtitle);
@@ -184,13 +185,15 @@ main {
 
     color: white;
     background-image: url('../img/background/character.png');
-    background-size: 240px;
+    background-size: 270px;
+    background-position: center;
     background-repeat: no-repeat;
     
     padding: 3px 16px 3px 10px;
     border-top-right-radius: 18px;
-    border-top: 3px solid black;
-    border-right: 3px solid black;
+    border-width: 3px 3px 0 2px;
+    border-style: solid;
+    border-color: black;
 }
 
 .skills{
@@ -199,7 +202,7 @@ main {
     align-items: center;
     justify-content: space-between;
     padding: 7px;
-    background: rgb(255 165 0 / 50%);
+    background: #50505080;
     border-top: 3px solid black;
 }
 
@@ -669,7 +672,7 @@ main {
     width: 100%;
 }
 
-.team__characters > div, .selected__character__conteiner > div {
+.team__characters > div, .character__selectable {
     position: relative;
     height: 100%;
     border: 2px solid black;
@@ -677,7 +680,7 @@ main {
     overflow: hidden;
 
     background-image: url('../img/background/character.png');
-    background-size: cover;
+    background-size: 200px;
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -696,13 +699,13 @@ main {
     width: 100%;
 }
 
-.team__character__info img:first-child {
+.team__character__rank {
     padding: 1px 2px;
     border-bottom-right-radius: 2px;
     background-color: black;
 }
 
-.team__character__info img:nth-child(n+2) {
+.team__character__attribute {
     padding: 2px;
     border-radius: 10px;
     background-color: black;
@@ -729,32 +732,54 @@ main {
 }
 
 .selected {
+    overflow: auto;
     height: 100%;
     width: 275px;
     background-color: #090909;
+    text-align: center;
+    padding: 15px;
 }
 
-.selected__character__conteiner, .selected__component__conteiner {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
+.selected h2 {
+   text-transform: uppercase;
 }
 
-.selected__character__conteiner > div {
-    height: 75px;
+.selected__character__conteiner, 
+.selected__item__conteiner {
+    display: grid;
+    grid-template-columns: repeat(4, auto);;
+    gap: 5px;
+    margin: 30px 0;
 }
 
-.selected__character__conteiner img {
-    height: 100%;
+.component__selectable {
+    position: relative;
 }
 
-.selected__component__conteiner > div {
-    width: 20px;
+.component__selectable div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:16px;
 }
 
-.selected__component__conteiner > div > img {
+.component__selectable img{
     width: 100%;
+}
+
+.character__selectable p {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    font-size: .75rem;
+    padding: 1px 0;
+    background-color: #09090967;
+}
+
+.w-engine__selectable .component {
+    padding-left: 6px;
 }
 
 .conteiner__active::after {
@@ -771,4 +796,33 @@ main {
 @keyframes blink {
     0%, 100% { opacity: 0; } /* Comienza y termina opaco */
     50% { opacity: 1; }     /* Mitad del tiempo transparente */
+}
+
+
+/* Estilo para la barra de desplazamiento */
+::-webkit-scrollbar {
+    width: 5px; /* Ancho de la barra de desplazamiento */
+    height: 5px; /* Altura de la barra de desplazamiento */
+}
+
+/* Estilo para la parte de la barra de desplazamiento */
+::-webkit-scrollbar-thumb {
+    background-color: #888; /* Color de la barra */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+/* Estilo para la parte de la barra cuando se pasa el mouse por encima */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Color al pasar el mouse */
+}
+
+/* Estilo para la pista de la barra de desplazamiento (la parte detrás de la barra) */
+::-webkit-scrollbar-track {
+    background-color: #000000; /* Color de fondo de la pista */
+    border-radius: 10px; /* Bordes redondeados de la pista */
+}
+
+/* Estilo para la pista de la barra de desplazamiento cuando se pasa el mouse por encima */
+::-webkit-scrollbar-track:hover {
+    background-color: #181818; /* Color de fondo al pasar el mouse */
 }

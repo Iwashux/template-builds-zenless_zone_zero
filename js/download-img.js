@@ -72,15 +72,17 @@ $(document).ready( function() {
     }
 
     function optionScaleImage(height, width, scaler) {
+        let margin = 2; // Margen adicional en px
         let options = {
-            width: width * scaler,
-            height: height * scaler,
+            width: (width + 2 * margin) * scaler,
+            height: (height + 2 * margin) * scaler,
             style: {
                 bgcolor: null, // Configura el fondo como transparente si es necesario
                 transform: 'scale(' + scaler + ')',
                 transformOrigin: 'top left',
-                width: width + 'px',
-                height: height + 'px'
+                width: (width + 2 * margin) + 'px',
+                height: (height + 2 * margin) + 'px',
+                margin: `-${margin}px 0 0 -${margin}px` // Ajuste para incluir el margen en el contenedor
             }
         };
 

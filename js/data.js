@@ -1,4 +1,4 @@
-var wEngeines = [
+var wEngines = [
     {name: "Deep_Sea_Visitor", rarity: "s"},
     {name: "Fusion_Compiler", rarity: "s"},
     {name: "Hellfire_Gears", rarity: "s"},
@@ -86,6 +86,7 @@ var characters = [
         attribute: "default",
         specialty: "default",
         faction: "default",
+        color: "#50505080",
         active: false
     },{   
         name: "nekomata",
@@ -93,6 +94,7 @@ var characters = [
         attribute: "physical",
         specialty: "attack",
         faction: "cunning_hares",
+        color: "#ffa50080",
         active: true
     },{
         name: "lycaon",
@@ -100,6 +102,7 @@ var characters = [
         attribute: "ice",
         specialty: "stun",
         faction: "victoria",
+        color: "#00feff80",
         active: true
     },{
         name: "soldier_11",
@@ -107,6 +110,7 @@ var characters = [
         attribute: "fire",
         specialty: "attack",
         faction: "obol_squad",
+        color: "#ff7c0080",
         active: true
     },{
         name: "koleda",
@@ -114,6 +118,7 @@ var characters = [
         attribute: "fire",
         specialty: "stun",
         faction: "belobog",
+        color: "#ff7c0080",
         active: true
     },{
         name: "grace",
@@ -121,6 +126,7 @@ var characters = [
         attribute: "electric",
         specialty: "Anomaly",
         faction: "belobog",
+        color: "#005eff80",
         active: true
     },{
         name: "ellen_joe",
@@ -128,6 +134,7 @@ var characters = [
         attribute: "ice",
         specialty: "attack",
         faction: "victoria",
+        color: "#00feff80",
         active: true
     },{
         name: "rina",
@@ -135,6 +142,7 @@ var characters = [
         attribute: "electric",
         specialty: "support",
         faction: "victoria",
+        color: "#005eff80",
         active: true
     },{
         name: "zhu_yuan",
@@ -142,6 +150,7 @@ var characters = [
         attribute: "ether",
         specialty: "attack",
         faction: "investigation_srt",
+        color: "#ff48e580",
         active: true
     },{
         name: "jane_doe",
@@ -156,6 +165,7 @@ var characters = [
         attribute: "electric",
         specialty: "stun",
         faction: "investigation_srt",
+        color: "#005eff80",
         active: false
     },{
         name: "hoshimi_miyabi",
@@ -163,6 +173,7 @@ var characters = [
         attribute: "ice",
         specialty: "attack",
         faction: "section_6",
+        color: "#00feff80",
         active: false
     },
     
@@ -172,6 +183,7 @@ var characters = [
         attribute: "electric",
         specialty: "stun",
         faction: "cunning_hares",
+        color: "#00ff3f80",
         active: true
     },{
         name: "billy",
@@ -179,6 +191,7 @@ var characters = [
         attribute: "physical",
         specialty: "attack",
         faction: "cunning_hares",
+        color: "#ff000080",
         active: true
     },{
         name: "nicole",
@@ -186,6 +199,7 @@ var characters = [
         attribute: "ether",
         specialty: "support",
         faction: "cunning_hares",
+        color: "#ff48e580",
         active: true
     },{
         name: "anton",
@@ -193,6 +207,7 @@ var characters = [
         attribute: "electric",
         specialty: "attack",
         faction: "belobog",
+        color: "#005eff80",
         active: true
     },{
         name: "corin",
@@ -200,6 +215,7 @@ var characters = [
         attribute: "physical",
         specialty: "attack",
         faction: "victoria",
+        color: "#ffa50080",
         active: true
     },{
         name: "ben",
@@ -207,11 +223,13 @@ var characters = [
         attribute: "fire",
         specialty: "defense",
         faction: "cunning_hares",
+        color: "#ff7c0080",
         active: true
     },{
         name: "soukaku",
         rarity: "a",
         attribute: "ice",
+        color: "#00feff80",
         specialty: "support",
         faction: "section_6",
         active: true
@@ -221,6 +239,7 @@ var characters = [
         attribute: "fire",
         specialty: "support",
         faction: "Calydon",
+        color: "#ff7c0080",
         active: true
     },{
         name: "piper",
@@ -228,6 +247,7 @@ var characters = [
         attribute: "physical",
         specialty: "Anomaly",
         faction: "Calydon",
+        color: "#ffa50080",
         active: true
     },{
         name: "seth",

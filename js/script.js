@@ -1,25 +1,32 @@
-// let scale = 1;
+let canvasScaler = 1;
 
-// // redimencion lienso
-// function fixWidth() { 
-//     let canvas = $("main");
-//     let canvasHeight = canvas.outerHeight(true);
-//     let canvasWidth = canvas.width();
+// $(window).resize(function() {
+//     fixWidth();
+// });
 
-//     while ($(window).height() <= canvasHeight * scale || 
-//         $(window).width() <= canvasWidth * scale) {
-//         scale -= 0.01;
-//     }
+// redimencion lienso
+function fixWidth() { 
+    let canvas = $("main");
+    let canvasHeight = canvas.outerHeight(true) + 4;
+    let canvasWidth = canvas.outerWidth(true) + 4;
 
-//     while ($(window).height() >= canvasHeight * scale &&
-//         $(window).width() >= canvasWidth * scale) {
-//         scale += 0.01;
-//     }
+    while ($(window).height() <= canvasHeight * canvasScaler || 
+        ($(window).width() - 560) <= canvasWidth * canvasScaler && canvasScaler >= 0.5) {
+        canvasScaler -= 0.01;
+    }
 
-//     canvas.css("transform", "scale(" + scale + ")");
-//     console.log(scale);
+    while ($(window).height() >= canvasHeight * canvasScaler &&
+        ($(window).width() - 560) >= canvasWidth * canvasScaler) {
+        canvasScaler += 0.01;
+    }
+
+    let newCanvasWidht = (canvasWidth * canvasScaler) - canvasWidth;
+    let newCanvasHeight = (canvasHeight * canvasScaler) - canvasHeight;
+    canvas.css("transform", `scale(${canvasScaler})`);
+    canvas.css("margin", `${newCanvasHeight / 2 + 20}px ${newCanvasWidht / 2}px`);
+    console.log(canvasScaler);
     
-// }fixWidth();
+}fixWidth();
 
 $(".cinema__switch__button").on("click", function() {
     let element = $(this);
@@ -82,39 +89,63 @@ $("#w-engine, #drive-disk, #team").on("click", function() {
 });
 
 function putWEngine() {
-    console.log(wEngeines);
+    console.log(wEngines);
 
-    const selectedComponent = $(".selected__component__conteiner");
+    const selectedComponent = $(".selected__item__conteiner");
+    selectedComponent.empty();
 
-    wEngeines.forEach(function(wEngeine, index) {
+    wEngines.forEach(function(wEngine, index) {
         selectedComponent.append(
-            `<div class="w-engine__conteiner" id_w-engine-data='${index}'>
-                <img class="w-engine__rarity" src="img/ranks/item_rank_${wEngeine.rarity}.webp" alt="">
-                <img class="w-engine__img" src="img/w-engine/${wEngeine.name}.webp" alt="">
+            `<div class="w-engine__selectable component__selectable" id_w-engine-data='${index}'>
+                <div>
+                    <img class="component__selectable__rank" src="img/ranks/item_rank_${wEngine.rarity}.webp" alt="">
+                </div>
+                <img class="component" src="img/w-engine/${wEngine.name}.webp" alt="">
             </div>`
         );
     });
+
+    selectedComponent.parent().find("h2").text("W-Engine")
     
 }putWEngine();
+
+function putDriveDisk() {
+    console.log(driveDisks);
+
+    const selectedComponent = $(".selected__item__conteiner");
+    selectedComponent.empty();
+
+    driveDisks.forEach(function(driveDisk, index) {
+        selectedComponent.append(
+            `<div class="drive-disk__selectable component__selectable" id_w-engine-data='${index}'>
+                <img class="component" src="img/drive-disks/${driveDisk}.webp" alt="">
+            </div>`
+        );
+    });
+
+    selectedComponent.parent().find("h2").text("Drive-Disks")
+    
+}putDriveDisk();
 
 
 function putCharacter() {
     console.log(characters);
 
     const selectedCharacter = $(".selected__character__conteiner");
+    selectedCharacter.empty();
 
     characters.forEach(function(character, index) {
         let characterText = capitalizeEachWord(character.name.replaceAll("_"," "));
 
         if (character.active) {
             selectedCharacter.append(
-                `<div class='character__avatar' id_character-data='${index}'>
-                    <div class="team__character__info">
-                        <img src="img/ranks/char_rank_${character.rarity}_color.png" alt="">
-                        <img src="img/attributes/${character.attribute}.png" alt="">
+                `<div class="character__selectable component__selectable" id_character-data='${index}'>
+                    <div component__selectable__info>
+                        <img class="component__selectable__rank" src="img/ranks/char_rank_${character.rarity}_color.png" alt="">
+                        <img class="component__selectable__attribute" src="img/attributes/${character.attribute}.png" alt="">
                     </div>
-                    <img src="img/char_avatar/${character.name}.png" alt="">
-                    <p class="team__characters__name">${characterText}</p>
+                    <img class="component" src="img/char_avatar/${character.name}.png" alt="">
+                    <p class="component__name">${characterText}</p>
                 </div>`
             );
         }
@@ -132,7 +163,7 @@ function capitalize(string) {
 }
 
 
-$(document).on("click", ".character__avatar", function() {
+$(".selected__character__conteiner").on("click", ".character__selectable", function() {
     idCharacter = $(this).attr("id_character-data");
     character = characters[idCharacter];
 
@@ -145,4 +176,15 @@ $(document).on("click", ".character__avatar", function() {
     $("#character-specialty").attr("src", `img/specialties/${character.specialty}.png`).removeClass();
 
     $("#character-rank").attr("src", `img/ranks/char_rank_${character.rarity}.png`);
+    $("#character-img").attr("src", `img/character/${character.name}.png`);
+    $("#skills").css("background", character.color)
+});
+
+$("#skills").on("click", "i", function() {
+    var icon = $(this);
+    if (icon.hasClass("fa-equals")) {
+        icon.removeClass("fa-equals").addClass("fa-angle-right");
+    } else {
+        icon.removeClass("fa-angle-right").addClass("fa-equals");
+    }
 });
