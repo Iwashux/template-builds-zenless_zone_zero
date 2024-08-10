@@ -1,4 +1,5 @@
 var wEngines = [
+    {name: "default"},
     {name: "Deep_Sea_Visitor", rarity: "s"},
     {name: "Fusion_Compiler", rarity: "s"},
     {name: "Hellfire_Gears", rarity: "s"},

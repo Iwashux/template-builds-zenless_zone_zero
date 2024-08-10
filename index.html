@@ -16,14 +16,28 @@
 <body>
     <div class="selected__characters selected">
         <h2>characters</h2>
-        <div class="selected__character__conteiner">
-            
+        <div class="selected__character__container"></div>
+
+        <div class="credits">
+            <div class="credits__info">
+                <h3>Basado en el diseño de Its_Eon / @gt_eon</h3>
+                <a href="https://beacons.ai/gt_eon">
+                    <img src="img/logos/gt_eon-logo.png" alt="">
+                </a>
+            </div>
+            <div class="credits__icons">
+                <a href="https://www.youtube.com/channel/UCi0bApu69bqlVMlZcmW29xQ" class="fa-brands fa-youtube"></a>
+                <a href="https://www.tiktok.com/@gt_eon" class="fa-brands fa-tiktok"></a>
+                <a href="https://x.com/gt_eon/" class="fa-brands fa-x-twitter"></a>
+                <a href="https://www.instagram.com/gt_eon/" class="fa-brands fa-instagram"></a>
+                <a href="https://discord.com/invite/bN755KxfMr" class="fa-brands fa-discord"></a>
+            </div>
         </div>
     </div>
 
     <main id="canvas" class="screen__item">
         <div id="character-info" class="screen__item">
-            <div class="character__info__conteiner">
+            <div class="character__info__container">
                 <img id="character-faction" src="img/factions/default.png" alt="">
                 <div id="character-info-attributes" class="character__info__attributes default">
                     <img id="character-attribute" src="img/attributes/fire.png" alt="">
@@ -34,13 +48,13 @@
             <div class="logo">
                 <div>
                     <i class="fa-brands fa-github"></i>
-                    <img src="img/logo.png" alt="">
+                    <img src="img/logos/my-logo.png" alt="">
                 </div>
                 <span>iwashux</span>
             </div>
         </div>
         <div id="character"  class="screen__item">
-            <div class="conteiner__character">
+            <div class="container__character">
                 <img id="character-img" class="character__img" src="img/character/nekomata.png" alt="">
                 <img id="character-rank" class="character__rank" src="img/ranks/char_rank_default.png" alt="">
                 <h2>SKILL PRIORITIES</h2>
@@ -78,42 +92,42 @@
         <div id="w-engine" class="screen__item">
             <h2>W-ENGINE / DRIVE DISK</h2>
             <div class="w-engine__best">
-                <div class="w-engine__conteiner">
+                <div class="w-engine__container">
                     <img class="w-engine__rarity" src="img/ranks/item_rank_a.webp" alt="">
                     <div class="w-engine__img">
                         <div class="w-engine__img__border">
-                            <img src="img/w-engine/default.webp" alt="">
+                            <img class="w-engine__component" src="img/w-engine/default.webp" alt="">
                         </div>
                     </div>
-                    <p>KABBOM THE CANNON</p>
+                    <p class="w-engine__name">KABBOM THE CANNON</p>
                 </div>
-                <div class="w-engine__conteiner">
+                <div class="w-engine__container">
                     <img class="w-engine__rarity" src="img/ranks/item_rank_b.webp" alt="">
                     <div class="w-engine__img">
                         <div class="w-engine__img__border">
-                            <img src="img/w-engine/[Reverb]_Mark_II.webp" alt="">
+                            <img class="w-engine__component" src="img/w-engine/[Reverb]_Mark_II.webp" alt="">
                         </div>
                     </div>
-                    <p>[REVERB] MARK II</p>
+                    <p class="w-engine__name">[REVERB] MARK II</p>
                 </div>
             </div>
             <div class="w-engine__good">
                 <p>Other Good Engine</p>
-                <div class="w-engine__conteiner">
+                <div class="w-engine__container">
                     <img class="w-engine__rarity" src="img/ranks/item_rank_b.webp" alt="">
-                    <img class="w-engine__img" src="img/w-engine/default.webp" alt="">
-                    <p>Reverb - Mark III</p>
+                    <img class="w-engine__img w-engine__component" src="img/w-engine/default.webp" alt="">
+                    <p class="w-engine__name">Reverb - Mark III</p>
                 </div>
-                <div class="w-engine__conteiner">
+                <div class="w-engine__container">
                     <img class="w-engine__rarity" src="img/ranks/item_rank_a.webp" alt="">
-                    <img class="w-engine__img" src="img/w-engine/Unfettered_Game_Ball.webp" alt="">
-                    <p>Unfettered G.</p>
+                    <img class="w-engine__img w-engine__component" src="img/w-engine/Unfettered_Game_Ball.webp" alt="">
+                    <p class="w-engine__name">Unfettered G.</p>
                 </div>
             </div>
         </div>
         <div id="drive-disk" class="screen__item">
             <h2 style="display: none;">DRIVE DISK</h2>
-            <div class="drive-disk__conteiner">
+            <div class="drive-disk__container">
                 <div class="drive-disk__decoration">
                     <div class="drive-disk__icon__zero">
                         <i class="fa-solid fa-chevron-up"></i>
@@ -126,7 +140,7 @@
                 <div class="drive-disk__sets">
                     <div>
                         <p>[set 1]</p>
-                        <div class="drive-disk__set__conteiner">
+                        <div class="drive-disk__set__container">
                             <div class="drive-disk__img">
                                 <img src="img/drive-disks/default.webp" alt="">
                                 <p>swin jazz</p>
@@ -140,7 +154,7 @@
                     </div>
                     <div>
                         <p>[set 2]</p>
-                        <div class="drive-disk__set__conteiner">
+                        <div class="drive-disk__set__container">
                             <div class="drive-disk__img">
                                 <img src="img/drive-disks/swin_jazz.webp" alt="">
                                 <p>swin jazz</p>
@@ -179,7 +193,7 @@
             <p class="drive-disk__sub-stats">SUB STATS: CRIT% > ATK%</p>
         </div>
         <div id="team" class="screen__item">
-            <div class="team__conteiner screen__item">
+            <div class="team__container screen__item">
                 <p>[Team 1]</p>
                 <div class="team__characters">
                     <div>
@@ -207,7 +221,7 @@
                     </div>
                 </div>
             </div>
-            <div class="team__conteiner screen__item">
+            <div class="team__container screen__item">
                 <p>[Team 2]</p>
                 <div class="team__characters">
                     <div>
@@ -240,9 +254,7 @@
 
     <div class="selected__items selected">
         <h2>title</h2>
-        <div class="selected__item__conteiner">
-
-        </div>
+        <div class="selected__item__container"></div>
     </div>
 
     <!-- <div>
@@ -253,5 +265,6 @@
 
 <script src="js/data.js"></script>
 <script src="js/script.js"></script>
+<script src="js/selectable.js"></script>
 <script src="js/download-img.js"></script>
 </html>
