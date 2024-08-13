@@ -1,5 +1,6 @@
 var wEngines = [
     {name: "default"},
+
     {name: "Deep_Sea_Visitor", rarity: "s"},
     {name: "Fusion_Compiler", rarity: "s"},
     {name: "Hellfire_Gears", rarity: "s"},
@@ -88,7 +89,7 @@ var characters = [
         specialty: "default",
         faction: "default",
         color: "#50505080",
-        active: false
+        active: false,
     },{   
         name: "nekomata",
         rarity: "s",
@@ -144,7 +145,12 @@ var characters = [
         specialty: "support",
         faction: "victoria",
         color: "#005eff80",
-        active: true
+        active: true,
+        fix: {
+            width: -25,
+            translate: 0,
+            scale: 1
+        }
     },{
         name: "zhu_yuan",
         rarity: "s",
@@ -156,10 +162,11 @@ var characters = [
     },{
         name: "jane_doe",
         rarity: "s",
-        attribute: "??",
-        specialty: "??",
-        faction: "??",
-        active: false
+        attribute: "physical",
+        specialty: "anomaly",
+        faction: "default",
+        color: "#ffa50080",
+        active: true
     },{
         name: "qinqyi",
         rarity: "s",
@@ -167,7 +174,7 @@ var characters = [
         specialty: "stun",
         faction: "investigation_srt",
         color: "#005eff80",
-        active: false
+        active: true
     },{
         name: "hoshimi_miyabi",
         rarity: "s",
@@ -175,7 +182,12 @@ var characters = [
         specialty: "attack",
         faction: "section_6",
         color: "#00feff80",
-        active: false
+        active: false,
+        fix: {
+            width: 0,
+            translate: 0,
+            scale: -1
+        }
     },
     
     {
@@ -201,7 +213,12 @@ var characters = [
         specialty: "support",
         faction: "cunning_hares",
         color: "#ff48e580",
-        active: true
+        active: true,
+        fix: {
+            width: 0,
+            translate: -4,
+            scale: 1
+        }
     },{
         name: "anton",
         rarity: "a",
@@ -209,7 +226,12 @@ var characters = [
         specialty: "attack",
         faction: "belobog",
         color: "#005eff80",
-        active: true
+        active: true,
+        fix: {
+            width: -20,
+            translate: -3,
+            scale: 1
+        }
     },{
         name: "corin",
         rarity: "a",
@@ -225,7 +247,12 @@ var characters = [
         specialty: "defense",
         faction: "cunning_hares",
         color: "#ff7c0080",
-        active: true
+        active: true,
+        fix: {
+            width: -8,
+            translate: 0,
+            scale: 1
+        }
     },{
         name: "soukaku",
         rarity: "a",
@@ -233,7 +260,12 @@ var characters = [
         color: "#00feff80",
         specialty: "support",
         faction: "section_6",
-        active: true
+        active: true,
+        fix: {
+            width: 0,
+            translate: 0,
+            scale: -1
+        }
     },{
         name: "lucy",
         rarity: "a",
@@ -253,9 +285,14 @@ var characters = [
     },{
         name: "seth",
         rarity: "a",
-        attribute: "??",
-        specialty: "??",
-        faction: "??",
-        active: false
+        attribute: "electric",
+        specialty: "defense",
+        faction: "investigation_srt",
+        active: true,
+        fix: {
+            width: 0,
+            translate: 3,
+            scale: -1
+        }
     }
 ];

@@ -50,7 +50,38 @@ $(".cinema__level").on("click", function(event) {
     }
 });
 
+$(".cinema__level").on("input", function() {
+    let value = $(this).val();
 
+    // Eliminar caracteres no permitidos y asegurar que el primer dígito sea 0
+    value = value.replace(/[^1-6]/g, ''); 
+    // Si hay mas de dos dígitos, actualizar el segundo dígito con el último ingresado
+    if (value.length = 1) {
+        lastChar = value.slice(-1);
+        value = value.slice(0, 0) + lastChar;
+    }
+    
+    // Asegurarse de que siempre comience con un 0
+    if (value.length > 0 && value[0] !== '0') {
+        value = '0' + value;
+    } else if (value.length === 0) {
+        value = '0';
+    }
+
+    $(this).val(value);
+});
+
+$(".cinema__level").on("focusout", function() {
+    let value = $(this).val();
+    
+    if (value.length == 1) {
+        $(this).val("01");
+    }
+});
+
+$(".cinema__info").on("click", function() {
+    $(this).select();
+});
 
 
 // PRUEBAS
@@ -61,10 +92,8 @@ function checkElements() {
         let elementCount = $(this).children().length;
         if (elementCount == 1) {
             $(this).css('font-size', '');
-        } else if(elementCount == 2) {
-            $(this).css('font-size', '.4rem');
-        } else {
-            $(this).css('font-size', '.3rem');
+        } else if(elementCount) {
+            $(this).css('font-size', '.5rem');
         }
     });
 }checkElements();
