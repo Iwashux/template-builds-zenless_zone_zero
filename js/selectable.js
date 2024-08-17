@@ -69,16 +69,15 @@ function sectionAnimation(section) {
 function putCharacter(selectedCharacter = $(".selected__characters")) {
     console.log(characters);
     selectedCharacter.empty().append(
-        `<section class="selected__item__container">
-            <h2>CHARACTERS</h2>
-            <ul class='selected__grid grid__c4'>`
+        `<h2>CHARACTERS</h2>
+        <ul class='selected__item__container selected__grid grid__c4'>`
     );
 
     characters.forEach(function(character, index) {
         let characterText = capitalizeEachWord(character.name.replaceAll("_"," "));
 
         if (character.active) {
-            selectedCharacter.find(".selected__item__container ul").append(
+            selectedCharacter.find(".selected__item__container").append(
                 `<li class="character__selectable component__selectable" id_character-data='${index}'>
                     <div class="component__selectable__info">
                         <img class="component__selectable__rank" src="img/ranks/char_rank_${character.rarity}_color.png" alt="">
@@ -182,14 +181,13 @@ function putWEngine() {
 
     const selectedComponent = $(".selected__items");
     selectedComponent.empty().append(
-        `<section class='selected__item__container'>
-            <h2>W-Engine</h2>
-            <ul class='selected__grid grid__c4'>`
+        `<h2>W-Engine</h2>
+        <ul class='selected__item__container selected__grid grid__c4'>`
     );
 
     wEngines.forEach(function(wEngine, index) {
         if (wEngine.rarity) {
-            selectedComponent.find(".selected__item__container ul").append(
+            selectedComponent.find(".selected__item__container").append(
                 `<li class="w-engine__selectable component__selectable" id_w-engine-data='${index}'>
                     <div>
                         <img class="component__selectable__rank" src="img/ranks/item_rank_${wEngine.rarity}.webp" alt="">
@@ -239,13 +237,12 @@ function putDriveDisk() {
 
     const selectedComponent = $(".selected__items");
     selectedComponent.empty().append(
-        `<section class="selected__item__container">
-            <h2>Drive-Disks</h2>
-            <ul class='selected__grid grid__c4'>`
+        `<h2>Drive-Disks</h2>
+        <ul class='selected__item__container selected__grid grid__c4'>`
     );
 
     driveDisks.forEach(function(driveDisk, index) {
-        selectedComponent.find(".selected__item__container ul").append(
+        selectedComponent.find(".selected__item__container").append(
             `<li class="drive-disk__selectable component__selectable" id_drive-disk-data='${index}'>
                 <img class="block" src="img/drive-disks/${driveDisk}.webp" alt="">
             </li>`
@@ -273,9 +270,8 @@ function putStats() {
 
     const selectedComponent = $(".selected__items");
     selectedComponent.append(
-        `<section class="selected__item__container">
-        <h2>STATS X</h2>
-        <ul class='selected__grid grid__c3'>`
+        `<h2>STATS X</h2>
+        <ul class='selected__item__container selected__grid grid__c3'>`
     );
 
     diskStats.forEach(function(diskStat, index) {
@@ -284,7 +280,7 @@ function putStats() {
         ).join('');
         statsHTML += "<li class='space'></li>"
         
-        selectedComponent.find(".selected__item__container:last ul").append(statsHTML);
+        selectedComponent.find(".selected__item__container:last").append(statsHTML);
     });
 }
 
@@ -294,15 +290,14 @@ function putBangboo() {
     console.log(bangboos);
 
     const selectedComponent = $(".selected__items");
-    selectedComponent.append(`
-        <hr>
-        <section class="selected__item__container">
-            <h2>Bangboo</h2>
-            <ul class='selected__grid grid__c4'>`
+    selectedComponent.append(
+        `<hr>
+        <h2>Bangboo</h2>
+        <ul class='selected__item__container selected__grid grid__c4'>`
     );
 
     bangboos.forEach(function(bangboo, index) {
-        selectedComponent.find(".selected__item__container:last ul").append(
+        selectedComponent.find(".selected__item__container:last").append(
             `<li class="bangboo__selectable component__selectable" id_bangboo-data='${index}'>
                 <div class="component__selectable__info">
                     <img class="component__selectable__rank" src="img/ranks/char_rank_${bangboo.rarity}_color.png" alt="">

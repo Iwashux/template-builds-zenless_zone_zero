@@ -775,8 +775,10 @@ main {
 }
 
 .selected > *:not(:last-child) {
-    overflow: hidden;
     margin-bottom: 20px;
+}
+.selected > h2 {
+    margin-bottom: 10px !important;
 }
 
 .selected h2 {
@@ -793,7 +795,7 @@ main {
     min-height: 59px;
 }
 
-.selected__grid {
+.selected__item__container {
     display: grid;
     overflow-y: auto;
     overflow-x: hidden;
