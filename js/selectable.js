@@ -5,16 +5,14 @@ let activeElement;
 
 // selecciona seccion de iteams
 let activeTimeout;
-$("#w-engine, #drive-disk, #team").on("click", function(event) {
+$("#skills, #w-engine, #drive-disk, #team").on("click", function(event) {
     elementSelected = $(this);
-    let viewSelect;
     let section = elementSelected.prop('id');
-    section == "team" ? section+="__character" : section;
     
     sectionAnimation(section);
 
     const target = $(event.target);
-    subElementSelected = target.closest(`.${section}__container`);
+    subElementSelected = target.closest(`.component__container`);
     
     $(".component.filter").css("filter","");
     $(".component.border").css("border-color","")
@@ -28,7 +26,8 @@ $("#w-engine, #drive-disk, #team").on("click", function(event) {
 
     viewSelect.filter(".background").css("background", "linear-gradient(45deg, #484000, #f0d600)").end()
         .filter(".filter").css("filter", "drop-shadow(yellow 1px 1px) drop-shadow(yellow -1px -1px)").end()
-        .filter(".border").css("border-color", "yellow");
+        .filter(".border").css("border-color", "yellow"
+    );
 });
 
 function sectionAnimation(section) {
@@ -40,13 +39,16 @@ function sectionAnimation(section) {
         putWEngine();
     } else if(section == "drive-disk") {
         putDriveDisk();
+        putStats();
+    } else if(section == "skills") {
+        putSkills();
     } else {
         putCharacter($(".selected__items"));
         putBangboo()
     }
     
     // Detener la animación anterior si está en curso
-    $("#w-engine, #drive-disk, #team").removeClass("container__active");
+    $("#skills, #w-engine, #drive-disk, #team").removeClass("container__active");
     
     // Reinicia la animación si es necesario
     if (activeTimeout) {
@@ -67,37 +69,41 @@ function sectionAnimation(section) {
 function putCharacter(selectedCharacter = $(".selected__characters")) {
     console.log(characters);
     selectedCharacter.empty().append(
-        `<h2>CHARACTERS</h2>
-        <div class='selected__character__container'>`
+        `<section class="selected__item__container">
+            <h2>CHARACTERS</h2>
+            <ul class='selected__grid grid__c4'>`
     );
 
     characters.forEach(function(character, index) {
         let characterText = capitalizeEachWord(character.name.replaceAll("_"," "));
 
         if (character.active) {
-            selectedCharacter.find(".selected__character__container").append(
-                `<div class="character__selectable component__selectable" id_character-data='${index}'>
+            selectedCharacter.find(".selected__item__container ul").append(
+                `<li class="character__selectable component__selectable" id_character-data='${index}'>
                     <div class="component__selectable__info">
                         <img class="component__selectable__rank" src="img/ranks/char_rank_${character.rarity}_color.png" alt="">
                         <img class="component__selectable__attribute" src="img/attributes/${character.attribute}.png" alt="">
                     </div>
                     <img class="block" src="img/char_avatar/${character.name}.png" alt="">
                     <p class="component__name">${characterText}</p>
-                </div>`
+                </li>`
             );
         }
     });
 
     if (selectedCharacter.hasClass("selected__characters")) {
-        $.get('credits.html', function(data) {
-            selectedCharacter.append(data);
+        $.when(
+            $.get('components/download.html'),
+            $.get('components/credits.html')
+        ).done(function(data1, data2) {
+            selectedCharacter.append(data1[0] + data2[0]);
         });
     }
     
 }putCharacter();
 
 // cambio de personajes tarjeta
-$(".selected__character__container").on("click", ".character__selectable", function() {
+$(".selected__characters").on("click", ".character__selectable", function() {
     let idCharacter = $(this).attr("id_character-data");
     let character = characters[idCharacter];
 
@@ -121,16 +127,6 @@ $(".selected__character__container").on("click", ".character__selectable", funct
     }
 });
 
-// cambio de iconos en las habilidades (=, >)
-$("#skills").on("click", "i", function() {
-    let icon = $(this);
-    if (icon.hasClass("fa-equals")) {
-        icon.removeClass("fa-equals").addClass("fa-angle-right");
-    } else {
-        icon.removeClass("fa-angle-right").addClass("fa-equals");
-    }
-});
-
 // cambio de personajes en seccion team
 $(".selected__items").on("click", ".character__selectable", function() {
     let idCharacter = $(this).attr("id_character-data");
@@ -146,6 +142,38 @@ $(".selected__items").on("click", ".character__selectable", function() {
     }
 })
 
+// ======== CAMBIO DE HABILIDADES =======
+// vista de habilidades
+function putSkills() {
+    const selectedComponent = $(".selected__items");
+    selectedComponent.empty().append(
+        "<h2>Skills</h2>"
+    );
+
+    $.get('components/skills.html', function(data) {
+        selectedComponent.append(data);
+    });
+}
+
+// cambio de habilidades
+$(document).on("click", ".selected__skills__container .skill__selectable", function() {
+    let skillImg = $(this).attr("src");
+    
+    if (subElementSelected) {
+        subElementSelected.attr("src", skillImg);
+    }
+})
+
+// cambio de iconos en las habilidades (=, >)
+$("#skills").on("click", "i", function() {
+    let icon = $(this);
+    if (icon.hasClass("fa-equals")) {
+        icon.removeClass("fa-equals").addClass("fa-angle-right");
+    } else {
+        icon.removeClass("fa-angle-right").addClass("fa-equals");
+    }
+});
+
 
 // ======== CAMBIO DE W-ENGINE =======
 // vista de w-engine
@@ -154,19 +182,20 @@ function putWEngine() {
 
     const selectedComponent = $(".selected__items");
     selectedComponent.empty().append(
-        `<h2>W-Engine</h2>
-        <div class='selected__item__container'>`
+        `<section class='selected__item__container'>
+            <h2>W-Engine</h2>
+            <ul class='selected__grid grid__c4'>`
     );
 
     wEngines.forEach(function(wEngine, index) {
         if (wEngine.rarity) {
-            selectedComponent.find(".selected__item__container").append(
-                `<div class="w-engine__selectable component__selectable" id_w-engine-data='${index}'>
+            selectedComponent.find(".selected__item__container ul").append(
+                `<li class="w-engine__selectable component__selectable" id_w-engine-data='${index}'>
                     <div>
                         <img class="component__selectable__rank" src="img/ranks/item_rank_${wEngine.rarity}.webp" alt="">
                     </div>
                     <img class="block" src="img/w-engine/${wEngine.name}.webp" alt="">
-                </div>`
+                </li>`
             );
         }
     });
@@ -175,6 +204,8 @@ function putWEngine() {
 // cambio de w-engine
 $(".selected__items").on("click", ".w-engine__selectable", function() {
     let idWEngine = $(this).attr("id_w-engine-data");
+    console.log(subElementSelected);
+    
     let wEngine = wEngines[idWEngine];
 
     let wEngineText = wEngine.name.replaceAll("_"," ");
@@ -208,15 +239,16 @@ function putDriveDisk() {
 
     const selectedComponent = $(".selected__items");
     selectedComponent.empty().append(
-        `<h2>Drive-Disks</h2>
-        <div class='selected__item__container'>`
+        `<section class="selected__item__container">
+            <h2>Drive-Disks</h2>
+            <ul class='selected__grid grid__c4'>`
     );
 
     driveDisks.forEach(function(driveDisk, index) {
-        selectedComponent.find(".selected__item__container").append(
-            `<div class="drive-disk__selectable component__selectable" id_drive-disk-data='${index}'>
+        selectedComponent.find(".selected__item__container ul").append(
+            `<li class="drive-disk__selectable component__selectable" id_drive-disk-data='${index}'>
                 <img class="block" src="img/drive-disks/${driveDisk}.webp" alt="">
-            </div>`
+            </li>`
         );
     });
 }
@@ -234,22 +266,49 @@ $(".selected__items").on("click", ".drive-disk__selectable", function() {
     }
 })
 
+// ======== CAMBIO DE STATS DE LOS DRIVE DISK =======
+// vista de stats de drive disk
+function putStats() {
+    console.log(diskStats);
+
+    const selectedComponent = $(".selected__items");
+    selectedComponent.append(
+        `<section class="selected__item__container">
+        <h2>STATS X</h2>
+        <ul class='selected__grid grid__c3'>`
+    );
+
+    diskStats.forEach(function(diskStat, index) {
+        let statsHTML = diskStat.stats.map((stat, index) => 
+            `<li class="drive-disk__stats__container disk-stat__selectable component__selectable" id_drive-disk-data='${index}'>${stat}</li>`
+        ).join('');
+        statsHTML += "<li class='space'></li>"
+        
+        selectedComponent.find(".selected__item__container:last ul").append(statsHTML);
+    });
+}
+
 // ======== CAMBIO DE BANGBOOS =======
 // vista de bangboos
 function putBangboo() {
     console.log(bangboos);
 
     const selectedComponent = $(".selected__items");
-    selectedComponent.append("<hr><div class='selected__item__container'>").find("h2").text("Characters/Bangboos");
+    selectedComponent.append(`
+        <hr>
+        <section class="selected__item__container">
+            <h2>Bangboo</h2>
+            <ul class='selected__grid grid__c4'>`
+    );
 
     bangboos.forEach(function(bangboo, index) {
-        selectedComponent.find(".selected__item__container:last").append(
-            `<div class="bangboo__selectable component__selectable" id_bangboo-data='${index}'>
+        selectedComponent.find(".selected__item__container:last ul").append(
+            `<li class="bangboo__selectable component__selectable" id_bangboo-data='${index}'>
                 <div class="component__selectable__info">
                     <img class="component__selectable__rank" src="img/ranks/char_rank_${bangboo.rarity}_color.png" alt="">
                 </div>
                 <img class="block" src="img/bangboos_avatar/${bangboo.name}.png" alt="">
-            </div>`
+            </li>`
         );
     });
 }

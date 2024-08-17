@@ -6,13 +6,13 @@ let canvasScaler = 1;
 
 // redimencion lienso
 function fixWidth() { 
-    let canvas = $("main");
-    let canvasHeight = canvas.outerHeight(true) + 4;
-    let canvasWidth = canvas.outerWidth(true) + 4;
+    let card = $("#card");
+    let canvasHeight = card.outerHeight(true) + 4;
+    let canvasWidth = card.outerWidth(true) + 4;
 
     while ($(window).height() <= canvasHeight * canvasScaler || 
         ($(window).width() - 560) <= canvasWidth * canvasScaler && canvasScaler >= 0.5) {
-        canvasScaler -= 0.01;
+        canvasScaler -= 0.1;
     }
 
     while ($(window).height() >= canvasHeight * canvasScaler &&
@@ -22,8 +22,8 @@ function fixWidth() {
 
     let newCanvasWidht = (canvasWidth * canvasScaler) - canvasWidth;
     let newCanvasHeight = (canvasHeight * canvasScaler) - canvasHeight;
-    canvas.css("transform", `scale(${canvasScaler})`);
-    canvas.css("margin", `${newCanvasHeight / 2 + 20}px ${newCanvasWidht / 2}px`);
+    card.css("transform", `scale(${canvasScaler})`);
+    card.css("margin", `${newCanvasHeight / 2 + 20}px ${newCanvasWidht / 2}px`);
     console.log(canvasScaler);
     
 }fixWidth();
@@ -73,18 +73,27 @@ $(".cinema__level").on("input", function() {
 
 $(".cinema__level").on("focusout", function() {
     let value = $(this).val();
-    
+
     if (value.length == 1) {
         $(this).val("01");
     }
 });
 
 $(".cinema__info").on("click", function() {
-    $(this).select();
+    cinemaText = $(this);
+    
+    if(cinemaText.prop("contenteditable") == "true" && cinemaText.text() == "EMPTY"){
+        var range = document.createRange();
+        range.selectNodeContents(this); // Selecciona todo el contenido del elemento
+        var selection = window.getSelection();
+        selection.removeAllRanges(); // Elimina cualquier selección previa
+        selection.addRange(range); // Añade el nuevo rango seleccionado
+    }
+    
 });
 
 
-// PRUEBAS
+// Cambio de tamanio stact de los drive diks
 function checkElements() {
     const elementsView = $(".stat__text");
 
@@ -97,3 +106,10 @@ function checkElements() {
         }
     });
 }checkElements();
+
+// Quita la correccies / para la generacion de la imagen
+$('[contenteditable').attr({
+    spellcheck: 'false',
+    autocorrect: 'off',
+    autocapitalize: 'off'
+});

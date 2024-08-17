@@ -81,6 +81,21 @@ var driveDisks = ["chaotic_metal", "fanged_metal", "freedom_blues", "hormone_pun
     "swin_jazz", "thunder_metal", "woodpecker_electro"
 ];
 
+var diskStats = [
+    {
+        number: "IV",
+        stats: ["ATAK%", "PV%", "DEF%", "CRate%", "CDMG%","ANOMAL"]
+    },
+    {
+        number: "V",
+        stats: ["ATAK%", "PV%", "DEF%", "PEN", "PHYSICAL DMG","FIRE DMG", "ICE DMG", "ELECTRIC DMG", "ETHER DMG"]
+    },
+    {
+        number: "VI",
+        stats: ["ATAK%", "PV%", "DEF%", "ANOMAL", "IMPACT","ENERG"]
+    }
+];
+
 var characters = [
     {
         name: "default",
@@ -182,7 +197,7 @@ var characters = [
         specialty: "attack",
         faction: "section_6",
         color: "#00feff80",
-        active: false,
+        active: true,
         fix: {
             width: 0,
             translate: 0,

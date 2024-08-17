@@ -1,12 +1,12 @@
 $(document).ready( function() {
-    $('#download-one').on('click', function() {
-        // Selecciona el canvas completo
-        let element = document.querySelectorAll('#canvas');
+    $(document).on('click', '#download-one', function() {
+        // Selecciona el card completo
+        let element = document.querySelectorAll('#card');
 
         generateImage(element, false);
     });
 
-    $('#download-all').on('click', function() {
+    $(document).on('click', '#download-all', function() {
         // Selecciona todos los elementos
         let elements = document.querySelectorAll('.screen__item');
 
@@ -28,14 +28,14 @@ $(document).ready( function() {
             let zip = new JSZip();
             let promises = [];
     
-            elements.forEach((element, index) => {
+            elements.forEach((element) => {
                 // opciones de reescalado para la resolucion de imagen
                 options = optionScaleImage(element.offsetHeight, element.offsetWidth, scaler)
     
                 // Generar imagen para cada elemento
                 let promise = domtoimage.toPng(element, options).then(function(dataUrl) {
                     let imgData = dataUrl.split(',')[1]; // Extraer datos de la imagen
-                    zip.file(`imagen_${index + 1}.png`, imgData, {base64: true}); // Añadir al ZIP
+                    zip.file(`imagen_${element.id}.png`, imgData, {base64: true}); // Añadir al ZIP
                 }).catch(function(error) {
                     console.error('Error al generar la imagen:', error);
                 });
@@ -48,7 +48,7 @@ $(document).ready( function() {
                 console.log("entre");
                 
                 zip.generateAsync({type: 'blob'}).then(function(content) {
-                    saveAs(content, 'imagenes.zip'); // Usar FileSaver.js para guardar el archivo
+                    saveAs(content, 'imagenes-zzzero.zip'); // Usar FileSaver.js para guardar el archivo
                 });
 
                 console.log("sali");

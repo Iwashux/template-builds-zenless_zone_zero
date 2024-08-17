@@ -14,42 +14,42 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 </head>
 <body>
-    <div class="selected__characters selected"></div>
+    <aside class="selected__characters selected"></aside>
 
-    <main id="canvas" class="screen__item">
-        <div id="character-info" class="screen__item">
-            <div class="character__info__container">
+    <main id="card" class="screen__item">
+        <section id="character-info" class="screen__item">
+            <figure class="character__info__container">
                 <img id="character-faction" src="img/factions/default.png" alt="">
-                <div id="character-info-attributes" class="character__info__attributes default">
+                <figure id="character-info-attributes" class="character__info__attributes default">
                     <img id="character-attribute" src="img/attributes/fire.png" alt="">
                     <img id="character-specialty" src="img/specialties/support.png" alt="">
-                </div>
-            </div>
-            <h1 id="character-name" class="character__info__name">Lucy</h1>
-            <div class="logo">
-                <div>
+                </figure>
+            </figure>
+            <h1 id="character-name" class="character__info__name">Empty</h1>
+            <footer class="logo">
+                <figure>
                     <i class="fa-brands fa-github"></i>
                     <img src="img/logos/my-logo.png" alt="">
-                </div>
+                </figure>
                 <span>iwashux</span>
-            </div>
-        </div>
-        <div id="character"  class="screen__item">
-            <div class="container__character">
+            </footer>
+        </section>
+        <section id="character"  class="screen__item">
+            <figure class="container__character">
                 <img id="character-img" class="character__img" src="img/character/default.png" alt="">
                 <img id="character-rank" class="character__rank" src="img/ranks/char_rank_default.png" alt="">
-                <h2>SKILL PRIORITIES</h2>
-            </div>
+            </figure>
             <div id="skills" class="skills">
-                <img src="img/skills/core.webp" alt=""><i class="fa-solid fa-equals"></i>
-                <img src="img/skills/basic.webp" alt=""><i class="fa-solid fa-angle-right"></i>
-                <img src="img/skills/special.webp" alt=""><i class="fa-solid fa-angle-right"></i>
-                <img src="img/skills/ulti.webp" alt=""><i class="fa-solid fa-angle-right"></i>
-                <img src="img/skills/assist.webp" alt=""><i class="fa-solid fa-angle-right"></i>
-                <img src="img/skills/dodge.webp" alt="">
+                <h2 class="skills__title">SKILL PRIORITIES</h2>
+                <img class="skills__container component__container component border" src="img/skills/default.webp" alt=""><i class="fa-solid fa-equals"></i>
+                <img class="skills__container component__container component border" src="img/skills/default.webp" alt=""><i class="fa-solid fa-angle-right"></i>
+                <img class="skills__container component__container component border" src="img/skills/default.webp" alt=""><i class="fa-solid fa-angle-right"></i>
+                <img class="skills__container component__container component border" src="img/skills/default.webp" alt=""><i class="fa-solid fa-angle-right"></i>
+                <img class="skills__container component__container component border" src="img/skills/default.webp" alt=""><i class="fa-solid fa-angle-right"></i>
+                <img class="skills__container component__container component border" src="img/skills/default.webp" alt="">
             </div>
-        </div>
-        <div id="cinema" class="screen__item">
+        </section>
+        <section id="cinema" class="screen__item">
             <h2>Key Mindscape Cinema (Duplicates)</h2>
             <div class="cinema__best">
                 <div class="cinema__switch">
@@ -58,7 +58,7 @@
                         <input class="cinema__level" type="text" value="01">
                     </div>
                 </div>
-                <div class="cinema__info" contenteditable>EMPTY</div>
+                <p class="cinema__info" contenteditable>EMPTY</p>
             </div>
             <div class="cinema__best">
                 <div class="cinema__switch">
@@ -67,49 +67,49 @@
                         <input class="cinema__level" type="text" value="00" readonly style="opacity: 0.5;">
                     </div>
                 </div>
-                <div class="cinema__info" contenteditable style="opacity: 0.5;">EMPTY</div>
+                <p class="cinema__info" contenteditable="false" style="opacity: 0.5;">EMPTY</p>
             </div>
-        </div>
-        <div id="w-engine" class="screen__item">
+        </section>
+        <section id="w-engine" class="screen__item">
             <h2>W-ENGINE / DRIVE DISK</h2>
-            <div class="w-engine__best">
-                <div class="w-engine__container">
-                    <img class="w-engine__rarity default" src="img/ranks/item_rank_a.webp" alt="">
+            <article class="w-engine__best">
+                <figure class="w-engine__container component__container">
                     <div class="w-engine__img component background">
+                        <img class="w-engine__rarity default" src="img/ranks/item_rank_a.webp" alt="">
                         <div class="w-engine__img__border">
                             <img class="w-engine__component" src="img/w-engine/default.webp" alt="">
                         </div>
                     </div>
-                    <p class="w-engine__name">EMPTY</p>
-                </div>
-                <div class="w-engine__container">
-                    <img class="w-engine__rarity default" src="img/ranks/item_rank_b.webp" alt="">
+                    <figcaption class="w-engine__name">EMPTY</figcaption>
+                </figure>
+                <figure class="w-engine__container component__container">
                     <div class="w-engine__img component background">
+                        <img class="w-engine__rarity default" src="img/ranks/item_rank_b.webp" alt="">
                         <div class="w-engine__img__border">
                             <img class="w-engine__component" src="img/w-engine/default.webp" alt="">
                         </div>
                     </div>
-                    <p class="w-engine__name">EMPTY</p>
-                </div>
-            </div>
-            <div class="w-engine__good">
-                <p>Other Good Engine</p>
-                <div class="w-engine__container">
+                    <figcaption class="w-engine__name">EMPTY</figcaption>
+                </figure>
+            </article>
+            <article class="w-engine__good">
+                <p class="w-engine__good__options">Other Good Engine</p>
+                <figure class="w-engine__container component__container">
                     <img class="w-engine__rarity default" src="img/ranks/item_rank_b.webp" alt="">
                     <img class="w-engine__img w-engine__component component filter" src="img/w-engine/default.webp" alt="">
-                    <p class="w-engine__name">EMPTY</p>
-                </div>
-                <div class="w-engine__container">
+                    <figcaption class="w-engine__name">EMPTY</figcaption>
+                </figure>
+                <figure class="w-engine__container component__container">
                     <img class="w-engine__rarity default" src="img/ranks/item_rank_a.webp" alt="">
                     <img class="w-engine__img w-engine__component component filter" src="img/w-engine/default.webp" alt="">
-                    <p class="w-engine__name">EMPTY</p>
-                </div>
-            </div>
-        </div>
-        <div id="drive-disk" class="screen__item">
+                    <figcaption class="w-engine__name">EMPTY</figcaption>
+                </figure>
+            </article>
+        </section>
+        <section id="drive-disk" class="screen__item">
             <h2 style="display: none;">DRIVE DISK</h2>
             <div class="drive-disk__background">
-                <div class="drive-disk__decoration">
+                <header class="drive-disk__decoration">
                     <div class="drive-disk__icon__zero">
                         <i class="fa-solid fa-chevron-up"></i>
                         <i class="fa-solid fa-chevron-down"></i>
@@ -117,53 +117,53 @@
                     </div>
                     <p>[ DRIVE DISC OPTIONS ]</p>
                     <i class="fa-solid fa-hard-drive"></i>
-                </div>
+                </header>
                 <div class="drive-disk__sets">
-                    <div>
-                        <p>[set 1]</p>
+                    <section>
+                        <p contenteditable>[set 1]</p>
                         <div class="drive-disk__set__container">
-                            <div class="drive-disk__container">
+                            <figure class="drive-disk__container component__container">
                                 <img class="drive-disk__component component filter" src="img/drive-disks/default.webp" alt="">
-                                <p class="drive-disk__name">EMPTY!</p>
-                            </div>
+                                <figcaption class="drive-disk__name">EMPTY!</figcaption>
+                            </figure>
                             <i class="fa-solid fa-plus"></i>
-                            <div class="drive-disk__container">
+                            <figure class="drive-disk__container component__container">
                                 <img class="drive-disk__component component filter" src="img/drive-disks/default.webp" alt="">
-                                <p class="drive-disk__name">EMPTY!</p>
-                            </div>
+                                <figcaption class="drive-disk__name">EMPTY!</figcaption>
+                            </figure>
                         </div>
-                    </div>
-                    <div>
-                        <p>[set 2]</p>
+                    </section>
+                    <section>
+                        <p contenteditable>[set 2]</p>
                         <div class="drive-disk__set__container">
-                            <div class="drive-disk__container">
+                            <figure class="drive-disk__container component__container">
                                 <img class="drive-disk__component component filter" src="img/drive-disks/default.webp" alt="">
-                                <p class="drive-disk__name">EMPTY!</p>
-                            </div>
+                                <figcaption class="drive-disk__name">EMPTY!</figcaption>
+                            </figure>
                             <i class="fa-solid fa-plus"></i>
-                            <div class="drive-disk__container">
+                            <figure class="drive-disk__container component__container">
                                 <img class="drive-disk__component component filter" src="img/drive-disks/default.webp" alt="">
-                                <p class="drive-disk__name">EMPTY!</p>
-                            </div>
+                                <figcaption class="drive-disk__name">EMPTY!</figcaption>
+                            </figure>
                         </div>
-                    </div>
+                    </section>
                 </div>
             </div>
             <div class="drive-disk__stats">
-                <div class="drive-disk__stats__number">
+                <div class="drive-disk__stats__container component__container component border" data-id_stat="0">
                     <span class="stat__number">IV</span>
                     <div  class="stat__text">
                         <span>CRIT %</span>
                         <span>ATK %</span>
                     </div>
                 </div>
-                <div class="drive-disk__stats__number">
+                <div class="drive-disk__stats__container component__container component border" data-id_stat="1">
                     <span class="stat__number">V</span>
                     <div  class="stat__text">
                         <span>ATK %</span>
                     </div>
                 </div>
-                <div class="drive-disk__stats__number">
+                <div class="drive-disk__stats__container component__container component border" data-id_stat="2">
                     <span class="stat__number">VI</span>
                     <div  class="stat__text">
                         <span>ENER %</span>
@@ -171,74 +171,69 @@
                     </div>
                 </div>
             </div>
-            <p class="drive-disk__sub-stats">SUB STATS: CRIT% > ATK%</p>
-        </div>
-        <div id="team" class="screen__item">
-            <div class="team__container screen__item">
-                <p>[Team 1]</p>
+            <p class="drive-disk__sub-stats component__container component border">SUB STATS: CRIT% > ATK%</p>
+        </section>
+        <section id="team" class="screen__item">
+            <div id="team-1" class="team__container screen__item">
+                <p contenteditable>[Team 1]</p>
                 <div class="team__characters">
-                    <div class="team__character__container team__component component border">
+                    <figure class="team__character__container component__container component border">
                         <div class="team__character__info">
                             <img class="team__character__rank" src="img/ranks/char_rank_default.png" alt="">
                             <img class="team__character__attribute default" src="img/attributes/fire.png" alt="">
                         </div>
                         <img class="team__character__img" src="img/char_avatar/default.png" alt="">
-                        <p class="team__character__name">EMPTY</p>
-                    </div>
-                    <div class="team__character__container team__component component border">
+                        <figcaption class="team__character__name">EMPTY</figcaption>
+                    </figure>
+                    <figure class="team__character__container component__container component border">
                         <div class="team__character__info">
                             <img class="team__character__rank" src="img/ranks/char_rank_default.png" alt="">
                             <img class="team__character__attribute default" src="img/attributes/fire.png" alt="">
                         </div>
                         <img class="team__character__img" src="img/char_avatar/default.png" alt="">
-                        <p class="team__character__name">EMPTY</p>
-                    </div>
-                    <div class="team__character__container team__bangboo__container team__component component border">
+                        <figcaption class="team__character__name">EMPTY</figcaption>
+                    </figure>
+                    <figure class="team__bangboo__container component__container component border">
                         <div class="team__character__info">
                             <img  class="team__character__rank" src="img/ranks/char_rank_default.png" alt="">
                         </div>
                         <img  class="team__character__img" src="img/bangboos_avatar/default.png" alt="">
-                        <p class="team__character__name">EMPTY</p>
-                    </div>
+                        <figcaption class="team__character__name">EMPTY</figcaption>
+                    </figure>
                 </div>
             </div>
-            <div class="team__container screen__item">
-                <p>[Team 2]</p>
+            <div id="team-2" class="team__container screen__item">
+                <p contenteditable>[Team 2]</p>
                 <div class="team__characters">
-                    <div class="team__character__container team__component component border">
+                    <figure class="team__character__container component__container component border">
                         <div class="team__character__info">
                             <img class="team__character__rank" src="img/ranks/char_rank_default.png" alt="">
                             <img class="team__character__attribute default" src="img/attributes/fire.png" alt="">
                         </div>
                         <img class="team__character__img" src="img/char_avatar/default.png" alt="">
-                        <p class="team__character__name">EMPTY</p>
-                    </div>
-                    <div class="team__character__container team__component component border">
+                        <figcaption class="team__character__name">EMPTY</figcaption>
+                    </figure>
+                    <figure class="team__character__container component__container component border">
                         <div class="team__character__info">
                             <img class="team__character__rank" src="img/ranks/char_rank_default.png" alt="">
                             <img class="team__character__attribute default" src="img/attributes/fire.png" alt="">
                         </div>
                         <img class="team__character__img" src="img/char_avatar/default.png" alt="">
-                        <p class="team__character__name">EMPTY</p>
-                    </div>
-                    <div class="team__character__container team__bangboo__container team__component component border">
+                        <figcaption class="team__character__name">EMPTY</figcaption>
+                    </figure>
+                    <figure class="team__bangboo__container component__container component border">
                         <div class="team__character__info">
                             <img  class="team__character__rank" src="img/ranks/char_rank_default.png" alt="">
                         </div>
                         <img  class="team__character__img" src="img/bangboos_avatar/default.png" alt="">
-                        <p class="team__character__name">EMPTY</p>
-                    </div>
+                        <figcaption class="team__character__name">EMPTY</figcaption>
+                    </figure>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
 
-    <div class="selected__items selected"></div>
-
-    <!-- <div>
-        <button id="download-one">Download One</button>
-        <button id="download-all">Download All</button>
-    </div> -->
+    <aside class="selected__items selected"></aside>
 </body>
 
 <script src="js/data.js"></script>
