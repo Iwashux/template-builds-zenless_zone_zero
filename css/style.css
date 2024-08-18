@@ -605,7 +605,7 @@ main {
 
 .drive-disk__container img {
     width: 100%;
-    padding: 0 15px;
+    padding: 0 16px;
 }
 
 .drive-disk__container:first-child::after,
@@ -629,13 +629,17 @@ main {
 
 .drive-disk__stats {
     display: flex;
+    align-items: center;
     gap: 6px;
 }
 
-.drive-disk__stats__container {
+.drive-disk__stats__container,
+.disk-stat__selectable,
+.disk-substat__selectable {
     flex: 1;
     display: flex;
     align-items: center;
+    align-content: center;
     padding: 1px 3px;
     padding-right: 0;
     border-radius: 6px;
@@ -664,7 +668,7 @@ main {
     align-items: center;
 }
 
-.drive-disk__sub-stats {
+.drive-disk__substats {
     font-size: var(--font-size-minitext);
     text-align: center;
 }
@@ -812,7 +816,8 @@ main {
 }
 .space {
     grid-column: 1 / 4;
-    height: 15px;
+    min-height: 15px;
+    color: grey;
 }
 
 .selected__skills__container {
@@ -821,8 +826,11 @@ main {
     gap: 15px;
 }
 
-.component__selectable:not(.character__selectable, .bangboo__selectable),
-.drive-disk__sub-stats {
+.component__selectable:not(.character__selectable, 
+    .bangboo__selectable, 
+    .disk-stat__selectable, 
+    .disk-substat__selectable),
+.drive-disk__substats {
     border: 2px solid transparent;  
 }
 
@@ -869,6 +877,11 @@ main {
 
 .w-engine__selectable .block {
     padding-top: 3px;
+}
+
+.disk-stat__selectable,
+.disk-substat__selectable {
+    display: block;
 }
 
 .container__active::after {
@@ -922,9 +935,9 @@ main {
 .credits__info {
     display: flex;
     align-items: center;
-    font-size: .9rem;
+    font-size: 1rem;
+    text-align: center;
     margin-bottom: 10px;
-    text-align: start;
 }
 
 .credits__icons {

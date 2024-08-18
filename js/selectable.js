@@ -14,14 +14,14 @@ $("#skills, #w-engine, #drive-disk, #team").on("click", function(event) {
     const target = $(event.target);
     subElementSelected = target.closest(`.component__container`);
     
-    $(".component.filter").css("filter","");
-    $(".component.border").css("border-color","")
-    $(".component.background").css("background","")
+    $(".identifier.filter").css("filter","");
+    $(".identifier.border").css("border-color","")
+    $(".identifier.background").css("background","")
 
-    if(subElementSelected.hasClass("component")){
+    if(subElementSelected.hasClass("identifier")){
         viewSelect = subElementSelected;
     } else {
-        viewSelect = subElementSelected.find(`.component`);
+        viewSelect = subElementSelected.find(`.identifier`);
     }
 
     viewSelect.filter(".background").css("background", "linear-gradient(45deg, #484000, #f0d600)").end()
@@ -40,6 +40,7 @@ function sectionAnimation(section) {
     } else if(section == "drive-disk") {
         putDriveDisk();
         putStats();
+        putSubstats();
     } else if(section == "skills") {
         putSkills();
     } else {
@@ -270,19 +271,96 @@ function putStats() {
 
     const selectedComponent = $(".selected__items");
     selectedComponent.append(
-        `<h2>STATS X</h2>
-        <ul class='selected__item__container selected__grid grid__c3'>`
+        `<h2 id='stats-title'>STATS</h2>
+        <ul id='selected-stats' class='selected__item__container selected__grid grid__c2'>`
     );
 
-    diskStats.forEach(function(diskStat, index) {
-        let statsHTML = diskStat.stats.map((stat, index) => 
-            `<li class="drive-disk__stats__container disk-stat__selectable component__selectable" id_drive-disk-data='${index}'>${stat}</li>`
-        ).join('');
-        statsHTML += "<li class='space'></li>"
+    selectedComponent.find(".selected__item__container:last").append("<li class='space'>Selecciona un stats</li>");
+}
+
+$(document).on("click", ".drive-disk__stats__container.component__container", function() {
+    let idStats = $(this).attr('data-id_stat');
+    let diskStat = diskStats[idStats];
+    
+    $("#stats-title").text(`STATS ${diskStat.number}`);
+
+    statsView(diskStat)
+});
+
+function statsView(diskStat) {
+    let statsHTML = diskStat.stats.map((stat, index) => 
+        `<li class="disk-stat__selectable component__selectable" id_disk-stat-data='${index}'>${stat}</li>`
+    ).join('');
+    
+    $("#selected-stats").empty().append(statsHTML);
+}
+
+//cambio de stats de drive disk
+$(document).on("click", ".disk-stat__selectable", function() {
+    let diskStatID = $(this).attr("id_disk-stat-data");
+    
+    if (subElementSelected.hasClass("drive-disk__stats__container")) {
+        let diskStatsNumber = subElementSelected.attr("data-id_stat");
+        let diskStat = diskStats[diskStatsNumber].short_stat[diskStatID];
+
+        if (subElementSelected.find("span").hasClass("stats__default")) {
+            subElementSelected.find(".stat__text").empty();
+        }
         
-        selectedComponent.find(".selected__item__container:last").append(statsHTML);
+        if(subElementSelected.find("span").length <= 1) {
+            subElementSelected.find(".stat__text").append(`<span>${diskStat}</span>`);
+        }
+    
+        checkElements();
+    }
+});
+
+// ======== CAMBIO DE SUBSTATS DE LOS DRIVE DISK =======
+// vista de substats de drive disk
+function putSubstats() {
+    console.log(substats);
+
+    const selectedComponent = $(".selected__items");
+    selectedComponent.append(
+        `<h2>SUBSTATS</h2>
+        <ul id='selected-substats' class='selected__item__container selected__grid grid__c2'>`
+    );
+
+    substats.forEach(function(substat, index) {
+        selectedComponent.find(".selected__item__container:last").append(
+            `<li class="drive-disk__substats__container disk-substat__selectable component__selectable" id_drive-substat-data='${index}'>${substat}</li>`
+        )
     });
 }
+
+//cambio de stats de drive disk
+let cont = 0;
+$(document).on("click", ".disk-substat__selectable", function() {
+    if (subElementSelected.hasClass("drive-disk__substats")) {
+        let substatID = $(this).attr("id_drive-substat-data");
+        let substat = substats[substatID];
+        let elementHeight = subElementSelected.height();
+        let fontSize = 0.65;
+        
+        cont++;
+        if(cont <= 4) {
+            if (subElementSelected.find(".substats__text").text() == "EMPTY") {
+                subElementSelected.find(".substats__text").empty();
+            } else {
+                subElementSelected.find(".substats__text").append(" <i class='fa-solid fa-angle-right'></i>");
+            }
+
+            subElementSelected.find(".substats__text").append(` ${substat}`);
+        }
+
+        while(subElementSelected.height() > elementHeight) {
+            fontSize -= 0.01;
+            subElementSelected.css("font-size", `${fontSize}rem`)
+            console.log("entre");
+            
+        }
+    }
+});
 
 // ======== CAMBIO DE BANGBOOS =======
 // vista de bangboos

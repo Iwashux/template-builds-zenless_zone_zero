@@ -92,20 +92,32 @@ $(".cinema__info").on("click", function() {
     
 });
 
-
 // Cambio de tamanio stact de los drive diks
 function checkElements() {
     const elementsView = $(".stat__text");
+    console.log(elementsView);
 
     elementsView.each(function() {
-        let elementCount = $(this).children().length;
-        if (elementCount == 1) {
-            $(this).css('font-size', '');
-        } else if(elementCount) {
+        console.log($(this));
+
+        let elementHeight = $(this).height();
+        let elementWidth = $(this).width();
+        console.log(elementHeight);
+        
+        console.log(elementWidth);
+                
+        if (elementWidth >= 36 && elementHeight != 15) {
+            $(this).css('font-size', '.5rem'); // Prioridad si ambos se cumplen
+        } else if (elementWidth >= 36) {
+            $(this).css('font-size', '.6rem');
+        } else if (elementHeight != 15) {
             $(this).css('font-size', '.5rem');
+        } else {
+            $(this).css('font-size', '');
         }
+
     });
-}checkElements();
+}
 
 // Quita la correccies / para la generacion de la imagen
 $('[contenteditable').attr({

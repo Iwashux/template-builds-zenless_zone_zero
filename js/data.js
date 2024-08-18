@@ -1,10 +1,11 @@
-var wEngines = [
+const wEngines = [
     {name: "default"},
 
+    {name: "Ice-Jade_Teapot", rarity:"s"},
+    {name: "Riot_Suppressor_Mark_VI", rarity: "s"},
     {name: "Deep_Sea_Visitor", rarity: "s"},
     {name: "Fusion_Compiler", rarity: "s"},
     {name: "Hellfire_Gears", rarity: "s"},
-    {name: "Riot_Suppressor_Mark_VI", rarity: "s"},
     {name: "Steel_Cushion", rarity: "s"},
     {name: "The_Brimstone", rarity: "s"},
     {name: "The_Restrained", rarity: "s"},
@@ -51,7 +52,7 @@ var wEngines = [
 ];
 
 
-var bangboos = [
+const bangboos = [
     {name: "amillion", rarity: "s"},
     {name: "bangvolver", rarity: "s"},
     {name: "butler", rarity: "s"},
@@ -76,27 +77,32 @@ var bangboos = [
     {name: "sumoboo", rarity: "a"}
 ];
 
-var driveDisks = ["chaotic_metal", "fanged_metal", "freedom_blues", "hormone_punk",
+const driveDisks = ["chaotic_metal", "fanged_metal", "freedom_blues", "hormone_punk",
     "inferno_metal", "polar_metal", "puffer_electro", "shockstar_disco", "soul_rock",
     "swin_jazz", "thunder_metal", "woodpecker_electro"
 ];
 
-var diskStats = [
+const diskStats = [
     {
         number: "IV",
-        stats: ["ATAK%", "PV%", "DEF%", "CRate%", "CDMG%","ANOMAL"]
+        stats: ["ATK %", "HP %", "DEF %", "CRIT Rate", "CRIT DMG%","ANOMALY"],
+        short_stat: ["ATK %", "HP %", "DEF %", "C Rate", "C DMG","ANOMAL"]
     },
     {
         number: "V",
-        stats: ["ATAK%", "PV%", "DEF%", "PEN", "PHYSICAL DMG","FIRE DMG", "ICE DMG", "ELECTRIC DMG", "ETHER DMG"]
+        stats: ["ATK %", "HP %", "DEF %", "PEN RATIO", "PHYSICAL DMG", "FIRE DMG", "ICE DMG", "ELECTRIC DMG", "ETHER DMG"],
+        short_stat: ["ATK %", "HP %", "DEF %", "PEN", "PHYSICAL DMG", "FIRE DMG", "ICE DMG", "ELECTRIC DMG", "ETHER DMG"]
     },
     {
         number: "VI",
-        stats: ["ATAK%", "PV%", "DEF%", "ANOMAL", "IMPACT","ENERG"]
+        stats: ["ATK %", "HP %", "DEF %", "ANOMALY", "IMPACT","ENERGY REGEN"],
+        short_stat: ["ATK %", "HP %", "DEF %", "ANOMAL", "IMPACT","ENERGY"]
     }
 ];
 
-var characters = [
+const substats = ["ATK","HP","DEF","ATK %","HP %","DEF %","CRIT Rate%","CRIT DMG%","PEN","ANOMALY"];
+
+const characters = [
     {
         name: "default",
         rarity: "default",
@@ -105,7 +111,31 @@ var characters = [
         faction: "default",
         color: "#50505080",
         active: false,
+    },{
+         name: "jane_doe",
+        rarity: "s",
+        attribute: "physical",
+        specialty: "anomaly",
+        faction: "investigation_srt",
+        color: "#ffa50080",
+        active: true
+    },{
+        name: "qinqyi",
+        rarity: "s",
+        attribute: "electric",
+        specialty: "stun",
+        faction: "investigation_srt",
+        color: "#005eff80",
+        active: true
     },{   
+        name: "zhu_yuan",
+        rarity: "s",
+        attribute: "ether",
+        specialty: "attack",
+        faction: "investigation_srt",
+        color: "#ff48e580",
+        active: true
+    },{
         name: "nekomata",
         rarity: "s",
         attribute: "physical",
@@ -141,7 +171,7 @@ var characters = [
         name: "grace",
         rarity: "s",
         attribute: "electric",
-        specialty: "Anomaly",
+        specialty: "anomaly",
         faction: "belobog",
         color: "#005eff80",
         active: true
@@ -167,37 +197,13 @@ var characters = [
             scale: 1
         }
     },{
-        name: "zhu_yuan",
-        rarity: "s",
-        attribute: "ether",
-        specialty: "attack",
-        faction: "investigation_srt",
-        color: "#ff48e580",
-        active: true
-    },{
-        name: "jane_doe",
-        rarity: "s",
-        attribute: "physical",
-        specialty: "anomaly",
-        faction: "default",
-        color: "#ffa50080",
-        active: true
-    },{
-        name: "qinqyi",
-        rarity: "s",
-        attribute: "electric",
-        specialty: "stun",
-        faction: "investigation_srt",
-        color: "#005eff80",
-        active: true
-    },{
         name: "hoshimi_miyabi",
         rarity: "s",
         attribute: "ice",
         specialty: "attack",
         faction: "section_6",
         color: "#00feff80",
-        active: true,
+        active: false,
         fix: {
             width: 0,
             translate: 0,
@@ -206,6 +212,18 @@ var characters = [
     },
     
     {
+        name: "seth",
+        rarity: "a",
+        attribute: "electric",
+        specialty: "defense",
+        faction: "investigation_srt",
+        active: true,
+        fix: {
+            width: 0,
+            translate: 3,
+            scale: -1
+        }
+    },{
         name: "anby",
         rarity: "a",
         attribute: "electric",
@@ -286,28 +304,16 @@ var characters = [
         rarity: "a",
         attribute: "fire",
         specialty: "support",
-        faction: "Calydon",
+        faction: "calydon",
         color: "#ff7c0080",
         active: true
     },{
         name: "piper",
         rarity: "a",
         attribute: "physical",
-        specialty: "Anomaly",
-        faction: "Calydon",
+        specialty: "anomaly",
+        faction: "calydon",
         color: "#ffa50080",
         active: true
-    },{
-        name: "seth",
-        rarity: "a",
-        attribute: "electric",
-        specialty: "defense",
-        faction: "investigation_srt",
-        active: true,
-        fix: {
-            width: 0,
-            translate: 3,
-            scale: -1
-        }
     }
 ];
