@@ -20,7 +20,7 @@ Una vez configurado, la página permite generar y descargar una imagen personali
 ## Capturas de Pantalla
 
 ![Screenshot 2024-08-18 172019](https://github.com/user-attachments/assets/e0677be2-32ab-4427-bb69-5cefa6410ad3)
-![imagen1](https://github.com/user-attachments/assets/f9ad605f-ce43-4fbc-9000-2fd43882ef2c)
+<img src="https://github.com/user-attachments/assets/f9ad605f-ce43-4fbc-9000-2fd43882ef2c" alt="imagen1" width="500"/>
 
 ## Instalación
 
