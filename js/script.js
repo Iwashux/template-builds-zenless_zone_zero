@@ -17,15 +17,18 @@ function fixWidth() {
 
     while ($(window).height() >= canvasHeight * canvasScaler &&
         ($(window).width() - 560) >= canvasWidth * canvasScaler) {
-        canvasScaler += 0.01;
+        canvasScaler += 0.1;
+    }
+
+    while ($(window).height() <= canvasHeight * canvasScaler || 
+        ($(window).width() - 560) <= canvasWidth * canvasScaler && canvasScaler >= 0.5) {
+        canvasScaler -= 0.01;
     }
 
     let newCanvasWidht = (canvasWidth * canvasScaler) - canvasWidth;
     let newCanvasHeight = (canvasHeight * canvasScaler) - canvasHeight;
     card.css("transform", `scale(${canvasScaler})`);
     card.css("margin", `${newCanvasHeight / 2 + 20}px ${newCanvasWidht / 2}px`);
-    console.log(canvasScaler);
-    
 }fixWidth();
 
 $(".cinema__switch__button").on("click", function() {
@@ -95,16 +98,10 @@ $(".cinema__info").on("click", function() {
 // Cambio de tamanio stact de los drive diks
 function checkElements() {
     const elementsView = $(".stat__text");
-    console.log(elementsView);
 
     elementsView.each(function() {
-        console.log($(this));
-
         let elementHeight = $(this).height();
         let elementWidth = $(this).width();
-        console.log(elementHeight);
-        
-        console.log(elementWidth);
                 
         if (elementWidth >= 36 && elementHeight != 15) {
             $(this).css('font-size', '.5rem'); // Prioridad si ambos se cumplen

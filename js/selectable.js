@@ -68,7 +68,7 @@ function sectionAnimation(section) {
 // ======== CAMBIO DE PERSONAJES =======
 //vista de los personajes
 function putCharacter(selectedCharacter = $(".selected__characters")) {
-    console.log(characters);
+    // console.log(characters);
     selectedCharacter.empty().append(
         `<h2>CHARACTERS</h2>
         <ul class='selected__item__container selected__grid grid__c4'>`
@@ -178,7 +178,7 @@ $("#skills").on("click", "i", function() {
 // ======== CAMBIO DE W-ENGINE =======
 // vista de w-engine
 function putWEngine() {
-    console.log(wEngines);
+    // console.log(wEngines);
 
     const selectedComponent = $(".selected__items");
     selectedComponent.empty().append(
@@ -203,7 +203,7 @@ function putWEngine() {
 // cambio de w-engine
 $(".selected__items").on("click", ".w-engine__selectable", function() {
     let idWEngine = $(this).attr("id_w-engine-data");
-    console.log(subElementSelected);
+    // console.log(subElementSelected);
     
     let wEngine = wEngines[idWEngine];
 
@@ -234,7 +234,7 @@ $(".selected__items").on("click", ".w-engine__selectable", function() {
 // ======== CAMBIO DE DRIVE DISK =======
 // vista de drive disk
 function putDriveDisk() {
-    console.log(driveDisks);
+    // console.log(driveDisks);
 
     const selectedComponent = $(".selected__items");
     selectedComponent.empty().append(
@@ -267,7 +267,7 @@ $(".selected__items").on("click", ".drive-disk__selectable", function() {
 // ======== CAMBIO DE STATS DE LOS DRIVE DISK =======
 // vista de stats de drive disk
 function putStats() {
-    console.log(diskStats);
+    // console.log(diskStats);
 
     const selectedComponent = $(".selected__items");
     selectedComponent.append(
@@ -318,7 +318,7 @@ $(document).on("click", ".disk-stat__selectable", function() {
 // ======== CAMBIO DE SUBSTATS DE LOS DRIVE DISK =======
 // vista de substats de drive disk
 function putSubstats() {
-    console.log(substats);
+    // console.log(substats);
 
     const selectedComponent = $(".selected__items");
     selectedComponent.append(
@@ -356,8 +356,6 @@ $(document).on("click", ".disk-substat__selectable", function() {
         while(subElementSelected.height() > elementHeight) {
             fontSize -= 0.01;
             subElementSelected.css("font-size", `${fontSize}rem`)
-            console.log("entre");
-            
         }
     }
 });
@@ -365,7 +363,7 @@ $(document).on("click", ".disk-substat__selectable", function() {
 // ======== CAMBIO DE BANGBOOS =======
 // vista de bangboos
 function putBangboo() {
-    console.log(bangboos);
+    // console.log(bangboos);
 
     const selectedComponent = $(".selected__items");
     selectedComponent.append(
