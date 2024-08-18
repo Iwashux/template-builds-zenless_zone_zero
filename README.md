@@ -11,6 +11,8 @@ Este proyecto es una plantilla web interactiva diseñada para la creación de co
 
 Una vez configurado, la página permite generar y descargar una imagen personalizada con la composición del personaje, ideal para compartir o utilizar como referencia.
 
+Pagina< https://iwashux.github.io/template-builds-zenless_zone_zero/
+
 ## Características
 
 - **Interfaz Interactiva:** Edita y ajusta cada elemento de la composición del personaje en tiempo real.
