@@ -11,6 +11,7 @@ const wEngines = [
     {name: "The_Restrained", rarity: "s"},
     {name: "Weeping_Cradle", rarity: "s"},
     
+    {name: "Gilded_Blossom", rarity: "a"},
     {name: "Bashful_Demon", rarity: "a"},
     {name: "Big_Cylinder", rarity: "a"},
     {name: "Bunny_Band", rarity: "a"},
