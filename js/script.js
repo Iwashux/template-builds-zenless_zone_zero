@@ -11,17 +11,17 @@ function fixWidth() {
     let canvasWidth = card.outerWidth(true) + 4;
 
     while ($(window).height() <= canvasHeight * canvasScaler || 
-        ($(window).width() - 560) <= canvasWidth * canvasScaler && canvasScaler >= 0.5) {
+        ($(window).width() - 325) <= canvasWidth * canvasScaler && canvasScaler >= 0.5) {
         canvasScaler -= 0.1;
     }
 
     while ($(window).height() >= canvasHeight * canvasScaler &&
-        ($(window).width() - 560) >= canvasWidth * canvasScaler) {
+        ($(window).width() - 325) >= canvasWidth * canvasScaler) {
         canvasScaler += 0.1;
     }
 
     while ($(window).height() <= canvasHeight * canvasScaler || 
-        ($(window).width() - 560) <= canvasWidth * canvasScaler && canvasScaler >= 0.5) {
+        ($(window).width() - 325) <= canvasWidth * canvasScaler && canvasScaler >= 0.5) {
         canvasScaler -= 0.01;
     }
 
@@ -117,7 +117,7 @@ function checkElements() {
 }
 
 // Quita la correccies / para la generacion de la imagen
-$('[contenteditable').attr({
+$('[contenteditable]').attr({
     spellcheck: 'false',
     autocorrect: 'off',
     autocapitalize: 'off'

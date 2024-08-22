@@ -11,6 +11,7 @@ const wEngines = [
     {name: "The_Restrained", rarity: "s"},
     {name: "Weeping_Cradle", rarity: "s"},
     
+    {name: "Gilded_Blossom", rarity: "a"},
     {name: "Bashful_Demon", rarity: "a"},
     {name: "Big_Cylinder", rarity: "a"},
     {name: "Bunny_Band", rarity: "a"},
@@ -49,7 +50,7 @@ const wEngines = [
     {name: "[Vortex]_Arrow", rarity: "b"},
     {name: "[Vortex]_Hatchet", rarity: "b"},
     {name: "[Vortex]_Revolver", rarity: "b"}
-];
+].map((item, index) => ({ id: index, ...item }));
 
 
 const bangboos = [
@@ -75,7 +76,7 @@ const bangboos = [
     {name: "penguinboo", rarity: "a"},
     {name: "resonaboo", rarity: "a"},
     {name: "sumoboo", rarity: "a"}
-];
+].map((item, index) => ({ id: index, ...item }));
 
 const driveDisks = ["chaotic_metal", "fanged_metal", "freedom_blues", "hormone_punk",
     "inferno_metal", "polar_metal", "puffer_electro", "shockstar_disco", "soul_rock",
@@ -112,7 +113,7 @@ const characters = [
         color: "#50505080",
         active: false,
     },{
-         name: "jane_doe",
+        name: "jane_doe",
         rarity: "s",
         attribute: "physical",
         specialty: "anomaly",
@@ -314,6 +315,11 @@ const characters = [
         specialty: "anomaly",
         faction: "calydon",
         color: "#ffa50080",
-        active: true
+        active: true,
+        fix: {
+            width: 0,
+            translate: 0,
+            scale: -1
+        }
     }
-];
+].map((item, index) => ({ id: index, ...item }));
