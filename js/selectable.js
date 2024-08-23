@@ -26,7 +26,7 @@ $containerEditable.on("click", function(event) {
         viewSelect = $subElementSelected.find(`.identifier`);
     }
     // selector visual activado (es el que el usuario selecciona se visualiza)
-    viewSelect.filter(".background").css("background", "linear-gradient(45deg, #484000, #f0d600)").end()
+    viewSelect.filter(".background").css("background", "var(--gradient-diagonal-yellow)").end()
         .filter(".filter").css("filter", "drop-shadow(yellow 1px 1px) drop-shadow(yellow -1px -1px)").end()
         .filter(".border").css("border-color", "yellow"
     );
@@ -36,6 +36,7 @@ function lateralView(section) {
     if ($elementActive?.is($elementSelected)) {
         return; // Si es el mismo, salir sin hacer cambios
     }
+    // $elementActive = $elementSelected
 
     if (section == "character") {
         putCharacter();
@@ -62,7 +63,7 @@ function lateralView(section) {
 function itemView(empty, name, cantGrid, data) {
     const $selectedComponent = $(".selected__items");
 
-    empty && $selectedComponent.empty(); //simplificacion de if
+    empty && $selectedComponent.empty(); //simplificacion de if / borra contenido lateral
     $selectedComponent.append(
         `<section class="selected__title"><h2>${name}</h2> <i id="reset-${name}" class="fa-solid fa-arrows-rotate"></i></section>
         <ul class='selected__item__container selected__grid grid__c${cantGrid}'>`
@@ -75,7 +76,7 @@ function itemView(empty, name, cantGrid, data) {
 function putCharacter(group = '') {
     // console.log(characters);
     const characterFilter = characters.filter(character => character.active)
-    let data = characterFilter.map((character) => {
+    const data = characterFilter.map((character) => {
         const characterText = capitalizeEachWord(character.name.replaceAll("_"," "));
 
         return `<li class="character_${group}_selectable component__selectable" id_character-data='${character.id}'>
@@ -101,8 +102,8 @@ function putSkills() {
 // vista de w-engine
 function putWEngine() {
     // console.log(wEngines);
-    let wEngineFilter = wEngines.filter(wEngine => wEngine.rarity )
-    let data = wEngineFilter.map((wEngine) =>
+    const wEngineFilter = wEngines.filter(wEngine => wEngine.rarity )
+    const data = wEngineFilter.map((wEngine) =>
             `<li class="w-engine__selectable component__selectable" id_w-engine-data='${wEngine.id}'>
                 <div>
                     <img class="component__selectable__rank" src="img/ranks/item_rank_${wEngine.rarity}.webp" alt="">
@@ -117,7 +118,7 @@ function putWEngine() {
 // vista de drive disk
 function putDriveDisk() {
     // console.log(driveDisks);
-    let data = driveDisks.map((driveDisk, index) =>
+    const data = driveDisks.map((driveDisk, index) =>
         `<li class="drive-disk__selectable component__selectable" id_drive-disk-data='${index}'>
             <img class="block" src="img/drive-disks/${driveDisk}.webp" alt="">
         </li>`
@@ -129,21 +130,25 @@ function putDriveDisk() {
 // vista de stats de drive disk
 function putStats() {
     // console.log(diskStats);
-    let data = "<li class='space'>Selecciona un stats</li>";
+    const data = "<li class='space'>Selecciona un stats</li>";
 
     itemView(false, "stats", 2, data);
 
     $(".selected__items").find(".selected__title:last h2").prop("id", "stats-title").end()
         .find("ul:last").prop("id", "selected-stats");
 }
+
+// ++++++++++++++++++   BALIDAR SI SACAR ESTO ES PRUDENTE   +++++++++++++++
 // vistas de los distintos stats dependiendo del numero de disk
-$(".drive-disk__stats__container").on("click", function(){
-    statsDriveNumber($(this))
-});
+// $(".drive-disk__stats__container").on("click", function(){
+//     statsDriveNumber($(this))
+// });
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 // funcion en caso de seleccionar primero un stats (para que aparescan en la seleccion de items)
 function statsDriveNumber(element) {
     const idStats = element.attr('data-id_stat');
-    const diskStat = diskStats[idStats];
+    const diskStat = diskStats[idStats]; // al ser siempre los mismo no utilizo find id
     const data = diskStat.stats.map((stat, index) => 
         `<li class="disk-stat__selectable component__selectable" id_disk-stat-data='${index}'>${stat}</li>`
     ).join('');
@@ -155,7 +160,7 @@ function statsDriveNumber(element) {
 // vista de substats de drive disk
 function putSubstats() {
     // console.log(substats);
-    let data = substats.map((substat, index) =>
+    const data = substats.map((substat, index) =>
         `<li class="drive-disk__substats__container disk-substat__selectable component__selectable" id_drive-substat-data='${index}'>${substat}</li>`
     ).join('');
 
@@ -165,7 +170,7 @@ function putSubstats() {
 // vista de bangboos
 function putBangboo() {
     // console.log(bangboos);
-    let data = bangboos.map((bangboo) =>
+    const data = bangboos.map((bangboo) =>
         `<li class="bangboo__selectable component__selectable" id_bangboo-data='${bangboo.id}'>
                 <div class="component__selectable__info">
                     <img class="component__selectable__rank" src="img/ranks/char_rank_${bangboo.rarity}_color.png" alt="">
@@ -181,10 +186,10 @@ function putBangboo() {
 // ======== CAMBIO INTERACTIVO =======
 // cambio de personajes tarjeta
 $(".selected").on("click", ".character__selectable", function() {
-    let idCharacter = $(this).attr("id_character-data");
-    let character = characters[idCharacter];
+    const idCharacter = $(this).attr("id_character-data");
+    const character = characters.find(char => char.id == idCharacter);
 
-    let characterText = capitalizeEachWord(character.name.replaceAll("_"," "));
+    const characterText = capitalizeEachWord(character.name.replaceAll("_"," "));
     
     $("#character-name").text(characterText);
     $("#character-info-attributes").removeClass("default");
@@ -206,10 +211,10 @@ $(".selected").on("click", ".character__selectable", function() {
 
 // cambio de personajes en seccion team
 $(".selected").on("click", ".character__team__selectable", function() {
-    let idCharacter = $(this).attr("id_character-data");
-    let character = characters[idCharacter];
+    const idCharacter = $(this).attr("id_character-data");
+    const character = characters.find(char => char.id == idCharacter);
     
-    let characterText = capitalizeEachWord(character.name.replaceAll("_"," "));
+    const characterText = capitalizeEachWord(character.name.replaceAll("_"," "));
 
     if ($subElementSelected && !$subElementSelected.hasClass("team__bangboo__container")) {
         $subElementSelected.find(".team__character__rank").attr("src", `img/ranks/char_rank_${character.rarity}_color.png`);
@@ -221,7 +226,7 @@ $(".selected").on("click", ".character__team__selectable", function() {
 
 // cambio de habilidades
 $(".selected").on("click", ".skill__selectable", function() {
-    let skillImg = $(this).attr("src");
+    const skillImg = $(this).attr("src");
     
     if ($subElementSelected) {
         $subElementSelected.attr("src", skillImg);
@@ -230,8 +235,8 @@ $(".selected").on("click", ".skill__selectable", function() {
 
 // cambio de iconos en las habilidades (=, >)
 $("#skills").on("click", "i", function() {
-    let icon = $(this);
-    if (icon.hasClass("fa-equals")) {
+    const icon = $(this);
+    if (icon.is(".fa-equals")) {
         icon.removeClass("fa-equals").addClass("fa-angle-right");
     } else {
         icon.removeClass("fa-angle-right").addClass("fa-equals");
@@ -240,12 +245,11 @@ $("#skills").on("click", "i", function() {
 
 // cambio de w-engine
 $(".selected").on("click", ".w-engine__selectable", function() {
-    let idWEngine = $(this).attr("id_w-engine-data");
     // console.log($subElementSelected);
-    
-    let wEngine = wEngines[idWEngine];
+    const idWEngine = $(this).attr("id_w-engine-data");
+    const wEngine = wEngines.find(eng => eng.id == idWEngine);
 
-    let wEngineText = wEngine.name.replaceAll("_"," ");
+    const wEngineText = wEngine.name.replaceAll("_"," ");
     let fontSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-size-text').trim());
 
     if ($subElementSelected) {
@@ -253,16 +257,16 @@ $(".selected").on("click", ".w-engine__selectable", function() {
         $subElementSelected.find(".w-engine__component").attr("src", `img/w-engine/${wEngine.name}.webp`);
         $subElementSelected.find(".w-engine__rarity").removeClass("default")
 
-        let subElementName = $subElementSelected.closest('.w-engine__container').find(".w-engine__name").text(wEngineText);
+        const $subElementName = $subElementSelected.closest('.w-engine__container').find(".w-engine__name").text(wEngineText);
 
         if ($subElementSelected.closest(".w-engine__best").length) {
-            subElementName.css("font-size", `${fontSize}rem`);
-            let totalHeight = subElementName.height();
+            $subElementName.css("font-size", `${fontSize}rem`);
+            let totalHeight = $subElementName.height();
     
             while (totalHeight > 32) {
                 fontSize -= 0.01;
-                totalHeight = subElementName.height();
-                subElementName.css("font-size", `${fontSize}rem`);
+                totalHeight = $subElementName.height();
+                $subElementName.css("font-size", `${fontSize}rem`);
             }
         }
     }
@@ -270,10 +274,10 @@ $(".selected").on("click", ".w-engine__selectable", function() {
 
 // cambio de drive-disk
 $(".selected").on("click", ".drive-disk__selectable", function() {
-    let idDriveDisk = $(this).attr("id_drive-disk-data");
-    let driveDisk = driveDisks[idDriveDisk];
+    const idDriveDisk = $(this).attr("id_drive-disk-data");
+    const driveDisk = driveDisks[idDriveDisk]; // al ser siempre los mismo y ser un array simple no utilizo find id
     
-    let driveDiskText = capitalizeEachWord(driveDisk.replaceAll("_"," "));
+    const driveDiskText = capitalizeEachWord(driveDisk.replaceAll("_"," "));
 
     if ($subElementSelected) {
         $subElementSelected.find(".drive-disk__component").attr("src", `img/drive-disks/${driveDisk}.webp`);
@@ -281,42 +285,37 @@ $(".selected").on("click", ".drive-disk__selectable", function() {
     }
 })
 
-// ======== CAMBIO DE STATS DE LOS DRIVE DISK =======
-
 //cambio de stats de drive disk
 $(".selected").on("click", ".disk-stat__selectable", function() {
-    let diskStatID = $(this).attr("id_disk-stat-data");
+    const diskStatID = $(this).attr("id_disk-stat-data");
     
     if ($subElementSelected.hasClass("drive-disk__stats__container")) {
-        let diskStatsNumber = $subElementSelected.attr("data-id_stat");
-        let diskStat = diskStats[diskStatsNumber].short_stat[diskStatID];
+        const diskStatsNumber = $subElementSelected.attr("data-id_stat");
+        const diskStatText = diskStats[diskStatsNumber].short_stat[diskStatID];
 
         if ($subElementSelected.find("span").hasClass("stats__default")) {
             $subElementSelected.find(".stat__text").empty();
         }
         
         if($subElementSelected.find("span").length <= 1) {
-            $subElementSelected.find(".stat__text").append(`<span>${diskStat}</span>`);
+            $subElementSelected.find(".stat__text").append(`<span>${diskStatText}</span>`);
         }
     
         checkElements();
     }
 });
 
-// ======== CAMBIO DE SUBSTATS DE LOS DRIVE DISK =======
-
-
-//cambio de stats de drive disk
-let cont = 0;
+//cambio de substats de drive disk
+let contSubstats = 0;
 $(".selected").on("click", ".disk-substat__selectable", function() {
     if ($subElementSelected.hasClass("drive-disk__substats")) {
-        let substatID = $(this).attr("id_drive-substat-data");
-        let substat = substats[substatID];
-        let elementHeight = $subElementSelected.height();
+        const substatID = $(this).attr("id_drive-substat-data");
+        const substat = substats[substatID]; // al ser siempre los mismo y ser un array simple no utilizo find id
+        const elementHeight = $subElementSelected.height();
         let fontSize = 0.65;
         
-        cont++;
-        if(cont <= 4) {
+        contSubstats++;
+        if(contSubstats <= 4) {
             if ($subElementSelected.find(".substats__text").text() == "EMPTY") {
                 $subElementSelected.find(".substats__text").empty();
             } else {
@@ -333,15 +332,12 @@ $(".selected").on("click", ".disk-substat__selectable", function() {
     }
 });
 
-// ======== CAMBIO DE BANGBOOS =======
-
-
 // cambio de personajes en seccion team
 $(".selected").on("click", ".bangboo__selectable", function() {
-    let idBangboo = $(this).attr("id_bangboo-data");
-    let bangboo = bangboos[idBangboo];
+    const idBangboo = $(this).attr("id_bangboo-data");
+    const bangboo = bangboos.find(boo => boo.id == idBangboo);
     
-    let bangbooText = capitalizeEachWord(bangboo.name.replaceAll("_"," "));
+    const bangbooText = capitalizeEachWord(bangboo.name.replaceAll("_"," "));
 
     if ($subElementSelected.hasClass("team__bangboo__container")) {
         $subElementSelected.find(".team__character__rank").attr("src", `img/ranks/char_rank_${bangboo.rarity}_color.png`);

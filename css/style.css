@@ -654,6 +654,10 @@ main {
     background: var(--gradient-vertical-top);
 }
 
+.drive-disk__stats__container {
+    height: 26px;
+}
+
 .drive-disk__stats__container .stat__number {
     padding-right: 2px;
     font-size: var(--font-size-subtitle);
@@ -833,12 +837,8 @@ main {
     background: var(--gradient-diagonal);
 }
 
-.menu__options li:hover {
-    border-color: yellow;
-    color: yellow;
-}
-
-.menu__options .active {
+.menu__options li:hover,
+.menu__options .active  {
     border-color: yellow;
     color: yellow;
 }
@@ -874,6 +874,12 @@ main {
     overflow-x: hidden;
     gap: 5px;
 }
+.grid__c6 {
+    grid-template-columns: repeat(6, calc(100% / 6 - 5px));
+}
+.grid__c5 {
+    grid-template-columns: repeat(5, calc(100% / 5 - 4.5px));
+}
 .grid__c4 {
     grid-template-columns: repeat(4, calc(100% / 4 - 4px));
 }
@@ -905,6 +911,7 @@ main {
 .component__selectable {
     position: relative;
     cursor: pointer;
+    max-width: 100%;
 }
 
 .component__selectable div {
@@ -949,6 +956,11 @@ main {
 .component__selectable:hover,
 .download__img button:hover  {
     border-color: yellow;
+}
+.component__selectable.character__selectable:hover,
+.component__selectable.bangboo__selectable:hover,
+.component__selectable.character__team__selectable:hover {
+    background: yellow;
 }
 
 .w-engine__selectable .block {
