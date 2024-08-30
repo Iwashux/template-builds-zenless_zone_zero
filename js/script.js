@@ -53,27 +53,6 @@ $(".cinema__level").on("click", function(event) {
     }
 });
 
-$(".cinema__level").on("input", function() {
-    let value = $(this).val();
-
-    // Eliminar caracteres no permitidos y asegurar que el primer dígito sea 0
-    value = value.replace(/[^1-6]/g, ''); 
-    // Si hay mas de dos dígitos, actualizar el segundo dígito con el último ingresado
-    if (value.length = 1) {
-        lastChar = value.slice(-1);
-        value = value.slice(0, 0) + lastChar;
-    }
-    
-    // Asegurarse de que siempre comience con un 0
-    if (value.length > 0 && value[0] !== '0') {
-        value = '0' + value;
-    } else if (value.length === 0) {
-        value = '0';
-    }
-
-    $(this).val(value);
-});
-
 $(".cinema__level").on("focusout", function() {
     let value = $(this).val();
 
@@ -94,6 +73,16 @@ $(".cinema__info").on("click", function() {
     }
     
 });
+
+// ====== EXTRAS FUNCTIONS ======
+function capitalizeEachWord(string) {
+    return string.split(" ").map(word => capitalize(word)).join(" ");
+}
+
+function capitalize(string) {
+    if (!string) return ""; // Manejar el caso de una cadena vacía
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
 
 // Cambio de tamanio stact de los drive diks
 function checkElements() {
