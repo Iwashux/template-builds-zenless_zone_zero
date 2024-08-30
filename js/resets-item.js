@@ -104,44 +104,41 @@ $(".selected").on("click", "#reset-substats", function() {
     }
     contSubstats = 0;
 });
-// +===============================================================================================+
-// borrar los personajes en seccion team FALTA ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-// +===============================================================================================+
-$(".selected").on("click", "#reset-team-characters", function() {
-    const idCharacter = $(this).attr("id_character-data");
-    const character = characters.find(char => char.id == idCharacter);
-    
-    const characterText = capitalizeEachWord(character.name.replaceAll("_"," "));
-
-    if ($subElementSelected && !$subElementSelected.hasClass("team__bangboo__container")) {
-        $subElementSelected.find(".team__character__rank").attr("src", `img/ranks/char_rank_${character.rarity}_color.png`);
-        $subElementSelected.find(".team__character__attribute").attr("src", `img/attributes/${character.attribute}.png`).removeClass("default");
-        $subElementSelected.find(".team__character__img").attr("src", `img/char_avatar/${character.name}.png`);
-        $subElementSelected.find(".team__character__name").text(characterText);
-    }
-})
 
 // borrar los personajes en seccion team
-$(".selected").on("click", "#reset-bangboos", function() {
-    const bangboo = bangboos.find(boo => boo.id === 0);
-    const bangbooText = "EMPTY";
+$(".selected").on("click", "#reset-team-character", function() {
+    const character = characters.find(char => char.id === 0);
+    const file = "char_avatar";
 
-    console.log($subElementSelected.find(".team__bangboo__container"));
-    
-    
-    if ($subElementSelected && $subElementSelected.parent(".team__characters")) {
-        const $element = $subElementSelected.parent(".team__characters").find(".team__bangboo__container");
-
-        $element.find(".team__character__rank").attr("src", `img/ranks/char_rank_${bangboo.name}_color.png`);
-        $element.find(".team__character__img").attr("src", `img/bangboos_avatar/${bangboo.name}.png`);
-        $element.find(".team__character__name").text(bangbooText);
+    if ($subElementSelected && $subElementSelected.is(".team__character__container")) {
+        $subElementSelected.find(".team__character__attribute").addClass("default");
+        deleteCharBangboo($subElementSelected, file, character);
     } else {
-        $elementSelected.find(".team__bangboo__container").each(function() {
-            console.log("aqui");
-            
-            $(this).find(".team__character__rank").attr("src", `img/ranks/char_rank_${bangboo.name}_color.png`);
-            $(this).find(".team__character__img").attr("src", `img/bangboos_avatar/${bangboo.name}.png`);
-            $(this).find(".team__character__name").text(bangbooText);
+        $elementSelected.find(".team__character__container").each(function() {
+            $(this).find(".team__character__attribute").addClass("default");
+            deleteCharBangboo($(this), file, character);
         });
     }
-})
+});
+
+// borrar los bangboo en seccion team
+$(".selected").on("click", "#reset-bangboos", function() {
+    const bangboo = bangboos.find(boo => boo.id === 0);
+    const file = "bangboos_avatar";
+
+    if ($subElementSelected && $subElementSelected.parent(".team__characters")) {
+        const $element = $subElementSelected.parent(".team__characters").find(".team__bangboo__container");
+        deleteCharBangboo($element, file, bangboo)
+    } else {
+        $elementSelected.find(".team__bangboo__container").each(function() {
+            deleteCharBangboo($(this), file, bangboo)
+        });
+    }
+});
+function deleteCharBangboo($element, file, char) {
+    const charText = "EMPTY";
+
+    $element.find(".team__character__rank").attr("src", `img/ranks/char_rank_${char.name}_color.png`);
+    $element.find(".team__character__img").attr("src", `img/${file}/${char.name}.png`);
+    $element.find(".team__character__name").text(charText);
+}

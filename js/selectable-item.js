@@ -6,7 +6,7 @@ $elementActive, // validador de elemento activo
 section = "character"; // id del $elementSelected (sirve para la vista lateral)
 
 // selecciona seccion de items
-$("main").on("click", function(event) {
+$("main, #menu-options li").on("click", function(event) {
     event.stopPropagation();
     // selectores visuales desactivados
     $(".identifier.filter").css("filter",""); 
@@ -15,9 +15,9 @@ $("main").on("click", function(event) {
 
     if ($(event.target).is($containerEditable) || $(event.target).closest($containerEditable).length) {
         $elementSelected = $(event.target).closest($containerEditable);
-        $subElementSelected = $(event.target).closest(`.component__container`);
         section = $elementSelected.prop('id');
-    
+        $subElementSelected = $(event.target).closest(`.component__container`);
+
         lateralView(section); // cambio visual al lateral (cambio de los componentes)
         // valida selector
         if($subElementSelected.is(".identifier")){
@@ -30,6 +30,10 @@ $("main").on("click", function(event) {
             .filter(".filter").css("filter", "drop-shadow(yellow 1px 1px) drop-shadow(yellow -1px -1px)").end()
             .filter(".border").css("border-color", "yellow"
         );
+
+        if (!$subElementSelected.length) {
+            $subElementSelected = null;
+        }
     } else {
         $subElementSelected = null;
     }
@@ -39,7 +43,6 @@ $("main").on("click", function(event) {
 $("#menu-options li").on("click", function() {
     section = $(this).prop("id").replace("icon-", "");
     $elementSelected = $(`#card #${section}`);
-    console.log($elementSelected);
     
     lateralView(section);
 });
