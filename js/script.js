@@ -116,3 +116,19 @@ $('[contenteditable]').attr({
     autocorrect: 'off',
     autocapitalize: 'off'
 });
+
+// animacion de reset
+$('.selected__items').on('mouseenter', '.spin-icon', function () {
+    let $this = $(this);
+
+    // Si el elemento ya tiene la clase 'animating', no hacer nada
+    if (!$this.hasClass('animating')) {
+        // Añadir la clase para iniciar la animación
+        $this.addClass('animating');
+
+        // Usar un timeout para quitar la clase después de que la animación termine
+        setTimeout(function() {
+            $this.removeClass('animating');
+        }, 1500); // Tiempo que dura la animación (1.5s)
+    }
+});
