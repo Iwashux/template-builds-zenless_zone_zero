@@ -21,7 +21,8 @@ Pagina: https://iwashux.github.io/template-builds-zenless_zone_zero/
 
 ## Capturas de Pantalla
 
-![Screenshot 2024-08-18 172019](https://github.com/user-attachments/assets/e0677be2-32ab-4427-bb69-5cefa6410ad3)
+![Screenshot 2024-08-30 193257](https://github.com/user-attachments/assets/ccf9d204-6de5-496a-9c81-5583f08ab2e6)
+
 <p align="center">
   <img src="https://github.com/user-attachments/assets/f9ad605f-ce43-4fbc-9000-2fd43882ef2c" alt="imagen1" width="500"/>
 </p>
