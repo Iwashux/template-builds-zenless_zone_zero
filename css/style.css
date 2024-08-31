@@ -1,5 +1,6 @@
 :root{
     --gradient-diagonal: linear-gradient(45deg, #171717, #353a39);
+    --gradient-diagonal-yellow: linear-gradient(45deg, rgb(72, 64, 0), rgb(240, 214, 0));
     --gradient-vertical-top: linear-gradient(to top, #171717, #353a39);
     --gradient-vertical-bottom: linear-gradient(to bottom, #171717, #353a39);
 
@@ -45,6 +46,12 @@ li {
 }
 
 main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+#card {
     position: relative;
     height: 600px;
     min-width: 468px;
@@ -53,6 +60,7 @@ main {
     padding: 10px;
     border: 2px solid black;
     border-radius: 10px;
+    overflow: hidden;
     
     background-image: url('../img/background/main.png');
     background-size: cover;
@@ -360,14 +368,14 @@ main {
     box-shadow: none;
 }
 
-#w-engine {
+#w-engines {
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-#w-engine h2 {
+#w-engines h2 {
     font-size: var(--font-size-subtitle);
     text-align: center;
 }
@@ -494,7 +502,7 @@ main {
     text-overflow: ellipsis;
 }
 
-#drive-disk {
+#drive-disks {
     position: relative;
     grid-row: 3 / 5;
     display: flex;
@@ -647,6 +655,10 @@ main {
     background: var(--gradient-vertical-top);
 }
 
+.drive-disk__stats__container {
+    height: 26px;
+}
+
 .drive-disk__stats__container .stat__number {
     padding-right: 2px;
     font-size: var(--font-size-subtitle);
@@ -706,6 +718,7 @@ main {
 .team__character__container,
 .team__bangboo__container,
 .character__selectable,
+.character__team__selectable,
 .bangboo__selectable {
     position: relative;
     height: 100%;
@@ -767,29 +780,86 @@ main {
 .selected {
     overflow: hidden;
     max-height: 100%;
-    width: 275px;
+    width: 325px;
     background-color: #090909;
-    text-align: center;
-    padding: 15px;
+    padding: 15px 15px 15px 10px;
     display: flex;
-    flex-direction: column;
+    gap: 10px;
 
     background-image: url(../img/background/background-zzero.png);
     background-size: 250%;
 }
 
-.selected > *:not(:last-child) {
+.selected .selected__items > *:not(:last-child) {
     margin-bottom: 20px;
 }
-.selected > h2 {
+
+.selected__title {
+    position: relative;
+    align-items: center;
     margin-bottom: 10px !important;
 }
 
-.selected h2 {
-   text-transform: uppercase;
+.selected__title h2 {
+    text-transform: uppercase;
+}
+
+.selected__title i {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: yellow;
+}
+
+.menu__options {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.menu__options li {
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+
+    border: 3px solid white;
+    border-radius: 50%;
+    padding: 7px 5px 5px;
+    cursor: pointer;
+    background: var(--gradient-diagonal);
+}
+
+.menu__options li:hover,
+.menu__options .active  {
+    border-color: yellow;
+    color: yellow;
+}
+
+.menu__options #icon-reset:hover {
+    border-color: red;
+    color: red;
+}
+
+.selected__items {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-align: center;
 }
 
 .character__selectable,
+.character__team__selectable,
 .bangboo__selectable {
     min-height: 71px;
 }
@@ -804,6 +874,12 @@ main {
     overflow-y: auto;
     overflow-x: hidden;
     gap: 5px;
+}
+.grid__c6 {
+    grid-template-columns: repeat(6, calc(100% / 6 - 5px));
+}
+.grid__c5 {
+    grid-template-columns: repeat(5, calc(100% / 5 - 4.5px));
 }
 .grid__c4 {
     grid-template-columns: repeat(4, calc(100% / 4 - 4px));
@@ -826,10 +902,9 @@ main {
     gap: 15px;
 }
 
-.component__selectable:not(.character__selectable, 
-    .bangboo__selectable, 
-    .disk-stat__selectable, 
-    .disk-substat__selectable),
+.drive-disk__selectable,
+.w-engine__selectable,
+.skill__selectable,
 .drive-disk__substats {
     border: 2px solid transparent;  
 }
@@ -837,6 +912,7 @@ main {
 .component__selectable {
     position: relative;
     cursor: pointer;
+    max-width: 100%;
 }
 
 .component__selectable div {
@@ -850,7 +926,13 @@ main {
     width: 100%;
 }
 
-.character__selectable p {
+.component__container,
+.container__character {
+    cursor: pointer;
+}
+
+.character__selectable .component__name,
+.character__team__selectable .component__name {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -861,11 +943,13 @@ main {
     background-color: #09090967;
 }
 
-.character__selectable .component__selectable__attribute {
+.character__selectable .component__selectable__attribute,
+.character__team__selectable .component__selectable__attribute {
     border-radius: 50%;
 }
 
-.character__selectable .component__selectable__info img {
+.character__selectable .component__selectable__info img,
+.character__team__selectable .component__selectable__info img {
     padding: 1px;
     background-color: black;
 }
@@ -873,6 +957,11 @@ main {
 .component__selectable:hover,
 .download__img button:hover  {
     border-color: yellow;
+}
+.component__selectable.character__selectable:hover,
+.component__selectable.bangboo__selectable:hover,
+.component__selectable.character__team__selectable:hover {
+    background: yellow;
 }
 
 .w-engine__selectable .block {
@@ -904,15 +993,21 @@ main {
 .download__img {
     margin: auto 0;
     display: grid;
-    gap: 15px;
+    gap: 25px;
+}
+
+.download__img,
+.download__img button {
+    font-size: 1.2rem;
 }
 
 .download__img button {
-    font-size: 1.2rem;
+    margin-top: 10px;
     border-radius: 10px;
     border: 2px solid white;
     padding: 5px;
     cursor: pointer;
+    width: 100%;
 
     background-image: url(../img/background/w-engine.png);
     background-size: cover;
@@ -921,7 +1016,6 @@ main {
 }
 
 .credits {
-    margin-top: auto;
     border: 2px solid;
     border-radius: 15px;
     padding: 10px;
@@ -934,18 +1028,41 @@ main {
 
 .credits__info {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     font-size: 1rem;
     text-align: center;
-    margin-bottom: 10px;
+}
+
+.credits__info p {
+    margin: auto;
+}
+
+.credits__info img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
 }
 
 .credits__icons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 13px;
     font-size: 2rem;
 }
 
+.loading, .spin-icon.animating {
+    animation: spin 1.5s infinite cubic-bezier(0.7, 0, 0.3, 1) !important;
+}
+
+@keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+}
 
 /* Estilo para la barra de desplazamiento */
 ::-webkit-scrollbar {

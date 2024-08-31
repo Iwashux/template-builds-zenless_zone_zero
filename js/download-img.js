@@ -3,23 +3,25 @@ $(document).ready( function() {
         // Selecciona el card completo
         let element = document.querySelectorAll('#card');
 
-        generateImage(element, false);
+        generateImage(element, false, $(this));
     });
 
     $(document).on('click', '#download-all', function() {
         // Selecciona todos los elementos
         let elements = document.querySelectorAll('.screen__item');
 
-        generateImage(elements, true);
+        generateImage(elements, true, $(this));
     });
 
-    function generateImage(elements, multiple) {
+    function generateImage(elements, multiple, loading) {
         // validar existencia de elementos
         if (!elements.length) {
             console.error('Elementos no encontrados');
             return;
         }
-    
+        const $loadingElement = loading;
+        const loadingText = $loadingElement.text();
+        $loadingElement.empty().append("<i class='fa-solid fa-circle-notch loading'></i>");
         // Configurar escala y opciones de renderizado
         const scaler = 4;
     
@@ -45,14 +47,10 @@ $(document).ready( function() {
     
             // Una vez todas las imágenes estén procesadas, generar y descargar el ZIP
             Promise.all(promises).then(function() {
-                console.log("entre");
-                
                 zip.generateAsync({type: 'blob'}).then(function(content) {
                     saveAs(content, 'imagenes-zzzero.zip'); // Usar FileSaver.js para guardar el archivo
                 });
-
-                console.log("sali");
-                
+                $loadingElement.empty().text(loadingText);
             });
         } else {
             // Asumir que sólo hay un elemento en `elements` cuando `multiple` es false
@@ -65,6 +63,7 @@ $(document).ready( function() {
             domtoimage.toPng(element, options).then(function(dataUrl) {
                 // Descargar la imagen
                 downloadImage(dataUrl, 'imagen.png');
+                $loadingElement.empty().text(loadingText);
             }).catch(function(error) {
                 console.error('Error al generar la imagen:', error);
             });

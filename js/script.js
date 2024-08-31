@@ -11,17 +11,17 @@ function fixWidth() {
     let canvasWidth = card.outerWidth(true) + 4;
 
     while ($(window).height() <= canvasHeight * canvasScaler || 
-        ($(window).width() - 560) <= canvasWidth * canvasScaler && canvasScaler >= 0.5) {
+        ($(window).width() - 325) <= canvasWidth * canvasScaler && canvasScaler >= 0.5) {
         canvasScaler -= 0.1;
     }
 
     while ($(window).height() >= canvasHeight * canvasScaler &&
-        ($(window).width() - 560) >= canvasWidth * canvasScaler) {
+        ($(window).width() - 325) >= canvasWidth * canvasScaler) {
         canvasScaler += 0.1;
     }
 
     while ($(window).height() <= canvasHeight * canvasScaler || 
-        ($(window).width() - 560) <= canvasWidth * canvasScaler && canvasScaler >= 0.5) {
+        ($(window).width() - 325) <= canvasWidth * canvasScaler && canvasScaler >= 0.5) {
         canvasScaler -= 0.01;
     }
 
@@ -53,27 +53,6 @@ $(".cinema__level").on("click", function(event) {
     }
 });
 
-$(".cinema__level").on("input", function() {
-    let value = $(this).val();
-
-    // Eliminar caracteres no permitidos y asegurar que el primer dígito sea 0
-    value = value.replace(/[^1-6]/g, ''); 
-    // Si hay mas de dos dígitos, actualizar el segundo dígito con el último ingresado
-    if (value.length = 1) {
-        lastChar = value.slice(-1);
-        value = value.slice(0, 0) + lastChar;
-    }
-    
-    // Asegurarse de que siempre comience con un 0
-    if (value.length > 0 && value[0] !== '0') {
-        value = '0' + value;
-    } else if (value.length === 0) {
-        value = '0';
-    }
-
-    $(this).val(value);
-});
-
 $(".cinema__level").on("focusout", function() {
     let value = $(this).val();
 
@@ -95,19 +74,34 @@ $(".cinema__info").on("click", function() {
     
 });
 
+// ====== EXTRAS FUNCTIONS ======
+function capitalizeEachWord(string) {
+    return string.split(" ").map(word => capitalize(word)).join(" ");
+}
+
+function capitalize(string) {
+    if (!string) return ""; // Manejar el caso de una cadena vacía
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
+
 // Cambio de tamanio stact de los drive diks
 function checkElements() {
-    const elementsView = $(".stat__text");
+    const $elementsView = $(".stat__text");
 
-    elementsView.each(function() {
-        let elementHeight = $(this).height();
-        let elementWidth = $(this).width();
+    $elementsView.each(function() {
+        const elementWidth = $(this).width();
+        let sumComponent = 0;
+
+        const $elementHeight = $(this).find("span");
+        $elementHeight.each(function() {
+            sumComponent += $(this).height();
+        });
                 
-        if (elementWidth >= 36 && elementHeight != 15) {
+        if (elementWidth >= 36 && sumComponent >= 20) {
             $(this).css('font-size', '.5rem'); // Prioridad si ambos se cumplen
         } else if (elementWidth >= 36) {
             $(this).css('font-size', '.6rem');
-        } else if (elementHeight != 15) {
+        } else if (sumComponent >= 20) {
             $(this).css('font-size', '.5rem');
         } else {
             $(this).css('font-size', '');
@@ -117,8 +111,24 @@ function checkElements() {
 }
 
 // Quita la correccies / para la generacion de la imagen
-$('[contenteditable').attr({
+$('[contenteditable]').attr({
     spellcheck: 'false',
     autocorrect: 'off',
     autocapitalize: 'off'
+});
+
+// animacion de reset
+$('.selected__items').on('mouseenter', '.spin-icon', function () {
+    let $this = $(this);
+
+    // Si el elemento ya tiene la clase 'animating', no hacer nada
+    if (!$this.hasClass('animating')) {
+        // Añadir la clase para iniciar la animación
+        $this.addClass('animating');
+
+        // Usar un timeout para quitar la clase después de que la animación termine
+        setTimeout(function() {
+            $this.removeClass('animating');
+        }, 1500); // Tiempo que dura la animación (1.5s)
+    }
 });
