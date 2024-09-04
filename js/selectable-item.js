@@ -97,7 +97,7 @@ function itemView(empty, title, cantGrid, data, resetName = title) {
     empty && $selectedComponent.empty();
 
     $selectedComponent.append(
-        `<section class="selected__title"><h2>${title}</h2> <i id="reset-${resetName}" class="fa-solid fa-arrows-rotate spin-icon"></i></section>
+        `<section class="selected__title"><h2>${title}</h2> <i id="reset-${resetName}" class="fa-solid fa-arrows-rotate spin-icon" title="reset"></i></section>
         <ul class='selected__item__container selected__grid grid__c${cantGrid}'>`
     );
 
@@ -133,7 +133,9 @@ function putCharacter(group = '') {
 
 // vista de habilidades
 function putSkills() {
-    const data = skills.map((skill) => `<li><img class="skill__selectable component__selectable" src="img/skills/${skill}.webp" alt=""></li>`).join('');
+    const data = skills.map((skill, index) => 
+        `<li><img class="skill__selectable component__selectable" src="img/skills/${skill}.webp" alt="" data-skill="${index}"></li>`
+    ).join('');
 
     itemView(true, "skills", 4, data);
 }

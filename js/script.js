@@ -31,49 +31,6 @@ function fixWidth() {
     card.css("margin", `${newCanvasHeight / 2 + 20}px ${newCanvasWidht / 2}px`);
 }fixWidth();
 
-$(".cinema__switch__button").on("click", function() {
-    let element = $(this);
-    let thisInput = element.find("input");
-    let thisInfo = element.closest(".cinema__best").find(".cinema__info");
-
-    element.toggleClass("active");
-
-    if (element.hasClass("active")) {
-        thisInput.val("01").prop("readonly", false).add(thisInfo).css("opacity", "1");
-        thisInfo.prop("contenteditable", true)
-    } else {
-        thisInput.val("00").prop("readonly", true).add(thisInfo).css("opacity", ".5");
-        thisInfo.prop("contenteditable", false).text("EMPTY")
-    }
-});
-
-$(".cinema__level").on("click", function(event) {
-    if (!$(this).prop("readonly")) {
-        event.stopPropagation();
-    }
-});
-
-$(".cinema__level").on("focusout", function() {
-    let value = $(this).val();
-
-    if (value.length == 1) {
-        $(this).val("01");
-    }
-});
-
-$(".cinema__info").on("click", function() {
-    cinemaText = $(this);
-    
-    if(cinemaText.prop("contenteditable") == "true" && cinemaText.text() == "EMPTY"){
-        var range = document.createRange();
-        range.selectNodeContents(this); // Selecciona todo el contenido del elemento
-        var selection = window.getSelection();
-        selection.removeAllRanges(); // Elimina cualquier selección previa
-        selection.addRange(range); // Añade el nuevo rango seleccionado
-    }
-    
-});
-
 // ====== EXTRAS FUNCTIONS ======
 function capitalizeEachWord(string) {
     return string.split(" ").map(word => capitalize(word)).join(" ");
