@@ -276,6 +276,7 @@ main {
     overflow: hidden;
     font-size: var(--font-size-text);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -657,6 +658,7 @@ main {
 
 .drive-disk__stats__container {
     height: 26px;
+    width: 60px;
 }
 
 .drive-disk__stats__container .stat__number {

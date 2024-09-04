@@ -24,7 +24,30 @@ $(".selected").on("click", ".character__selectable", function() {
         $("#character-img").css("max-width", "").css("transform", "")
     }
 
-    putCinema(character.id)
+    putCinema(character.id);
+    saveCharacter();
+});
+
+// cambio de habilidades
+$(".selected").on("click", ".skill__selectable", function() {
+    const idSkill = $(this).attr("data-skill");
+    const skill = skills[idSkill];
+    
+    if ($subElementSelected) {
+        $subElementSelected.attr("data-skill", idSkill);
+        $subElementSelected.attr("src", `img/skills/${skill}.webp`);
+    }
+
+    saveSkills();
+})
+// cambio de iconos en las habilidades (=, >)
+$("#skills").on("click", "i", function() {
+    const icon = $(this);
+    if (icon.is(".fa-equals")) {
+        icon.removeClass("fa-equals").addClass("fa-angle-right");
+    } else {
+        icon.removeClass("fa-angle-right").addClass("fa-equals");
+    }
 });
 
 // cambio de Nivel de cinema
@@ -48,41 +71,40 @@ $(".cinema__level").on("input", function() {
 
     $(this).val(value);
 
-    const idCharacter = $("#character-img").attr("data-id-character")
+    const idCharacter = mainCharacter();
     putCinema(idCharacter)
 });
+// cinema switch click
+$(".cinema__switch__button").on("click", function() {
+    let element = $(this);
+    let thisInput = element.find("input");
+    let thisInfo = element.closest(".cinema__best").find(".cinema__info");
 
-// cambio de personajes en seccion team
-$(".selected").on("click", ".character__team__selectable", function() {
-    const idCharacter = $(this).attr("id_character-data");
-    const character = characters.find(char => char.id == idCharacter);
-    
-    const characterText = capitalizeEachWord(character.name.replaceAll("_"," "));
+    element.toggleClass("active");
 
-    if ($subElementSelected && !$subElementSelected.hasClass("team__bangboo__container")) {
-        $subElementSelected.find(".team__character__rank").attr("src", `img/ranks/char_rank_${character.rarity}_color.png`);
-        $subElementSelected.find(".team__character__attribute").attr("src", `img/attributes/${character.attribute}.png`).removeClass("default");
-        $subElementSelected.find(".team__character__img").attr("src", `img/char_avatar/${character.name}.png`);
-        $subElementSelected.find(".team__character__name").text(characterText);
-    }
-})
-
-// cambio de habilidades
-$(".selected").on("click", ".skill__selectable", function() {
-    const skillImg = $(this).attr("src");
-    
-    if ($subElementSelected) {
-        $subElementSelected.attr("src", skillImg);
-    }
-})
-
-// cambio de iconos en las habilidades (=, >)
-$("#skills").on("click", "i", function() {
-    const icon = $(this);
-    if (icon.is(".fa-equals")) {
-        icon.removeClass("fa-equals").addClass("fa-angle-right");
+    if (element.hasClass("active")) {
+        thisInput.val("01").prop("readonly", false).add(thisInfo).css("opacity", "1");
+        thisInfo.prop("contenteditable", true)
     } else {
-        icon.removeClass("fa-angle-right").addClass("fa-equals");
+        thisInput.val("00").prop("readonly", true).add(thisInfo).css("opacity", ".5");
+        thisInfo.prop("contenteditable", false).text("EMPTY")
+    }
+});
+// cinema level select
+$(".cinema__level").on("click", function(event) {
+    if (!$(this).prop("readonly")) {
+        event.stopPropagation();
+    }
+});
+// cinema level en caso de dejar vacio
+$(".cinema__level").on("focusout", function() {
+    let value = $(this).val();
+
+    if (value.length == 1) {
+        $(this).val("01");
+
+        const idCharacter = mainCharacter();
+        putCinema(idCharacter)
     }
 });
 
@@ -93,27 +115,33 @@ $(".selected").on("click", ".w-engine__selectable", function() {
     const wEngine = wEngines.find(eng => eng.id == idWEngine);
 
     const wEngineText = wEngine.name.replaceAll("_"," ");
-    let fontSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-size-text').trim());
-
+    
     if ($subElementSelected) {
+        $subElementSelected.attr("data-w-engine", wEngine.id)
         $subElementSelected.find(".w-engine__rarity").attr("src", `img/ranks/item_rank_${wEngine.rarity}.webp`);
         $subElementSelected.find(".w-engine__component").attr("src", `img/w-engine/${wEngine.name}.webp`);
         $subElementSelected.find(".w-engine__rarity").removeClass("default")
-
+        
         const $subElementName = $subElementSelected.closest('.w-engine__container').find(".w-engine__name").text(wEngineText);
-
+        
         if ($subElementSelected.closest(".w-engine__best").length) {
-            $subElementName.css("font-size", `${fontSize}rem`);
-            let totalHeight = $subElementName.height();
-    
-            while (totalHeight > 32) {
-                fontSize -= 0.01;
-                totalHeight = $subElementName.height();
-                $subElementName.css("font-size", `${fontSize}rem`);
-            }
+            wEngineFixText($subElementName)
         }
+        
+        saveWEngine()
     }
 })
+function wEngineFixText($subElementName) {
+    let fontSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-size-text').trim());
+    let totalHeight = $subElementName.height();
+    $subElementName.css("font-size", `${fontSize}rem`);
+
+    while (totalHeight > 32) {
+        fontSize -= 0.01;
+        totalHeight = $subElementName.height();
+        $subElementName.css("font-size", `${fontSize}rem`);
+    }
+}
 
 // cambio de drive-disk
 $(".selected").on("click", ".drive-disk__selectable", function() {
@@ -123,8 +151,11 @@ $(".selected").on("click", ".drive-disk__selectable", function() {
     const driveDiskText = capitalizeEachWord(driveDisk.replaceAll("_"," "));
 
     if ($subElementSelected) {
+        $subElementSelected.attr("data-drive-disk", idDriveDisk)
         $subElementSelected.find(".drive-disk__component").attr("src", `img/drive-disks/${driveDisk}.webp`);
         $subElementSelected.find(".drive-disk__name").text(driveDiskText);
+
+        saveDriveDisk();
     }
 })
 
@@ -174,6 +205,21 @@ $(".selected").on("click", ".disk-substat__selectable", function() {
         }
     }
 });
+
+// cambio de personajes en seccion team
+$(".selected").on("click", ".character__team__selectable", function() {
+    const idCharacter = $(this).attr("id_character-data");
+    const character = characters.find(char => char.id == idCharacter);
+    
+    const characterText = capitalizeEachWord(character.name.replaceAll("_"," "));
+
+    if ($subElementSelected && !$subElementSelected.hasClass("team__bangboo__container")) {
+        $subElementSelected.find(".team__character__rank").attr("src", `img/ranks/char_rank_${character.rarity}_color.png`);
+        $subElementSelected.find(".team__character__attribute").attr("src", `img/attributes/${character.attribute}.png`).removeClass("default");
+        $subElementSelected.find(".team__character__img").attr("src", `img/char_avatar/${character.name}.png`);
+        $subElementSelected.find(".team__character__name").text(characterText);
+    }
+})
 
 // cambio de bangboos en seccion team
 $(".selected").on("click", ".bangboo__selectable", function() {
