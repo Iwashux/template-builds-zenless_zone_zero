@@ -1,6 +1,7 @@
 const wEngines = [
     {name: "default"},
 
+    {name: "Sharpened_Stinger", rarity:"s"},
     {name: "Ice-Jade_Teapot", rarity:"s"},
     {name: "Riot_Suppressor_Mark_VI", rarity: "s"},
     {name: "Deep_Sea_Visitor", rarity: "s"},
@@ -11,6 +12,7 @@ const wEngines = [
     {name: "The_Restrained", rarity: "s"},
     {name: "Weeping_Cradle", rarity: "s"},
     
+    {name: "Peacekeeper_-_Specialized", rarity:"a"},
     {name: "Gilded_Blossom", rarity: "a"},
     {name: "Bashful_Demon", rarity: "a"},
     {name: "Big_Cylinder", rarity: "a"},
