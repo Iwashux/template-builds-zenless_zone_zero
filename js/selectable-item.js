@@ -76,9 +76,9 @@ function lateralView(section) {
             $(".selected__items").html(data);
         });
     } else if(section == "reset") {
-        // advertir y borrar
-        section = "character";
-        putCharacter();
+        $.get('components/delete-alert.html', function(data) {
+            $(".selected__items").html(data);
+        });
     } else {
         putCharacter("_team_");
         putBangboo()
@@ -159,7 +159,7 @@ function putCinema(idCharacter) {
 // vista de w-engine
 function putWEngine() {
     // console.log(wEngines);
-    const wEngineFilter = wEngines.filter(wEngine => wEngine.rarity )
+    const wEngineFilter = wEngines.filter(wEngine => wEngine.rarity != 'default' )
     const data = wEngineFilter.map((wEngine) =>
             `<li class="w-engine__selectable component__selectable" id_w-engine-data='${wEngine.id}'>
                 <div>
@@ -204,8 +204,8 @@ function putStats() {
 
 // funcion en caso de seleccionar primero un stats (para que aparescan en la seleccion de items)
 function statsDriveNumber(element) {
-    const idStats = element.attr('data-id_stat');
-    const diskStat = diskStats[idStats]; // al ser siempre los mismo no utilizo find id
+    const numStats = element.attr('data-num_stat');
+    const diskStat = diskStats.find(stat => stat.number == numStats);
     const data = diskStat.stats.map((stat, index) => 
         `<li class="disk-stat__selectable component__selectable" id_disk-stat-data='${index}'>${stat}</li>`
     ).join('');
@@ -227,7 +227,7 @@ function putSubstats() {
 // vista de bangboos
 function putBangboo() {
     // console.log(bangboos);
-    const bangboosFilter = bangboos.filter(boo => boo.rarity )
+    const bangboosFilter = bangboos.filter(boo => boo.rarity != 'default' )
     const data = bangboosFilter.map((bangboo) =>
         `<li class="bangboo__selectable component__selectable" id_bangboo-data='${bangboo.id}'>
                 <div class="component__selectable__info">

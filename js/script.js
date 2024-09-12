@@ -41,32 +41,6 @@ function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
-// Cambio de tamanio stact de los drive diks
-function checkElements() {
-    const $elementsView = $(".stat__text");
-
-    $elementsView.each(function() {
-        const elementWidth = $(this).width();
-        let sumComponent = 0;
-
-        const $elementHeight = $(this).find("span");
-        $elementHeight.each(function() {
-            sumComponent += $(this).height();
-        });
-                
-        if (elementWidth >= 36 && sumComponent >= 20) {
-            $(this).css('font-size', '.5rem'); // Prioridad si ambos se cumplen
-        } else if (elementWidth >= 36) {
-            $(this).css('font-size', '.6rem');
-        } else if (sumComponent >= 20) {
-            $(this).css('font-size', '.5rem');
-        } else {
-            $(this).css('font-size', '');
-        }
-
-    });
-}
-
 // Quita la correccies / para la generacion de la imagen
 $('[contenteditable]').attr({
     spellcheck: 'false',

@@ -1,5 +1,5 @@
 const wEngines = [
-    {name: "default"},
+    {name: "default", rarity: "default"},
 
     {name: "Sharpened_Stinger", rarity:"s"},
     {name: "Ice-Jade_Teapot", rarity:"s"},
@@ -56,7 +56,7 @@ const wEngines = [
 
 
 const bangboos = [
-    {name: "default"},
+    {name: "default", rarity: "default"},
 
     {name: "officer_cui", rarity: "s"},
     {name: "amillion", rarity: "s"},
@@ -97,7 +97,7 @@ const diskStats = [
     {
         number: "V",
         stats: ["ATK %", "HP %", "DEF %", "PEN RATIO", "PHYSICAL DMG", "FIRE DMG", "ICE DMG", "ELECTRIC DMG", "ETHER DMG"],
-        short_stat: ["ATK %", "HP %", "DEF %", "PEN", "PHYSICAL DMG", "FIRE DMG", "ICE DMG", "ELECTRIC DMG", "ETHER DMG"]
+        short_stat: ["ATK %", "HP %", "DEF %", "PEN", "PHYS DMG", "FIRE DMG", "ICE DMG", "ELEC DMG", "ETH DMG"]
     },
     {
         number: "VI",
