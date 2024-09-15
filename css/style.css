@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Impact';
+    src: url('../fonts/impact.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 :root{
     --gradient-diagonal: linear-gradient(45deg, #171717, #353a39);
     --gradient-diagonal-yellow: linear-gradient(45deg, rgb(72, 64, 0), rgb(240, 214, 0));
@@ -15,7 +22,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: "Impact", Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-weight: normal;
     letter-spacing: .4px;
     color: white;
@@ -276,6 +283,7 @@ main {
     overflow: hidden;
     font-size: var(--font-size-text);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -657,6 +665,7 @@ main {
 
 .drive-disk__stats__container {
     height: 26px;
+    width: 60px;
 }
 
 .drive-disk__stats__container .stat__number {
@@ -678,6 +687,10 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.drive-disk__stats__container .stat__text span {
+    white-space: nowrap;
 }
 
 .drive-disk__substats {
@@ -773,7 +786,7 @@ main {
     height: 100%;
 }
 
-.default {
+.empty {
     display: none;
 }
 
@@ -844,9 +857,11 @@ main {
     color: yellow;
 }
 
-.menu__options #icon-reset:hover {
-    border-color: red;
-    color: red;
+.menu__options #icon-reset:hover,
+.menu__options #icon-reset.active,
+.delete__option button:hover  {
+    border-color: red !important; 
+    color: red !important;
 }
 
 .selected__items {
@@ -990,18 +1005,22 @@ main {
     50% { opacity: 1; }     /* Mitad del tiempo transparente */
 }
 
-.download__img {
+.download__img,
+.delete__option {
     margin: auto 0;
     display: grid;
     gap: 25px;
 }
 
 .download__img,
-.download__img button {
+.delete__option,
+.download__img button,
+.delete__option button {
     font-size: 1.2rem;
 }
 
-.download__img button {
+.download__img button,
+.delete__option button {
     margin-top: 10px;
     border-radius: 10px;
     border: 2px solid white;

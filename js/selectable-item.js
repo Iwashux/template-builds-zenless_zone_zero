@@ -76,9 +76,9 @@ function lateralView(section) {
             $(".selected__items").html(data);
         });
     } else if(section == "reset") {
-        // advertir y borrar
-        section = "character";
-        putCharacter();
+        $.get('components/delete-alert.html', function(data) {
+            $(".selected__items").html(data);
+        });
     } else {
         putCharacter("_team_");
         putBangboo()
@@ -97,7 +97,7 @@ function itemView(empty, title, cantGrid, data, resetName = title) {
     empty && $selectedComponent.empty();
 
     $selectedComponent.append(
-        `<section class="selected__title"><h2>${title}</h2> <i id="reset-${resetName}" class="fa-solid fa-arrows-rotate spin-icon"></i></section>
+        `<section class="selected__title"><h2>${title}</h2> <i id="reset-${resetName}" class="fa-solid fa-arrows-rotate spin-icon" title="reset"></i></section>
         <ul class='selected__item__container selected__grid grid__c${cantGrid}'>`
     );
 
@@ -133,7 +133,9 @@ function putCharacter(group = '') {
 
 // vista de habilidades
 function putSkills() {
-    const data = skills.map((skill) => `<li><img class="skill__selectable component__selectable" src="img/skills/${skill}.webp" alt=""></li>`).join('');
+    const data = skills.map((skill, index) => 
+        `<li><img class="skill__selectable component__selectable" src="img/skills/${skill}.webp" alt="" data-skill="${index}"></li>`
+    ).join('');
 
     itemView(true, "skills", 4, data);
 }
@@ -149,7 +151,7 @@ function putCinema(idCharacter) {
             const levelInfo = character.cinema[level];
             $(this).find(".cinema__info").empty().text(levelInfo)
         } else {
-            $(this).find(".cinema__info").empty().text("EMPTY")
+            $(this).find(".cinema__info").empty().text(generalTextDefault)
         }
     });
 }
@@ -157,7 +159,7 @@ function putCinema(idCharacter) {
 // vista de w-engine
 function putWEngine() {
     // console.log(wEngines);
-    const wEngineFilter = wEngines.filter(wEngine => wEngine.rarity )
+    const wEngineFilter = wEngines.filter(wEngine => wEngine.rarity != generalTextDefault)
     const data = wEngineFilter.map((wEngine) =>
             `<li class="w-engine__selectable component__selectable" id_w-engine-data='${wEngine.id}'>
                 <div>
@@ -202,8 +204,8 @@ function putStats() {
 
 // funcion en caso de seleccionar primero un stats (para que aparescan en la seleccion de items)
 function statsDriveNumber(element) {
-    const idStats = element.attr('data-id_stat');
-    const diskStat = diskStats[idStats]; // al ser siempre los mismo no utilizo find id
+    const numStats = element.attr('data-num_stat');
+    const diskStat = diskStats.find(stat => stat.number == numStats);
     const data = diskStat.stats.map((stat, index) => 
         `<li class="disk-stat__selectable component__selectable" id_disk-stat-data='${index}'>${stat}</li>`
     ).join('');
@@ -225,7 +227,7 @@ function putSubstats() {
 // vista de bangboos
 function putBangboo() {
     // console.log(bangboos);
-    const bangboosFilter = bangboos.filter(boo => boo.rarity )
+    const bangboosFilter = bangboos.filter(boo => boo.rarity != generalTextDefault )
     const data = bangboosFilter.map((bangboo) =>
         `<li class="bangboo__selectable component__selectable" id_bangboo-data='${bangboo.id}'>
                 <div class="component__selectable__info">
