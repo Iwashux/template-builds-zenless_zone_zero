@@ -1,6 +1,6 @@
 // obtener main character
 function mainCharacter() {
-    return $("#character-img").attr("data-id-character")
+    return $("#character-img").attr("data-id-character") || "0";
 }
 
 function getIdElement(elements, data) {
@@ -25,7 +25,7 @@ function saveCinemaLevel() {
     const numberCinema = cinemasLevels.map((_,cinema) => $(cinema).val()).get();
 
     localStorage.setItem('cinemas', JSON.stringify(numberCinema));
-}saveCinemaLevel()
+}
 
 function saveWEngine() {
     const elementWEngine = $("#w-engines .component__container");
@@ -64,7 +64,7 @@ function saveTeam() {
 
 function getSaveItems() {
     // Crear un objeto vacío
-    let data = {};
+    let data = { ...getDefaultData() };
 
     // Recorrer el localStorage y agregar los datos al objeto, parseando los valores JSON
     for (let i = 0; i < localStorage.length; i++) {
@@ -89,7 +89,17 @@ function getSaveItems() {
     setItemsElement(data.driveDisks, $("#drive-disks .drive-disk__container"), changeDriveDisk);
     setItemsElement(data.team, $("#team .component__container"), changeTeam, true);
     
-    $("#cinema .cinema__level").each((index,cinema) => $(cinema).val(data.cinemas[index]));
+    $("#cinema .cinema__level").each((index,cinema) => {
+        const level = data.cinemas[index];
+        const $elementSwitch = $(cinema).parent();
+        if (parseInt(level) > 0) {
+            $elementSwitch.addClass('active')
+        }
+        $(cinema).val(level);
+        
+        cinemaLevelCheck($(cinema), $elementSwitch.parent().siblings('.cinema__info'));
+        putCinema(data.character);
+    });
 
     $("#drive-disks .stat__text").each((index,stat) => {
         $(stat).html(data.stats[index]);
@@ -100,8 +110,25 @@ function getSaveItems() {
     $("#drive-disks .substats__text").html(data.substats.join(" <i class='fa-solid fa-angle-right'></i> "));
     contSubstats = data.substats.length;
     fixSizeSubstats();
-
 }getSaveItems();
+
+// Función que devuelve los datos predeterminados
+function getDefaultData() {
+    return {
+        character: "0",
+        skills: ["none", "none", "none", "none", "none", "none"],
+        cinemas: ["00", "00"],
+        wEngines: ["none", "none", "none", "none"],
+        driveDisks: ["none", "none", "none", "none"],
+        stats: [
+            "<span class=\"stats__empty\">EMPTY</span>",
+            "<span class=\"stats__empty\">EMPTY</span>",
+            "<span class=\"stats__empty\">EMPTY</span>"
+        ],
+        substats: ["EMPTY"],
+        team: ["none", "none", "none", "none", "none", "none"],
+    };
+}
 
 function setItemsElement(data, $element, changeFunction, optionalData) {
     $element.each((index, elem) => { // index ya que corresponde al orden de como se guardan
@@ -116,19 +143,3 @@ function setItemsElement(data, $element, changeFunction, optionalData) {
         }
     })
 }
-
-// ===========  ESTRUCTURA =============
-// saved = {
-//     character: id,
-//     skills: ['none', 'none', 'none', 'none', 'none', 'none'],
-//     cinema: [01, 00],
-//     wengine: ['none', 'none', 'none', 'none'],
-//     drive_disk: ['none', 'none', 'none', 'none'],
-//     stats: {
-//         statIV: [],
-//         statV: [],
-//         statVI: [],
-//     },
-//     substats: html(),
-//     team: [none, none, none, none, none, none],
-// }
