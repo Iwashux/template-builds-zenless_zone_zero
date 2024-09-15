@@ -80,7 +80,7 @@ function getSaveItems() {
 
         data[key] = value;
     }
-    console.log(data);
+    // console.log(data);
 
     changeCharacter(data.character)
 
