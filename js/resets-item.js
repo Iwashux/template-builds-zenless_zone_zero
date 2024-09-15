@@ -19,9 +19,7 @@ function deleteMultipleItems(changeFuction, subContainerElement) {
 // borrar las habilidades
 $(".selected").on("click", "#reset-skills", function() {
     if (!$subElementSelected) {
-        $elementSelected.find("i").each(function() {
-            $(this).removeClass("fa-equals").addClass("fa-angle-right");
-        });
+        $elementSelected.find("i").map((_,elem) => $(elem).removeClass("fa-equals").addClass("fa-angle-right")); //
     }
     deleteMultipleItems(changeSkills, ".skills__container");
 });
@@ -84,4 +82,14 @@ $(".selected").on("click", "#delete-all", function() {
             funcs();
         }
     });
+
+    resetCinema();
+    localStorage.clear();
 });
+
+function resetCinema() {
+    $elementCinema = $("#cinema");
+    $elementCinema.find(".cinema__level").map((_,element) => $(element).val("00"));
+    cinemaLevelCheck($elementCinema.find(".cinema__level"), $elementCinema.find(".cinema__info"));
+    saveCinemaLevel();
+}

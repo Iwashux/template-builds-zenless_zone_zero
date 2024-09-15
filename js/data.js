@@ -1,5 +1,8 @@
+const generalFileDefault = "empty",
+generalTextDefault = "EMPTY";
+
 const wEngines = [
-    {name: "default", rarity: "default"},
+    {name: generalTextDefault, rarity: generalTextDefault},
 
     {name: "Ice-Jade_Teapot", rarity:"s"},
     {name: "Riot_Suppressor_Mark_VI", rarity: "s"},
@@ -54,7 +57,7 @@ const wEngines = [
 
 
 const bangboos = [
-    {name: "default", rarity: "default"},
+    {name: generalTextDefault, rarity: generalTextDefault},
 
     {name: "officer_cui", rarity: "s"},
     {name: "amillion", rarity: "s"},
@@ -110,11 +113,11 @@ const skills = ["core", "basic", "dodge", "assist", "special", "ulti"]
 
 const characters = [
     {
-        name: "default",
-        rarity: "default",
-        attribute: "default",
-        specialty: "default",
-        faction: "default",
+        name: generalTextDefault,
+        rarity: generalTextDefault,
+        attribute: generalTextDefault,
+        specialty: generalTextDefault,
+        faction: generalTextDefault,
         color: "#50505080",
         active: false,
     },{

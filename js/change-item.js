@@ -5,7 +5,7 @@ $(".selected").on("click", ".character__selectable", function() {
     changeCharacter(idCharacter)
 });
 function changeCharacter(idCharacter) {
-    const character = characters.find(char => char.id == idCharacter) || characters.find(char => char.name == 'default');
+    const character = characters.find(char => char.id == idCharacter) || characters.find(char => char.id == 0);
     const characterText = capitalizeEachWord(character.name.replaceAll("_"," "));
     
     $("#character-name").text(characterText);
@@ -19,9 +19,9 @@ function changeCharacter(idCharacter) {
     if (character.id !== 0) {
         $("#character-attribute").attr("src", `img/attributes/${character.attribute}.png`);
         $("#character-specialty").attr("src", `img/specialties/${character.specialty}.png`);
-        $("#character-info-attributes").removeClass("default");
+        $("#character-info-attributes").removeClass("empty");
     } else {
-        $("#character-info-attributes").addClass("default");
+        $("#character-info-attributes").addClass("empty");
     }
     
     if (character.fix) {
@@ -41,7 +41,7 @@ $(".selected").on("click", ".skill__selectable", function() {
     changeSkills(idSkill)
 });
 function changeSkills(idSkill = '') {
-    const skill = skills[idSkill] || 'default';
+    const skill = skills[idSkill] || generalFileDefault;
     
     if ($subElementSelected) {
         $subElementSelected.attr("data-skill", idSkill);
@@ -82,11 +82,9 @@ $(".cinema__level").on("input", function() {
     $(this).val(value);
 
     const idCharacter = mainCharacter();
-    putCinema(idCharacter)
+    putCinema(idCharacter);
+    saveCinemaLevel();
 });
-function changeCinema(numberCinema) {
-
-}
 // cinema switch click
 $(".cinema__switch__button").on("click", function() {
     let element = $(this);
@@ -96,13 +94,22 @@ $(".cinema__switch__button").on("click", function() {
     element.toggleClass("active");
 
     if (element.hasClass("active")) {
-        thisInput.val("01").prop("readonly", false).add(thisInfo).css("opacity", "1");
-        thisInfo.prop("contenteditable", true)
+        thisInput.val("01")
     } else {
-        thisInput.val("00").prop("readonly", true).add(thisInfo).css("opacity", ".5");
-        thisInfo.prop("contenteditable", false).text("EMPTY")
+        thisInput.val("00")
     }
+
+    cinemaLevelCheck(thisInput, thisInfo);
+    putCinema(mainCharacter());
+    saveCinemaLevel();
 });
+function cinemaLevelCheck(thisInput, thisInfo) {
+    const isActive = parseInt(thisInput.val()) !== 0;
+    thisInput.parent().toggleClass("active", isActive);
+
+    thisInput.prop("readonly", !isActive).add(thisInfo).css("opacity", isActive ? "1" : ".5");
+    thisInfo.prop("contenteditable", isActive).text(isActive ? "" : generalTextDefault);
+}
 // cinema level select
 $(".cinema__level").on("click", function(event) {
     if (!$(this).prop("readonly")) {
@@ -119,6 +126,7 @@ $(".cinema__level").on("focusout", function() {
         const idCharacter = mainCharacter();
         putCinema(idCharacter)
     }
+    saveCinemaLevel();
 });
 
 // cambio de w-engine
@@ -128,21 +136,22 @@ $(".selected").on("click", ".w-engine__selectable", function() {
     changeWEngine(idWEngine);
 })
 function changeWEngine(idWEngine) {
-    const wEngine = wEngines.find(eng => eng.id == idWEngine) || wEngines.find(eng => eng.name == 'default');
+    const wEngine = wEngines.find(eng => eng.id == idWEngine) || wEngines.find(eng => eng.id === 0);
     const wEngineText = wEngine.name.replaceAll("_"," ");
     
     if ($subElementSelected) {
         $subElementSelected.find(".w-engine__component").attr("src", `img/w-engine/${wEngine.name}.webp`);
-        if (wEngine.name !== 'default') {
+        if (wEngine.id !== 0) {
             $subElementSelected.attr("data-w-engine", wEngine.id)
             $subElementSelected.find(".w-engine__rarity").attr("src", `img/ranks/item_rank_${wEngine.rarity}.webp`);
-            $subElementSelected.find(".w-engine__rarity").removeClass("default");
+            $subElementSelected.find(".w-engine__rarity").removeClass("empty");
         } else {
             $subElementSelected.attr("data-w-engine", '')
-            $subElementSelected.find(".w-engine__rarity").addClass("default");
+            $subElementSelected.find(".w-engine__rarity").addClass("empty");
         }
         
-        const $subElementName = $subElementSelected.closest('.w-engine__container').find(".w-engine__name").text(wEngineText);
+        const $subElementName = $subElementSelected.closest('.w-engine__container').find(".w-engine__name")
+            .text(wEngine.id !== 0 ? wEngineText : wEngineText.toUpperCase());
         
         if ($subElementSelected.closest(".w-engine__best").length) {
             wEngineFixText($subElementName)
@@ -169,14 +178,13 @@ $(".selected").on("click", ".drive-disk__selectable", function() {
     changeDriveDisk(idDriveDisk);
 })
 function changeDriveDisk(idDriveDisk = '') {
-    const driveDisk = driveDisks[idDriveDisk] || 'default'; // al ser siempre los mismo y ser un array simple no utilizo find id
-    
+    const driveDisk = driveDisks[idDriveDisk] || generalFileDefault; // al ser siempre los mismo y ser un array simple no utilizo find id
     const driveDiskText = capitalizeEachWord(driveDisk.replaceAll("_"," "));
     
     if ($subElementSelected) {
         $subElementSelected.attr("data-drive-disk", idDriveDisk)
         $subElementSelected.find(".drive-disk__component").attr("src", `img/drive-disks/${driveDisk}.webp`);
-        $subElementSelected.find(".drive-disk__name").text(driveDiskText);
+        $subElementSelected.find(".drive-disk__name").text(driveDisk !== generalFileDefault ? driveDiskText : generalTextDefault);
     
         saveDriveDisk();
     }
@@ -191,10 +199,10 @@ function changeStats(diskStatID = '') {
     if ($subElementSelected && $subElementSelected.hasClass("drive-disk__stats__container")) { 
         const diskStatsNumber = $subElementSelected.attr("data-num_stat");
         const diskStat = diskStats.find(stat => stat.number == diskStatsNumber);
-        const diskStatText = diskStat.short_stat[diskStatID] || 'EMPT';
+        const diskStatText = diskStat.short_stat[diskStatID] || generalTextDefault;
         
-        if(diskStatText !== 'EMPT') {
-            if ($subElementSelected.find("span").hasClass("stats__default")) {
+        if(diskStatText !== generalTextDefault) {
+            if ($subElementSelected.find("span").hasClass("stats__empty")) {
                 $subElementSelected.find(".stat__text").empty();
             }
             
@@ -202,7 +210,7 @@ function changeStats(diskStatID = '') {
                 $subElementSelected.find(".stat__text").append(`<span>${diskStatText}</span>`);
             }
         } else {
-            $subElementSelected.find(".stat__text").empty().append(`<span class="stats__default">${diskStatText}</span>`).css('font-size', '');
+            $subElementSelected.find(".stat__text").empty().append(`<span class="stats__empty">${diskStatText}</span>`).css('font-size', '');
         }
     
         fixSizeStats();
@@ -235,7 +243,7 @@ function changeSubstats(substatID = '') {
         if ($subElementSelected && $subElementSelected.hasClass("drive-disk__substats")) {
             contSubstats++;
             if(contSubstats <= 4) {
-                if ($subElementSelected.find(".substats__text").text() == "EMPTY") {
+                if ($subElementSelected.find(".substats__text").text() == generalTextDefault) {
                     $subElementSelected.find(".substats__text").empty();
                 } else {
                     $subElementSelected.find(".substats__text").append(" <i class='fa-solid fa-angle-right'></i>");
@@ -273,25 +281,25 @@ $(".selected").on("click", ".character__team__selectable, .bangboo__selectable",
 });
 function changeTeam(isCharacter, idData) {
     const data = isCharacter 
-        ? characters.find(char => char.id == idData) || characters.find(char => char.name == 'default')
-        : bangboos.find(boo => boo.id == idData) || bangboos.find(boo => boo.name == 'default');
+        ? characters.find(char => char.id == idData) || characters.find(char => char.id === 0)
+        : bangboos.find(boo => boo.id == idData) || bangboos.find(boo => boo.id == 0);
         
     const dataText = capitalizeEachWord(data.name.replaceAll("_"," "));
     const file = isCharacter ? "char_avatar" : "bangboos_avatar";
     
     if ($subElementSelected && $subElementSelected.hasClass(isCharacter ? "team__character__container" : "team__bangboo__container")) {
-        if(data.name !== 'default') {
+        if(data.id !== 0) {
             $subElementSelected.attr("data-id-team", idData);
             if (isCharacter) {
                 $subElementSelected.find(".team__character__attribute").attr("src", `img/attributes/${data.attribute}.png`).removeClass("default");
             }
         } else {
             $subElementSelected.attr("data-id-team", '');
-            $subElementSelected.find(".team__character__attribute").addClass("default");
+            $subElementSelected.find(".team__character__attribute").addClass("empty");
         }
         $subElementSelected.find(".team__character__rank").attr("src", `img/ranks/char_rank_${data.rarity}_color.png`);
         $subElementSelected.find(".team__character__img").attr("src", `img/${file}/${data.name}.png`);
-        $subElementSelected.find(".team__character__name").text(dataText);
+        $subElementSelected.find(".team__character__name").text(data.id !== 0 ? dataText : generalTextDefault);
     
         saveTeam();
     }

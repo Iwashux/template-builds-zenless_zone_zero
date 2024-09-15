@@ -151,7 +151,7 @@ function putCinema(idCharacter) {
             const levelInfo = character.cinema[level];
             $(this).find(".cinema__info").empty().text(levelInfo)
         } else {
-            $(this).find(".cinema__info").empty().text("EMPTY")
+            $(this).find(".cinema__info").empty().text(generalTextDefault)
         }
     });
 }
@@ -159,7 +159,7 @@ function putCinema(idCharacter) {
 // vista de w-engine
 function putWEngine() {
     // console.log(wEngines);
-    const wEngineFilter = wEngines.filter(wEngine => wEngine.rarity != 'default' )
+    const wEngineFilter = wEngines.filter(wEngine => wEngine.rarity != generalTextDefault)
     const data = wEngineFilter.map((wEngine) =>
             `<li class="w-engine__selectable component__selectable" id_w-engine-data='${wEngine.id}'>
                 <div>
@@ -227,7 +227,7 @@ function putSubstats() {
 // vista de bangboos
 function putBangboo() {
     // console.log(bangboos);
-    const bangboosFilter = bangboos.filter(boo => boo.rarity != 'default' )
+    const bangboosFilter = bangboos.filter(boo => boo.rarity != generalTextDefault )
     const data = bangboosFilter.map((bangboo) =>
         `<li class="bangboo__selectable component__selectable" id_bangboo-data='${bangboo.id}'>
                 <div class="component__selectable__info">
