@@ -123,6 +123,22 @@ const characters = [
         color: "#50505080",
         active: false,
     },{
+        name: "burnice",
+        rarity: "s",
+        attribute: "fire",
+        specialty: "anomaly",
+        faction: "calydon",
+        color: "#ff7c0080",
+        active: false,
+    },{
+        name: "caesar",
+        rarity: "s",
+        attribute: "physical",
+        specialty: "defense",
+        faction: "calydon",
+        color: "#ffa50080",
+        active: false,
+    },{
         name: "jane_doe",
         rarity: "s",
         attribute: "physical",

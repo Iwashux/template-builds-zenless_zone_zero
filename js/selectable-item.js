@@ -159,7 +159,7 @@ function putCinema(idCharacter) {
 // vista de w-engine
 function putWEngine() {
     // console.log(wEngines);
-    const wEngineFilter = wEngines.filter(wEngine => wEngine.rarity != generalTextDefault)
+    const wEngineFilter = wEngines.filter(wEngine => wEngine.id !== 0)
     const data = wEngineFilter.map((wEngine) =>
             `<li class="w-engine__selectable component__selectable" id_w-engine-data='${wEngine.id}'>
                 <div>
@@ -227,7 +227,7 @@ function putSubstats() {
 // vista de bangboos
 function putBangboo() {
     // console.log(bangboos);
-    const bangboosFilter = bangboos.filter(boo => boo.rarity != generalTextDefault )
+    const bangboosFilter = bangboos.filter(boo => boo.id !== 0 )
     const data = bangboosFilter.map((bangboo) =>
         `<li class="bangboo__selectable component__selectable" id_bangboo-data='${bangboo.id}'>
                 <div class="component__selectable__info">
