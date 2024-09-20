@@ -85,6 +85,7 @@ $(".selected").on("click", "#delete-all", function() {
 
     resetCinema();
     localStorage.clear();
+    viewUnselecter();
 });
 
 function resetCinema() {
