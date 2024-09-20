@@ -1,4 +1,6 @@
 $(document).ready( function() {
+    const characterBuild = $("#character-name").text().replaceAll(" ","-").toLowerCase();
+
     $(document).on('click', '#download-one', function() {
         // Selecciona el card completo
         let element = document.querySelectorAll('#card');
@@ -37,7 +39,7 @@ $(document).ready( function() {
                 // Generar imagen para cada elemento
                 let promise = domtoimage.toPng(element, options).then(function(dataUrl) {
                     let imgData = dataUrl.split(',')[1]; // Extraer datos de la imagen
-                    zip.file(`imagen_${element.id}.png`, imgData, {base64: true}); // Añadir al ZIP
+                    zip.file(`${characterBuild}_${element.id}.png`, imgData, {base64: true}); // Añadir al ZIP
                 }).catch(function(error) {
                     console.error('Error al generar la imagen:', error);
                 });
@@ -48,7 +50,7 @@ $(document).ready( function() {
             // Una vez todas las imágenes estén procesadas, generar y descargar el ZIP
             Promise.all(promises).then(function() {
                 zip.generateAsync({type: 'blob'}).then(function(content) {
-                    saveAs(content, 'imagenes-zzzero.zip'); // Usar FileSaver.js para guardar el archivo
+                    saveAs(content, `build_${characterBuild}_zzz.zip`); // Usar FileSaver.js para guardar el archivo
                 });
                 $loadingElement.empty().text(loadingText);
             });
@@ -62,7 +64,7 @@ $(document).ready( function() {
             // Generar y descargar una sola imagen
             domtoimage.toPng(element, options).then(function(dataUrl) {
                 // Descargar la imagen
-                downloadImage(dataUrl, 'imagen.png');
+                downloadImage(dataUrl, `build_${characterBuild}_zzz.png`);
                 $loadingElement.empty().text(loadingText);
             }).catch(function(error) {
                 console.error('Error al generar la imagen:', error);

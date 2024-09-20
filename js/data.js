@@ -2,7 +2,7 @@ const generalFileDefault = "empty",
 generalTextDefault = "EMPTY";
 
 // Función genérica para ordenar arrays por rarity y name
-function orderArrayRarityName(array) {
+function orderRarityName(array) {
     return array.sort((a, b) => { // Primero ordenamos por `rarity`
         const rarityOrder = { "s": 1, "a": 2, "b": 3 };
         if (rarityOrder[a.rarity] !== rarityOrder[b.rarity]) {
@@ -67,7 +67,7 @@ const allWEngines = [
     {name: "[Vortex]_Hatchet", rarity: "b"},
     {name: "[Vortex]_Revolver", rarity: "b"}
 ];
-const wEngines = orderArrayRarityName(allWEngines);
+const wEngines = orderRarityName(allWEngines);
 
 const allBangboos = [
     {name: generalFileDefault, rarity: generalFileDefault},
@@ -96,7 +96,7 @@ const allBangboos = [
     {name: "resonaboo", rarity: "a"},
     {name: "sumoboo", rarity: "a"}
 ];
-const bangboos = orderArrayRarityName(allBangboos);
+const bangboos = orderRarityName(allBangboos);
 
 const driveDisks = ["chaotic_metal", "fanged_metal", "freedom_blues", "hormone_punk",
     "inferno_metal", "polar_metal", "puffer_electro", "shockstar_disco", "soul_rock",
@@ -501,8 +501,6 @@ const allCharacters = [
         }
     }
 ];
-let filterCharacters = allCharacters.slice(1).filter(item => item.active) // Filtra solo los personajes con active: true
-filterCharacters = [allCharacters[0], ...filterCharacters];
-const characters = orderArrayRarityName(filterCharacters);
-
-console.log(characters);
+let filterCharacters = allCharacters.filter(item => item.active) // Filtra solo los personajes con active: true
+filterCharacters = [allCharacters[0], ...filterCharacters]; // agrega el valor vacio al principio (para poder usarlo al borrar)
+const characters = orderRarityName(filterCharacters);
