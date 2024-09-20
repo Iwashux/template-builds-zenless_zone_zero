@@ -1,4 +1,4 @@
-// VIZUALIZACION DE LA SECCION DE SELECCION
+// VISUALIZACION DE LA SECCION DE SELECCION
 const $containerEditable = $("#character, #skills, #w-engines, #drive-disks, #team");
 let $elementSelected, // seccion editable seleccionada
 $subElementSelected, // subseccion editable (elemento cambiante)
@@ -8,10 +8,6 @@ section = "character"; // id del $elementSelected (sirve para la vista lateral)
 // selecciona seccion de items
 $("main, #menu-options li").on("click", function(event) {
     event.stopPropagation();
-    // selectores visuales desactivados
-    $(".identifier.filter").css("filter",""); 
-    $(".identifier.border").css("border-color","");
-    $(".identifier.background").css("background","");
 
     if ($(event.target).is($containerEditable) || $(event.target).closest($containerEditable).length) {
         $elementSelected = $(event.target).closest($containerEditable);
@@ -19,25 +15,38 @@ $("main, #menu-options li").on("click", function(event) {
         $subElementSelected = $(event.target).closest(`.component__container`);
 
         lateralView(section); // cambio visual al lateral (cambio de los componentes)
-        // valida selector
-        if($subElementSelected.is(".identifier")){
-            viewSelect = $subElementSelected;
-        } else {
-            viewSelect = $subElementSelected.find(`.identifier`);
-        }
-        // selector visual activado (es el que el usuario selecciona se visualiza)
-        viewSelect.filter(".background").css("background", "var(--gradient-diagonal-yellow)").end()
-            .filter(".filter").css("filter", "drop-shadow(yellow 1px 1px) drop-shadow(yellow -1px -1px)").end()
-            .filter(".border").css("border-color", "yellow"
-        );
+        viewSelecter();
 
         if (!$subElementSelected.length) {
             $subElementSelected = null;
         }
     } else {
+        viewUnselecter();
         $subElementSelected = null;
     }
 });
+
+function viewSelecter() {
+    viewUnselecter();
+    let viewSelect;
+    // valida selector
+    if($subElementSelected.is(".identifier")){
+        viewSelect = $subElementSelected;
+    } else {
+        viewSelect = $subElementSelected.find(`.identifier`);
+    }
+    // selector visual activado (es el que el usuario selecciona se visualiza)
+    viewSelect.filter(".background").css("background", "var(--gradient-diagonal-yellow)").end()
+        .filter(".filter").css("filter", "drop-shadow(yellow 1px 1px) drop-shadow(yellow -1px -1px)").end()
+        .filter(".border").css("border-color", "yellow"
+    );
+}
+function viewUnselecter() {
+    // selectores visuales desactivados
+    $(".identifier.filter").css("filter",""); 
+    $(".identifier.border").css("border-color","");
+    $(".identifier.background").css("background","");
+}
 
 // seleccion menu
 $("#menu-options li").on("click", function() {
@@ -107,8 +116,7 @@ function itemView(empty, title, cantGrid, data, resetName = title) {
 //vista de los personajes
 function putCharacter(group = '') {
     // console.log(characters);
-    const characterFilter = characters.filter(character => character.active);
-    const data = characterFilter.map((character) => {
+    const data = characters.slice(1).map((character) => {
         const characterText = capitalizeEachWord(character.name.replaceAll("_"," "));
 
         return `<li class="character_${group}_selectable component__selectable" id_character-data='${character.id}'>

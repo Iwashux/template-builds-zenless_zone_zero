@@ -108,8 +108,10 @@ function getSaveItems() {
     });
 
     $("#drive-disks .substats__text").html(data.substats.join(" <i class='fa-solid fa-angle-right'></i> "));
-    contSubstats = data.substats.length;
+    contSubstats = data.substats[0] !== "EMPTY" ? data.substats.length : 0;
     fixSizeSubstats();
+
+    viewUnselecter();
 }getSaveItems();
 
 // Función que devuelve los datos predeterminados

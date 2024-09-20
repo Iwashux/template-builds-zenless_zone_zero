@@ -42,13 +42,19 @@ $(".selected").on("click", ".skill__selectable", function() {
 });
 function changeSkills(idSkill = '') {
     const skill = skills[idSkill] || generalFileDefault;
-    
-    if ($subElementSelected) {
-        $subElementSelected.attr("data-skill", idSkill);
-        $subElementSelected.attr("src", `img/skills/${skill}.webp`);
+    // Si no hay un subelemento seleccionado válido, selecciona el primero
+    if (!$subElementSelected || !$subElementSelected.is(".skills__container")) {
+        $subElementSelected = $("#skills .skills__container").first();
     }
-    
-    saveSkills();
+    // Actualizamos siempre el `data-skill` y `src`
+    $subElementSelected.attr("data-skill", idSkill);
+    $subElementSelected.attr("src", `img/skills/${skill}.webp`);
+    // Si la habilidad no es la predeterminada, avanzamos al siguiente contenedor
+    if (skill !== generalFileDefault) {
+        $subElementSelected = $subElementSelected.nextAll(".skills__container").first();
+        viewSelecter(); // Solo se ejecuta cuando cambiamos de habilidad
+    }
+    saveSkills(); // Guardamos siempre
 }
 // cambio de iconos en las habilidades (=, >)
 $("#skills").on("click", "i", function() {
@@ -139,26 +145,29 @@ function changeWEngine(idWEngine) {
     const wEngine = wEngines.find(eng => eng.id == idWEngine) || wEngines.find(eng => eng.id === 0);
     const wEngineText = wEngine.name.replaceAll("_"," ");
     
-    if ($subElementSelected) {
-        $subElementSelected.find(".w-engine__component").attr("src", `img/w-engine/${wEngine.name}.webp`);
-        if (wEngine.id !== 0) {
-            $subElementSelected.attr("data-w-engine", wEngine.id)
-            $subElementSelected.find(".w-engine__rarity").attr("src", `img/ranks/item_rank_${wEngine.rarity}.webp`);
-            $subElementSelected.find(".w-engine__rarity").removeClass("empty");
-        } else {
-            $subElementSelected.attr("data-w-engine", '')
-            $subElementSelected.find(".w-engine__rarity").addClass("empty");
-        }
-        
-        const $subElementName = $subElementSelected.closest('.w-engine__container').find(".w-engine__name")
-            .text(wEngine.id !== 0 ? wEngineText : wEngineText.toUpperCase());
-        
-        if ($subElementSelected.closest(".w-engine__best").length) {
-            wEngineFixText($subElementName)
-        }
-        
-        saveWEngine()
+    if (!$subElementSelected || !$subElementSelected.is(".w-engine__container")) {
+        $subElementSelected = $("#w-engines .w-engine__container").first();
+        viewSelecter();
     }
+
+    $subElementSelected.find(".w-engine__component").attr("src", `img/w-engine/${wEngine.name}.webp`);
+    if (wEngine.id !== 0) {
+        $subElementSelected.attr("data-w-engine", wEngine.id)
+        $subElementSelected.find(".w-engine__rarity").attr("src", `img/ranks/item_rank_${wEngine.rarity}.webp`);
+        $subElementSelected.find(".w-engine__rarity").removeClass("empty");
+    } else {
+        $subElementSelected.attr("data-w-engine", '')
+        $subElementSelected.find(".w-engine__rarity").addClass("empty");
+    }
+    
+    const $subElementName = $subElementSelected.find(".w-engine__name")
+        .text(wEngine.id !== 0 ? wEngineText : wEngineText.toUpperCase());
+    
+    if ($subElementSelected.parent().is(".w-engine__best")) {
+        wEngineFixText($subElementName)
+    }
+
+    saveWEngine()
 }
 function wEngineFixText($subElementName) {
     let fontSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-size-text').trim());
@@ -181,13 +190,16 @@ function changeDriveDisk(idDriveDisk = '') {
     const driveDisk = driveDisks[idDriveDisk] || generalFileDefault; // al ser siempre los mismo y ser un array simple no utilizo find id
     const driveDiskText = capitalizeEachWord(driveDisk.replaceAll("_"," "));
     
-    if ($subElementSelected) {
-        $subElementSelected.attr("data-drive-disk", idDriveDisk)
-        $subElementSelected.find(".drive-disk__component").attr("src", `img/drive-disks/${driveDisk}.webp`);
-        $subElementSelected.find(".drive-disk__name").text(driveDisk !== generalFileDefault ? driveDiskText : generalTextDefault);
-    
-        saveDriveDisk();
+    if (!$subElementSelected) {
+        $subElementSelected = $("#drive-disks .drive-disk__container").first();
+        viewSelecter();
     }
+
+    $subElementSelected.attr("data-drive-disk", idDriveDisk)
+    $subElementSelected.find(".drive-disk__component").attr("src", `img/drive-disks/${driveDisk}.webp`);
+    $subElementSelected.find(".drive-disk__name").text(driveDisk !== generalFileDefault ? driveDiskText : generalTextDefault);
+    
+    saveDriveDisk();
 }
 
 //cambio de stats de drive disk
@@ -196,26 +208,30 @@ $(".selected").on("click", ".disk-stat__selectable", function() {
     changeStats(diskStatID);
 });
 function changeStats(diskStatID = '') {
-    if ($subElementSelected && $subElementSelected.hasClass("drive-disk__stats__container")) { 
-        const diskStatsNumber = $subElementSelected.attr("data-num_stat");
-        const diskStat = diskStats.find(stat => stat.number == diskStatsNumber);
-        const diskStatText = diskStat.short_stat[diskStatID] || generalTextDefault;
-        
-        if(diskStatText !== generalTextDefault) {
-            if ($subElementSelected.find("span").hasClass("stats__empty")) {
-                $subElementSelected.find(".stat__text").empty();
-            }
-            
-            if($subElementSelected.find("span").length <= 1) {
-                $subElementSelected.find(".stat__text").append(`<span>${diskStatText}</span>`);
-            }
-        } else {
-            $subElementSelected.find(".stat__text").empty().append(`<span class="stats__empty">${diskStatText}</span>`).css('font-size', '');
-        }
-    
-        fixSizeStats();
-        saveStats();
+    if (!$subElementSelected || !$subElementSelected.is("#drive-disks .drive-disk__stats__container")) {
+        const getNumberStat = $("#stats-title").text().replace("STATS ","");
+        $subElementSelected = $(`#drive-disks .drive-disk__stats__container[data-num_stat='${getNumberStat}']`);
+        viewSelecter();
     }
+
+    const diskStatsNumber = $subElementSelected.attr("data-num_stat");
+    const diskStat = diskStats.find(stat => stat.number == diskStatsNumber);
+    const diskStatText = diskStat.short_stat[diskStatID] || generalTextDefault;
+    
+    if(diskStatText !== generalTextDefault) {
+        if ($subElementSelected.find("span").hasClass("stats__empty")) {
+            $subElementSelected.find(".stat__text").empty();
+        }
+        
+        if($subElementSelected.find("span").length <= 1) {
+            $subElementSelected.find(".stat__text").append(`<span>${diskStatText}</span>`);
+        }
+    } else {
+        $subElementSelected.find(".stat__text").empty().append(`<span class="stats__empty">${diskStatText}</span>`).css('font-size', '');
+    }
+
+    fixSizeStats();
+    saveStats();
 }
 // Cambio de tamanio stact de los drive diks
 function fixSizeStats() {
@@ -238,20 +254,22 @@ $(".selected").on("click", ".disk-substat__selectable", function() {
 });
 function changeSubstats(substatID = '') {
     const substat = substats[substatID] || 'EMPTY'; // al ser siempre los mismo y ser un array simple no utilizo find id
+    if (!$subElementSelected || !$subElementSelected.is(".drive-disk__substats")) {
+        $subElementSelected = $("#drive-disks .drive-disk__substats");
+        viewSelecter();
+    }
 
     if (substat !== 'EMPTY') {
-        if ($subElementSelected && $subElementSelected.hasClass("drive-disk__substats")) {
-            contSubstats++;
-            if(contSubstats <= 4) {
-                if ($subElementSelected.find(".substats__text").text() == generalTextDefault) {
-                    $subElementSelected.find(".substats__text").empty();
-                } else {
-                    $subElementSelected.find(".substats__text").append(" <i class='fa-solid fa-angle-right'></i>");
-                }
-                
-                $subElementSelected.find(".substats__text").append(` ${substat}`);
+        contSubstats++;
+        if(contSubstats <= 4) {
+            if ($subElementSelected.find(".substats__text").text() == generalTextDefault) {
+                $subElementSelected.find(".substats__text").empty();
+            } else {
+                $subElementSelected.find(".substats__text").append(" <i class='fa-solid fa-angle-right'></i>");
             }
-        } 
+            
+            $subElementSelected.find(".substats__text").append(` ${substat}`);
+        }
     } else {
         $elementSelected.find(".drive-disk__substats .substats__text").empty().append(`${substat}`).end()
             .find(".drive-disk__substats").css("font-size", "");
@@ -287,20 +305,23 @@ function changeTeam(isCharacter, idData) {
     const dataText = capitalizeEachWord(data.name.replaceAll("_"," "));
     const file = isCharacter ? "char_avatar" : "bangboos_avatar";
     
-    if ($subElementSelected && $subElementSelected.hasClass(isCharacter ? "team__character__container" : "team__bangboo__container")) {
-        if(data.id !== 0) {
-            $subElementSelected.attr("data-id-team", idData);
-            if (isCharacter) {
-                $subElementSelected.find(".team__character__attribute").attr("src", `img/attributes/${data.attribute}.png`).removeClass("default");
-            }
-        } else {
-            $subElementSelected.attr("data-id-team", '');
-            $subElementSelected.find(".team__character__attribute").addClass("empty");
-        }
-        $subElementSelected.find(".team__character__rank").attr("src", `img/ranks/char_rank_${data.rarity}_color.png`);
-        $subElementSelected.find(".team__character__img").attr("src", `img/${file}/${data.name}.png`);
-        $subElementSelected.find(".team__character__name").text(data.id !== 0 ? dataText : generalTextDefault);
-    
-        saveTeam();
+    if (!$subElementSelected || !$subElementSelected.hasClass(isCharacter ? "team__character__container" : "team__bangboo__container")) {
+        $subElementSelected = $(`#team ${isCharacter ? ".team__character__container" : ".team__bangboo__container"}`).first();
+        viewSelecter();
     }
+
+    if(data.id !== 0) {
+        $subElementSelected.attr("data-id-team", idData);
+        if (isCharacter) {
+            $subElementSelected.find(".team__character__attribute").attr("src", `img/attributes/${data.attribute}.png`).removeClass("default");
+        }
+    } else {
+        $subElementSelected.attr("data-id-team", '');
+        $subElementSelected.find(".team__character__attribute").addClass("empty");
+    }
+    $subElementSelected.find(".team__character__rank").attr("src", `img/ranks/char_rank_${data.rarity}_color.png`);
+    $subElementSelected.find(".team__character__img").attr("src", `img/${file}/${data.name}.png`);
+    $subElementSelected.find(".team__character__name").text(data.id !== 0 ? dataText : generalTextDefault);
+
+    saveTeam();
 }

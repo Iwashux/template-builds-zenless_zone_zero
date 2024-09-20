@@ -1,7 +1,18 @@
 const generalFileDefault = "empty",
 generalTextDefault = "EMPTY";
 
-const wEngines = [
+// Función genérica para ordenar arrays por rarity y name
+function orderArrayRarityName(array) {
+    return array.sort((a, b) => { // Primero ordenamos por `rarity`
+        const rarityOrder = { "s": 1, "a": 2, "b": 3 };
+        if (rarityOrder[a.rarity] !== rarityOrder[b.rarity]) {
+            return rarityOrder[a.rarity] - rarityOrder[b.rarity];
+        }
+        return a.name.localeCompare(b.name); // Si las rarezas son iguales, ordenamos alfabéticamente por `name`
+    }).map((item, index) => ({ id: index, ...item })); // Agregar id basado en el índice
+}
+
+const allWEngines = [
     {name: generalFileDefault, rarity: generalFileDefault},
 
     {name: "Sharpened_Stinger", rarity:"s"},
@@ -55,10 +66,10 @@ const wEngines = [
     {name: "[Vortex]_Arrow", rarity: "b"},
     {name: "[Vortex]_Hatchet", rarity: "b"},
     {name: "[Vortex]_Revolver", rarity: "b"}
-].map((item, index) => ({ id: index, ...item }));
+];
+const wEngines = orderArrayRarityName(allWEngines);
 
-
-const bangboos = [
+const allBangboos = [
     {name: generalFileDefault, rarity: generalFileDefault},
 
     {name: "officer_cui", rarity: "s"},
@@ -84,7 +95,8 @@ const bangboos = [
     {name: "penguinboo", rarity: "a"},
     {name: "resonaboo", rarity: "a"},
     {name: "sumoboo", rarity: "a"}
-].map((item, index) => ({ id: index, ...item }));
+];
+const bangboos = orderArrayRarityName(allBangboos);
 
 const driveDisks = ["chaotic_metal", "fanged_metal", "freedom_blues", "hormone_punk",
     "inferno_metal", "polar_metal", "puffer_electro", "shockstar_disco", "soul_rock",
@@ -113,7 +125,7 @@ const substats = ["ATK","HP","DEF","ATK %","HP %","DEF %","CRIT Rate%","CRIT DMG
 
 const skills = ["core", "basic", "dodge", "assist", "special", "ulti"]
 
-const characters = [
+const allCharacters = [
     {
         name: generalFileDefault,
         rarity: generalFileDefault,
@@ -247,7 +259,7 @@ const characters = [
             "02": "Kinetic Recovery",
             "03": "“Mind Your Own!”",
             "04": "Furnace’s Glow",
-            "05": "“You Dare Underestimate Me?”",
+            "05": "You Dare Underestimate Me?",
             "06": "Saturated Blast"
         }
     },{
@@ -488,4 +500,9 @@ const characters = [
             "06": "Mild Excitement"
         }
     }
-].map((item, index) => ({ id: index, ...item }));
+];
+let filterCharacters = allCharacters.slice(1).filter(item => item.active) // Filtra solo los personajes con active: true
+filterCharacters = [allCharacters[0], ...filterCharacters];
+const characters = orderArrayRarityName(filterCharacters);
+
+console.log(characters);
