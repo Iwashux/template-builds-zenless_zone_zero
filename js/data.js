@@ -15,6 +15,7 @@ function orderRarityName(array) {
 const allWEngines = [
     {name: generalFileDefault, rarity: generalFileDefault},
 
+    {name: "Tusks_of_Fury", rarity:"s"},
     {name: "Sharpened_Stinger", rarity:"s"},
     {name: "Ice-Jade_Teapot", rarity:"s"},
     {name: "Riot_Suppressor_Mark_VI", rarity: "s"},
@@ -149,7 +150,7 @@ const allCharacters = [
         specialty: "defense",
         faction: "calydon",
         color: "#ffa50080",
-        active: false,
+        active: true,
     },{
         name: "jane_doe",
         rarity: "s",
