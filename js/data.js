@@ -151,6 +151,14 @@ const allCharacters = [
         faction: "calydon",
         color: "#ffa50080",
         active: true,
+        cinema: {
+            "01": "Spearhead Advance",
+            "02": "Legacy of the Far Lands",
+            "03": "Absolute Trust",
+            "04": "Aries the Battering-Ram",
+            "05": "Romantic Conquest",
+            "06": "Overlord’s Will"
+        }
     },{
         name: "jane_doe",
         rarity: "s",
