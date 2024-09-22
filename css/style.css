@@ -69,7 +69,7 @@ main {
     border-radius: 10px;
     overflow: hidden;
     
-    background-image: url('../img/background/main.png');
+    background-image: url('../img/background/main.webp');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -161,7 +161,7 @@ main {
     justify-content: flex-end;
 
     border-top-left-radius: 100px;
-    background-image: url('../img/background/character.png');
+    background-image: url('../img/background/character.webp');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -207,7 +207,7 @@ main {
     font-style: italic;
 
     color: white;
-    background-image: url('../img/background/character.png');
+    background-image: url('../img/background/character.webp');
     background-size: 270px;
     background-position: center;
     background-repeat: no-repeat;
@@ -405,7 +405,7 @@ main {
     border: 2px solid black;
     border-radius: 10px;
     
-    background-image: url('../img/background/w-engine.png');
+    background-image: url('../img/background/w-engine.webp');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -467,7 +467,7 @@ main {
     border: 2px solid black;
     border-radius: 10px;
 
-    background-image: url('../img/background/w-engine.png');
+    background-image: url('../img/background/w-engine.webp');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -583,7 +583,7 @@ main {
     gap: 2px;
     padding: 2px;
     
-    background-image: url('../img/background/w-engine.png');
+    background-image: url('../img/background/w-engine.webp');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -739,7 +739,7 @@ main {
     border-radius: 0 5px;
     overflow: hidden;
 
-    background-image: url('../img/background/character.png');
+    background-image: url('../img/background/character.webp');
     background-size: 200px;
     background-repeat: no-repeat;
     background-position: center;
@@ -799,7 +799,7 @@ main {
     display: flex;
     gap: 10px;
 
-    background-image: url(../img/background/background-zzero.png);
+    background-image: url(../img/background/background-zzero.webp);
     background-size: 250%;
 }
 
@@ -1028,7 +1028,7 @@ main {
     cursor: pointer;
     width: 100%;
 
-    background-image: url(../img/background/w-engine.png);
+    background-image: url(../img/background/w-engine.webp);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -1039,7 +1039,7 @@ main {
     border-radius: 15px;
     padding: 10px;
 
-    background-image: url(../img/background/w-engine.png);
+    background-image: url(../img/background/w-engine.webp);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

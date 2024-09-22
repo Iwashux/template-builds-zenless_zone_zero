@@ -9,16 +9,16 @@ function changeCharacter(idCharacter) {
     const characterText = capitalizeEachWord(character.name.replaceAll("_"," "));
     
     $("#character-name").text(characterText);
-    $("#character-faction").attr("src", `img/factions/${character.faction}.png`);
+    $("#character-faction").attr("src", `img/factions/${character.faction}.webp`);
     
     $("#character-img").attr("data-id-character", character.id);
-    $("#character-rank").attr("src", `img/ranks/char_rank_${character.rarity}.png`);
-    $("#character-img").attr("src", `img/character/${character.name}.png`);
+    $("#character-rank").attr("src", `img/ranks/char_rank_${character.rarity}.webp`);
+    $("#character-img").attr("src", `img/character/${character.name}.webp`);
     $("#skills").css("background", character.color)
     
     if (character.id !== 0) {
-        $("#character-attribute").attr("src", `img/attributes/${character.attribute}.png`);
-        $("#character-specialty").attr("src", `img/specialties/${character.specialty}.png`);
+        $("#character-attribute").attr("src", `img/attributes/${character.attribute}.webp`);
+        $("#character-specialty").attr("src", `img/specialties/${character.specialty}.webp`);
         $("#character-info-attributes").removeClass("empty");
     } else {
         $("#character-info-attributes").addClass("empty");
@@ -313,14 +313,14 @@ function changeTeam(isCharacter, idData) {
     if(data.id !== 0) {
         $subElementSelected.attr("data-id-team", idData);
         if (isCharacter) {
-            $subElementSelected.find(".team__character__attribute").attr("src", `img/attributes/${data.attribute}.png`).removeClass("default");
+            $subElementSelected.find(".team__character__attribute").attr("src", `img/attributes/${data.attribute}.webp`).removeClass("default");
         }
     } else {
         $subElementSelected.attr("data-id-team", '');
         $subElementSelected.find(".team__character__attribute").addClass("empty");
     }
-    $subElementSelected.find(".team__character__rank").attr("src", `img/ranks/char_rank_${data.rarity}_color.png`);
-    $subElementSelected.find(".team__character__img").attr("src", `img/${file}/${data.name}.png`);
+    $subElementSelected.find(".team__character__rank").attr("src", `img/ranks/char_rank_${data.rarity}_color.webp`);
+    $subElementSelected.find(".team__character__img").attr("src", `img/${file}/${data.name}.webp`);
     $subElementSelected.find(".team__character__name").text(data.id !== 0 ? dataText : generalTextDefault);
 
     saveTeam();

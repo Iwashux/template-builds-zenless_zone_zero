@@ -121,10 +121,10 @@ function putCharacter(group = '') {
 
         return `<li class="character_${group}_selectable component__selectable" id_character-data='${character.id}'>
                 <div class="component__selectable__info">
-                    <img class="component__selectable__rank" src="img/ranks/char_rank_${character.rarity}_color.png" alt="">
-                    <img class="component__selectable__attribute" src="img/attributes/${character.attribute}.png" alt="">
+                    <img class="component__selectable__rank" src="img/ranks/char_rank_${character.rarity}_color.webp" alt="">
+                    <img class="component__selectable__attribute" src="img/attributes/${character.attribute}.webp" alt="">
                 </div>
-                <img class="block" src="img/char_avatar/${character.name}.png" alt="">
+                <img class="block" src="img/char_avatar/${character.name}.webp" alt="">
                 <p class="component__name">${characterText}</p>
             </li>`;
     }).join('');
@@ -239,9 +239,9 @@ function putBangboo() {
     const data = bangboosFilter.map((bangboo) =>
         `<li class="bangboo__selectable component__selectable" id_bangboo-data='${bangboo.id}'>
                 <div class="component__selectable__info">
-                    <img class="component__selectable__rank" src="img/ranks/char_rank_${bangboo.rarity}_color.png" alt="">
+                    <img class="component__selectable__rank" src="img/ranks/char_rank_${bangboo.rarity}_color.webp" alt="">
                 </div>
-                <img class="block" src="img/bangboos_avatar/${bangboo.name}.png" alt="">
+                <img class="block" src="img/bangboos_avatar/${bangboo.name}.webp" alt="">
             </li>`
     ).join('');
 
