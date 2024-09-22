@@ -106,7 +106,7 @@ function itemView(empty, title, cantGrid, data, resetName = title) {
     empty && $selectedComponent.empty();
 
     $selectedComponent.append(
-        `<section class="selected__title"><h2>${title}</h2> <i id="reset-${resetName}" class="fa-solid fa-arrows-rotate spin-icon" title="reset"></i></section>
+        `<section class="selected__title"><h2>${title}</h2> <i id="reset-${resetName}" class="fa-regular fa-trash-can" title="reset"></i></section>
         <ul class='selected__item__container selected__grid grid__c${cantGrid}'>`
     );
 

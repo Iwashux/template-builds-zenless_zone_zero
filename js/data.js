@@ -101,7 +101,7 @@ const bangboos = orderRarityName(allBangboos);
 
 const driveDisks = ["chaotic_metal", "fanged_metal", "freedom_blues", "hormone_punk",
     "inferno_metal", "polar_metal", "puffer_electro", "shockstar_disco", "soul_rock",
-    "swin_jazz", "thunder_metal", "woodpecker_electro", "proto_punk"
+    "swin_jazz", "thunder_metal", "woodpecker_electro", "proto_punk", "chaos_jazz"
 ].sort(); // ordena alfabéticamente
 
 const diskStats = [
@@ -122,7 +122,7 @@ const diskStats = [
     }
 ];
 
-const substats = ["ATK","HP","DEF","ATK %","HP %","DEF %","CRIT Rate%","CRIT DMG%","PEN","ANOMALY"];
+const substats = ["ATK","ATK %","HP","HP %","DEF","DEF %","CRIT Rate%","CRIT DMG%","PEN","ANOMALY"];
 
 const skills = ["core", "basic", "dodge", "assist", "special", "ulti"]
 
